@@ -26,7 +26,7 @@ def camera_pattern_input():
     return (st.session_state.pattern)
 
 def advanced():
-    with st.expander(("About the #30DaysOfStreamlit")):
+    with st.expander("# About the #30DaysOfStreamlit"):
         st.markdown((
             """
         The **#30DaysOfStreamlit** is a coding challenge designed to help you get started in building Streamlit apps.
@@ -41,7 +41,7 @@ def advanced():
     # Sidebar
     st.sidebar.header(("About"))
     st.sidebar.markdown((
-        "[Streamlit](https://streamlit.io) is a Python library that allows the creation of interactive, data-driven web applications in Python."
+        "[Cyanview](https://www.cyanview.com) is a company providing shading solutions for video productions."
     ))
 
     st.sidebar.header(("Resources"))
