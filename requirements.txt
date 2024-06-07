@@ -1,0 +1,13 @@
+streamlit
+langchain
+langchain-openai
+langchain-community
+validators
+unstructured
+tabulate
+pdf2image
+pytesseract
+pytube
+youtube-transcript-api
+pandas
+notebook
