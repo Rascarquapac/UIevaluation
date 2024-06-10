@@ -10,7 +10,6 @@ class Camera():
     def get_csv(self):
         self.set_cameras()
 
-
     def set_cameras(self):
         cameras_df = pd.read_csv("./data/CyanviewDescriptor - Cameras.csv")
         self.cameras_df = pd.DataFrame(cameras_df)

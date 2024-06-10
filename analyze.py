@@ -17,7 +17,8 @@ class Analyze():
             "tally":[],
             "rcp":[],
             }
-        self.df.to_csv("./data/selected_cameras.csv")
+        # Uncomment to get a test file… and rename it to InstanceDataframe.csv when created
+        # self.df.to_csv("./data/selected_cameras.csv")
         self.cameraTypes  = ['Slow Motion','Mini Camera','PTZ','Shoulder Camcorder',
                               'Handheld Camcorder','Block','DSLR','System','Large Sensor']         
         self.df['Device'] = ""
@@ -45,8 +46,8 @@ class Analyze():
         pass
     def consume_rcp(self):
         pass
-    def set_IP_interface(self):
-        def ipinterface(network='LAN wired',cable='Ethernet-RJ45'):
+    def add_IPconverter(self):
+        def ipinterface(network='LAN wired',cable='Ethernet-RJ45',maxlatency='medium'):
             if network == 'LAN wired' :
                 if cable[0:7] == "CY-CBL-" :
                     return("CI0")
@@ -79,25 +80,9 @@ class Analyze():
         # Can be done in set_IP_Interface…
         pass
 
-class Port():
-    def __init__(self) -> None:
-        pass
-class Node():
-    def __init__(self) -> None:
-        self.name = ""
-        self.instance = ""
-        self.type  = ""
-        #ports are list of ports Types
-        self.ports = []
-        self.free = []
-        self.connected = []
-class Link():
-    def __init__(self) -> None:
-        pass
-
 if __name__ == "__main__":
     df = pd.read_csv("./data/InstanceDataframe.csv")
     print(df)
     analyze = Analyze(df)
-    analyze.set_IP_interface()    
+    analyze.add_IPconverter()    
     analyze.gear_number()
