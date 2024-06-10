@@ -51,7 +51,7 @@ class Camera():
                 display += f"### Model {index}\n"
                 display += f"+ Brand: {row['Brand']}\n"
                 display += f"+ Cable: {row['Cable']}\n"
-                display += f"+ Cyanview support: [{"Support URL"}]({row['SupportURL']})\n"
+                display += f"+ Cyanview support: ['Support URL']({row['SupportURL']})\n"
         return(display)
     
     def print_selected(self):
