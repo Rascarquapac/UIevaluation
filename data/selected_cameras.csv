@@ -1,4 +1,7 @@
-Instance,Reference,Protocol,Brand,ManufacturerURL,Remark,Type,Cable,SupportURL,Message,Selected,Number,Lens,Network,Base,Model,Device,Connected
-XF605_0,CanonXF605,Canon XC,Canon,https://fr.canon.be/video-cameras/xf605/ ,,Large Sensor,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Canon/CanonXC,,False,1.0,Fixed,LAN wired,Fixed,XF605,,False
-CV225_0,MarshallCV225,Marshall Breakout,Marshall,,,Mini Camera,CY-CBL-6P-PFAN,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,2.0,Fixed,LAN wired,Fixed,CV225,,False
-CV225_1,MarshallCV225,Marshall Breakout,Marshall,,,Mini Camera,CY-CBL-6P-PFAN,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,2.0,Fixed,LAN wired,Fixed,CV225,,False
+Instance,Reference,Protocol,Brand,ManufacturerURL,Remark,Type,Cable,SupportURL,Message,Selected,Number,Lens,Network,Base,Model
+FS7_0,PXW-FS7,Sony Lanc,Sony,,,Handheld Camcorder,CY-CBL-6P-LANC-2,https://support.cyanview.com/docs/Integrations/Sony/SonyLanc,,False,2.0,Fixed,LAN wired,Fixed,FS7
+FS7_1,PXW-FS7,Sony Lanc,Sony,,,Handheld Camcorder,CY-CBL-6P-LANC-2,https://support.cyanview.com/docs/Integrations/Sony/SonyLanc,,False,2.0,Fixed,LAN wired,Fixed,FS7
+CV225_0,MarshallCV225,Marshall Breakout,Marshall,,,Mini Camera,CY-CBL-6P-PFAN,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,2.0,Fixed,LAN wired,Fixed,CV225
+CV225_1,MarshallCV225,Marshall Breakout,Marshall,,,Mini Camera,CY-CBL-6P-PFAN,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,2.0,Fixed,LAN wired,Fixed,CV225
+CV370_0,,Marshall Ethernet,Marshall,https://marshall-usa.com/cameras/CV568/,,Mini Camera,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,2.0,Fixed,LAN wired,Fixed,CV370
+CV370_1,,Marshall Ethernet,Marshall,https://marshall-usa.com/cameras/CV568/,,Mini Camera,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,2.0,Fixed,LAN wired,Fixed,CV370

@@ -6,3 +6,4 @@ test.py
 todelete.py
 test.ipynb
 requirements.old.txt
+/data/selected_cameras.csv
