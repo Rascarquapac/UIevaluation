@@ -1,0 +1,51 @@
+Device,Device,Device,Lens,Lens,Lens,Lens,Camera,Camera,Camera,Camera,Camera,Camera,Network,Base,Cable,Cable,Cable,Cable
+Models,Ports,Supplies,Types,Brands,Motorization,Protocols,UseTypes,Types,Brands,ControlLinks,ControlConnectors,Protocols,Types,Types,Models,Uses,Sources,Destinations
+CY-CI0,BM SDI In,Power Supply,B4 ENG,Canon,Internal,Sony SE,Specialty,Slow Motion,Adimec,Serial,RJ45,Aja Serial,LAN wired,Fixed,CY-CBL-6P-AJA-01,Camera,Cyan Hirose 6P Male,RS232 Aja
+CY-RIO,BM SDI Out,PoE,Cinema,Fujinon,External,Sony SEL,Broadcast,Mini Camera,Aida,IP,USB A-Ethernet,Arri CAP,LAN RF,Robotic head,CY-CBL-6P-B4-01,Lens,Battery,Lemo Bradley
+CY-RIO-Live,Cyan Serial,,Photo,Sony,None,Sony SELP,Dcinema,PTZ,Aja,WiFi,USB C-Ethernet,Arri SSCP,WAN wired,,CY-CBL-6P-B4-02,Robotic head,Cyan Jack,HR10A & TRRS
+CY-RCP,Cyan USB-A,,Prime,Other,,Fujinon BoxLens,Studio,Shoulder Camcorder,ARC,,Serial,Birdog PTZ,WAN RF,,CY-CBL-6P-BRADLEY,Internal,Cyan 6P,HR25A-9P-20P
+CY-RSBM,Ethernet,,Fixed,,,Fujinon PortableLens,,Handheld Camcorder,ARRI,,,BlackMagic IP,RF video,,CY-CBL-6P-CIS-01,Cable,Cyan USB-A,HR10A-7P-6S
+Switch,Jack-IO,,Internal,,,Fujinon Cabrio,,Block,AstroDesign,,,BlackMagic SDI,WAN video,,CY-CBL-6P-CIS-02,Device Power,WiFi,Mini XLR 3P
+Wifi Router,Power 24 V,,Camera integrated,,,Fujinon MK,,DSLR,Bell,,,Canon DSLR,,,CY-CBL-6P-CN-REM,Tally,Cyan Ethernet,Cyan Hirose 6P Female
+,USB-A,,,,,Fujinon Premista,,System,BirdDog,,,Canon PTZ,,,CY-CBL-6P-DCHIP-01,None,Cyan SDI,Fanout
+,,,,,,Canon CN Prime,,Large Sensor,BlackMagic,,,Canon RemoteA,,,CY-CBL-6P-DCHIP-02,Cyan Power,None,HR10A-10P-12P & HR25A-9P-20P
+,,,,,,Canon CN-R,,Any,Bradley,,,Canon XC,,,CY-CBL-6P-DCHIP-03,Tilta,,Fanout & Power
+,,,,,,Canon Photo Lens,,,CameraCorps,,,Canon XF605,,,CY-CBL-6P-DCM2,,,USB-C
+,,,,,,Canon HJ,,,Canon,,,Canon XF705,,,CY-CBL-6P-EXT100,,,External Ethernet
+,,,,,,,,,CIS,,,DreamChip Serial,,,CY-CBL-6P-EXT1000,,,BM-SDI
+,,,,,,,,,Cyan,,,Dreamchip SSM,,,CY-CBL-6P-EXT300,,,
+,,,,,,,,,DreamChip,,,Ikegami Serial,,,CY-CBL-6P-EXT50,,,
+,,,,,,,,,GrassValley,,,JVC IP,,,CY-CBL-6P-EXT500,,,
+,,,,,,,,,Haivision,,,Panasonic BGH1,,,CY-CBL-6P-FAN100,,,
+,,,,,,,,,Hitachi,,,Panasonic CX350,,,CY-CBL-6P-FAN20,,,
+,,,,,,,,,Ikegami,,,Panasonic DSLR,,,CY-CBL-6P-FUJI,,,
+,,,,,,,,,IOI,,,Panasonic EVA1,,,CY-CBL-6P-FUJI-02,,,
+,,,,,,,,,JVC,,,Panasonic P2,,,CY-CBL-6P-FUJI-03,,,
+,,,,,,,,,Lumens,,,Panasonic PTZ,,,CY-CBL-6P-IOI,,,
+,,,,,,,,,Marshall,,,Panasonic Varicam,,,CY-CBL-6P-LANC-1,,,
+,,,,,,,,,MediaEdge,,,Panasonic UC,,,CY-CBL-6P-LANC-2,,,
+,,,,,,,,,None,,,Red IP,,,CY-CBL-6P-MARS-01,,,
+,,,,,,,,,Pacific Corp.,,,Sony 8-Pin,,,CY-CBL-6P-MARS-02,,,
+,,,,,,,,,Panasonic,,,Sony Burano,,,CY-CBL-6P-PAN-10P,,,
+,,,,,,,,,RED,,,Sony CBM,,,CY-CBL-6P-PFAN,,,
+,,,,,,,,,RoboSHOT,,,Sony DSLR,,,CY-CBL-6P-PWR,,,
+,,,,,,,,,ROSS,,,Sony Visca,,,CY-CBL-6P-ST-15,,,
+,,,,,,,,,Sony,,,Sony FR7,,,CY-CBL-6P-ST-50,,,
+,,,,,,,,,Toshiba,,,Sony FX6,,,CY-CBL-6P-TALLY,,,
+,,,,,,,,,VHD,,,Sony FX9,,,CY-CBL-6P-TOSH-01,,,
+,,,,,,,,,VisionResearch,,,Sony FX9,,,CY-CBL-6P-X3,,,
+,,,,,,,,,Yushida,,,Sony Lanc,,,CY-CBL-ASTRO-01,,,
+,,,,,,,,,,,,Sony PTZ,,,CY-CBL-ASTRO-02,,,
+,,,,,,,,,,,,Sony Venice,,,CY-CBL-DTAP,,,
+,,,,,,,,,,,,Marshall Breakout,,,CY-CBL-JACK-GPIO8,,,
+,,,,,,,,,,,,Marshall Hirose,,,CY-CBL-SONY-8P-03,,,
+,,,,,,,,,,,,Marshall PushLock,,,CY-CBL-TILTA-SERIAL,,,
+,,,,,,,,,,,,Marshall Ethernet,,,CY-CBL-TILTA-USB,,,
+,,,,,,,,,,,,Marshall PTZ,,,WiFi,,,
+,,,,,,,,,,,,Hitachi SH HD 1xxx,,,IP-to-USB-C,,,
+,,,,,,,,,,,,CIS HR10A & TRRS,,,USB-A-to-USB-C,,,
+,,,,,,,,,,,,CIS HR10A,,,Ethernet-RJ45,,,
+,,,,,,,,,,,,Not controllable,,,BM-SDI,,,
+,,,,,,,,,,,,Not compatible,,,JVC USB-to-IP,,,
+,,,,,,,,,,,,Not evaluated,,,XDCA back,,,
+,,,,,,,,,,,,,,,None,,,

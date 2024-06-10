@@ -1,0 +1,219 @@
+Model,Reference,Protocol,Brand,ManufacturerURL,Remark,Type,Cable,SupportURL,Message,Selected,Number,Lens,Network,Base,Model
+TMX74,Adimec,Not still documented,Adimec,,,,,,,False,0,Fixed,LAN wired,Fixed,TMX74
+Gen3G-200,AidaGen3G200,Not still documented,Aida,,,,,,,False,0,Fixed,LAN wired,Fixed,Gen3G-200
+HD NDI 200,AidaHdNdi200,Not still documented,Aida,,,,,,,False,0,Fixed,LAN wired,Fixed,HD NDI 200
+PTZ X12,AidaPtzX12,Not still documented,Aida,,,,,,,False,0,Fixed,LAN wired,Fixed,PTZ X12
+UHD6G-200,AidaUHD6G200,Not still documented,Aida,,,,,,,False,0,Fixed,LAN wired,Fixed,UHD6G-200
+RovoCam,Rovocam,Aja Serial,Aja,,,Block,CY-CBL-6P-AJA-01,https://support.cyanview.com/docs/Integrations/AJA/RovoCam,,False,0,Fixed,LAN wired,Fixed,RovoCam
+Arc360,Arc360,Not still documented,ARC,,,,,,,False,0,Fixed,LAN wired,Fixed,Arc360
+Alexa 35,Alexa 35,Arri CAP,ARRI,,,Large Sensor,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/ARRI/ARRICAP,,False,0,Fixed,LAN wired,Fixed,Alexa 35
+Alexa mini,Alexa mini,Arri CAP,ARRI,,,Large Sensor,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/ARRI/ARRICAP,,False,0,Fixed,LAN wired,Fixed,Alexa mini
+Alexa mini LF,Alexa mini LF,Arri CAP,ARRI,,,Large Sensor,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/ARRI/ARRICAP,,False,0,Fixed,LAN wired,Fixed,Alexa mini LF
+Amira,Amira,Arri SSCP,ARRI,,,Large Sensor,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/ARRI/ARRISSCP,,False,0,Fixed,LAN wired,Fixed,Amira
+AC4829,Astro4829,Not still documented,AstroDesign,,,,,,,False,0,Fixed,LAN wired,Fixed,AC4829
+Driver's Eye,BellDriversEye,Not still documented,Bell,,,,,,,False,0,Fixed,LAN wired,Fixed,Driver's Eye
+P100,BirdDogP100,Birdog PTZ,BirdDog,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Birddog/BirddogPTZ,,False,0,Fixed,LAN wired,Fixed,P100
+P200,BirdDogP200,Birdog PTZ,BirdDog,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Birddog/BirddogPTZ,,False,0,Fixed,LAN wired,Fixed,P200
+P400,BirdDogP400,Birdog PTZ,BirdDog,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Birddog/BirddogPTZ,,False,0,Fixed,LAN wired,Fixed,P400
+P4K,BirdDogP4K,Birdog PTZ,BirdDog,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Birddog/BirddogPTZ,,False,0,Fixed,LAN wired,Fixed,P4K
+Mini Studio,Mini Studio,BlackMagic SDI,BlackMagic,https://www.blackmagicdesign.com/fr/products/blackmagicmicrostudiocamera,,Large Sensor,BM-SDI,https://support.cyanview.com/docs/Integrations/Blackmagic/CameraSDI,,False,0,Fixed,LAN wired,Fixed,Mini Studio
+Mini Studio G2,Mini Studio G2,BlackMagic IP,BlackMagic,https://www.blackmagicdesign.com/fr/products/blackmagicmicrostudiocamera,,Large Sensor,IP-to-USB-C,https://support.cyanview.com/docs/Integrations/Blackmagic/CameraIP,,False,0,Fixed,LAN wired,Fixed,Mini Studio G2
+URSA,URSA,BlackMagic SDI,BlackMagic,https://www.blackmagicdesign.com/products/blackmagicursabroadcast,,Large Sensor,BM-SDI,https://support.cyanview.com/docs/Integrations/Blackmagic/CameraSDI,,False,0,Fixed,LAN wired,Fixed,URSA
+URSA G2,URSA G2,BlackMagic IP,BlackMagic,https://www.blackmagicdesign.com/products/blackmagicursabroadcast,,Large Sensor,IP-to-USB-C,https://support.cyanview.com/docs/Integrations/Blackmagic/CameraIP,,False,0,Fixed,LAN wired,Fixed,URSA G2
+Camball,Camball,Not still documented,Bradley,,,,,,,False,0,Fixed,LAN wired,Fixed,Camball
+Camball/IP,CamballIp,Not still documented,Bradley,,,,,,,False,0,Fixed,LAN wired,Fixed,Camball/IP
+Meerkat,Meerkat,Not still documented,CameraCorps,,,,,,,False,0,Fixed,LAN wired,Fixed,Meerkat
+QBall,CCQBall,Not still documented,CameraCorps,,,,,,,False,0,Fixed,LAN wired,Fixed,QBall
+Qx,CCQx,Not still documented,CameraCorps,,,,,,,False,0,Fixed,LAN wired,Fixed,Qx
+Qx Minizoom,CCQxMinizoom,Not still documented,CameraCorps,,,,,,,False,0,Fixed,LAN wired,Fixed,Qx Minizoom
+C100,C100,Canon RemoteA,Canon,,,Large Sensor,CY-CBL-6P-LANC-1,https://support.cyanview.com/docs/Integrations/Canon/CanonRemoteA,,False,0,Fixed,LAN wired,Fixed,C100
+C200,C200,Canon RemoteA,Canon,,,Large Sensor,CY-CBL-6P-LANC-1,https://support.cyanview.com/docs/Integrations/Canon/CanonRemoteA,,False,0,Fixed,LAN wired,Fixed,C200
+C300mk1,C300mk1,Canon RemoteA,Canon,,,Large Sensor,CY-CBL-6P-LANC-1,https://support.cyanview.com/docs/Integrations/Canon/CanonRemoteA,,False,0,Fixed,LAN wired,Fixed,C300mk1
+C300mk2,C300mk2,Canon RemoteA,Canon,,,Large Sensor,CY-CBL-6P-LANC-1,https://support.cyanview.com/docs/Integrations/Canon/CanonRemoteA,,False,0,Fixed,LAN wired,Fixed,C300mk2
+C300mk3,C300mk3,Canon XC,Canon,,,Large Sensor,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Canon/CanonXC,,False,0,Fixed,LAN wired,Fixed,C300mk3
+C500mk1,C500mk1,Canon RemoteA,Canon,,,Large Sensor,CY-CBL-6P-LANC-1,https://support.cyanview.com/docs/Integrations/Canon/CanonRemoteA,,False,0,Fixed,LAN wired,Fixed,C500mk1
+C500mk2,C500mk2,Canon XC,Canon,,,Large Sensor,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Canon/CanonXC,,False,0,Fixed,LAN wired,Fixed,C500mk2
+C70,C70,Canon XC,Canon,,,Large Sensor,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Canon/CanonXC,,False,0,Fixed,LAN wired,Fixed,C70
+C700,C700,Canon RemoteA,Canon,,,Large Sensor,CY-CBL-6P-LANC-1,https://support.cyanview.com/docs/Integrations/Canon/CanonRemoteA,,False,0,Fixed,LAN wired,Fixed,C700
+CR-N300,CanonCRN300,Canon PTZ,Canon,https://www.canon.fr/ptz-cameras/cr-n300/,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Canon/CanonPTZ,,False,0,Fixed,LAN wired,Fixed,CR-N300
+CR-N500,CanonCRN500,Canon PTZ,Canon,https://www.canon.fr/ptz-cameras/cr-n500/,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Canon/CanonPTZ,,False,0,Fixed,LAN wired,Fixed,CR-N500
+CR-N700,CanonCRN700,Canon PTZ,Canon,https://www.canon.fr/ptz-cameras/cr-n700/,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Canon/CanonPTZ,,False,0,Fixed,LAN wired,Fixed,CR-N700
+CR-X500,CanonCRX500,Canon PTZ,Canon,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Canon/CanonPTZ,,False,0,Fixed,LAN wired,Fixed,CR-X500
+R5,CanonR5,Canon DSLR,Canon,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Canon/CanonMirrorless,,False,0,Fixed,LAN wired,Fixed,R5
+XF605,CanonXF605,Canon XC,Canon,https://fr.canon.be/video-cameras/xf605/ ,,Large Sensor,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Canon/CanonXC,,False,0,Fixed,LAN wired,Fixed,XF605
+XF705,CanonXF705,Canon RemoteA,Canon,,,Large Sensor,CY-CBL-6P-LANC-1,https://support.cyanview.com/docs/Integrations/Canon/CanonRemoteA,,False,0,Fixed,LAN wired,Fixed,XF705
+VCC-HD1,CISHD1,CIS HR10A,CIS,,,Mini Camera,CY-CBL-6P-CIS-02,,,False,0,Fixed,LAN wired,Fixed,VCC-HD1
+VCC-HD10ZM,,CIS HR10A,CIS,,,Mini Camera,CY-CBL-6P-CIS-02,,,False,0,Fixed,LAN wired,Fixed,VCC-HD10ZM
+VCC-HD10ZM,CISHD10ZM,CIS HR10A,CIS,,,Mini Camera,CY-CBL-6P-CIS-02,,,False,0,Fixed,LAN wired,Fixed,VCC-HD10ZM
+VCC-HD1X,CIS,CIS HR10A,CIS,,,Mini Camera,CY-CBL-6P-CIS-02,,,False,0,Fixed,LAN wired,Fixed,VCC-HD1X
+VCC-HD3,,CIS HR10A,CIS,,,Mini Camera,CY-CBL-6P-CIS-02,,,False,0,Fixed,LAN wired,Fixed,VCC-HD3
+VCC-HD3,CISHD3,CIS HR10A,CIS,,,Mini Camera,CY-CBL-6P-CIS-02,,,False,0,Fixed,LAN wired,Fixed,VCC-HD3
+Generic,CyCam,Not still documented,Cyan,,,,,,,False,0,Fixed,LAN wired,Fixed,Generic
+Imported,Imported,Not still documented,Cyan,,,,,,,False,0,Fixed,LAN wired,Fixed,Imported
+AtomOne,AtomOne,DreamChip Serial,DreamChip,,,Mini Camera,CY-CBL-6P-DCHIP-02,https://support.cyanview.com/docs/Integrations/Dreamchip/,,False,0,Fixed,LAN wired,Fixed,AtomOne
+AtomOne 4K,Atom4K,DreamChip Serial,Dreamchip,,,Mini Camera,CY-CBL-6P-DCHIP-02,https://support.cyanview.com/docs/Integrations/Dreamchip/,,False,0,Fixed,LAN wired,Fixed,AtomOne 4K
+AtomOne mini,AtomMini,DreamChip Serial,Dreamchip,,,Mini Camera,CY-CBL-6P-DCHIP-02,https://support.cyanview.com/docs/Integrations/Dreamchip/,,False,0,Fixed,LAN wired,Fixed,AtomOne mini
+AtomOne mini Zoom,AtomMiniZoom,DreamChip Serial,Dreamchip,,,Mini Camera,CY-CBL-6P-DCHIP-02,https://support.cyanview.com/docs/Integrations/Dreamchip/,,False,0,Fixed,LAN wired,Fixed,AtomOne mini Zoom
+AtomOne SSM500,SSM500,Dreamchip SSM,DreamChip,,,Slow Motion,CY-CBL-6P-DCHIP-03,https://support.cyanview.com/docs/Integrations/Dreamchip/ssm500,,False,0,Fixed,LAN wired,Fixed,AtomOne SSM500
+AtomOne SSM500/IP,SSM500IP,Not still documented,DreamChip,,,,,,,False,0,Fixed,LAN wired,Fixed,AtomOne SSM500/IP
+LDK series,GrassValley,Not still documented,GrassValley,,,,,,,False,0,Fixed,LAN wired,Fixed,LDK series
+MojoPro,MojoPro,Not still documented,Haivision,,,,,,,False,0,Fixed,LAN wired,Fixed,MojoPro
+DK series,HitachiDKIP,Not still documented,Hitachi,,,,,,,False,0,Fixed,LAN wired,Fixed,DK series
+DK series (serial),HitachiDKSerial,Not still documented,Hitachi,,,,,,,False,0,Fixed,LAN wired,Fixed,DK series (serial)
+Hitachi SK-HD1000,,Hitachi SH HD 1xxx,Hitachi,https://www.hitachikokusai.us/BroadcastandProfessionalCameras/SK-HD1000.html,,System,Ethernet-RJ45,,,False,0,Fixed,LAN wired,Fixed,Hitachi SK-HD1000
+Hitachi SK-HD1300,,Hitachi SH HD 1xxx,Hitachi,https://www.hitachikokusai.us/BroadcastandProfessionalCameras/SK-HD1300.html,,System,Ethernet-RJ45,,,False,0,Fixed,LAN wired,Fixed,Hitachi SK-HD1300
+Hitachi SK-HD1500,,Hitachi SH HD 1xxx,Hitachi,https://www.gravitymedia.com/product/hitachi-sk-hd1500-hd-slow-motion-production-camera/,,System,Ethernet-RJ45,,,False,0,Fixed,LAN wired,Fixed,Hitachi SK-HD1500
+SK HD series,HitachiSKHDIP,Not still documented,Hitachi,,,,,,,False,0,Fixed,LAN wired,Fixed,SK HD series
+SK HD series (serial),HitachiSKHDSerial,Not still documented,Hitachi,,,,,,,False,0,Fixed,LAN wired,Fixed,SK HD series (serial)
+SK UHD series,HitachiSKUHDIP,Not still documented,Hitachi,,,,,,,False,0,Fixed,LAN wired,Fixed,SK UHD series
+SK UHD series (serial),HitachiSKUHDSerial,Not still documented,Hitachi,,,,,,,False,0,Fixed,LAN wired,Fixed,SK UHD series (serial)
+ICCP,Ikegami,Not still documented,Ikegami,,,,,,,False,0,Fixed,LAN wired,Fixed,ICCP
+2KMini,V2KMini,Not still documented,IOI,,,,,,,False,0,Fixed,LAN wired,Fixed,2KMini
+2KMiniRS,V2KMiniRS,Not still documented,IOI,,,,,,,False,0,Fixed,LAN wired,Fixed,2KMiniRS
+4KMini,V4KMini,Not still documented,IOI,,,,,,,False,0,Fixed,LAN wired,Fixed,4KMini
+4KMiniRS,V4KMiniRS,Not still documented,IOI,,,,,,,False,0,Fixed,LAN wired,Fixed,4KMiniRS
+8KSDI,V8KSDI,Not still documented,IOI,,,,,,,False,0,Fixed,LAN wired,Fixed,8KSDI
+JVC GY-HM850,JVC,JVC IP,JVC,https://fr.jvc.com/pro/ccr/eng/GY-HM850RE/,,Handheld Camcorder,JVC USB-to-IP,https://support.cyanview.com/docs/Integrations/JVC/JVCCamcorder,,False,0,Fixed,LAN wired,Fixed,JVC GY-HM850
+VC-A series,Lumens,Not still documented,Lumens,,,,,,,False,0,Fixed,LAN wired,Fixed,VC-A series
+VC-A71,LumensVCA71PN,Not still documented,Lumens,,,,,,,False,0,Fixed,LAN wired,Fixed,VC-A71
+VC-BC 601,LumensVCBC601P,Not still documented,Lumens,,,,,,,False,0,Fixed,LAN wired,Fixed,VC-BC 601
+VC-BC 701,LumensVCBC701P,Not still documented,Lumens,,,,,,,False,0,Fixed,LAN wired,Fixed,VC-BC 701
+CV225,MarshallCV225,Marshall Breakout,Marshall,,,Mini Camera,CY-CBL-6P-PFAN,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV225
+CV226,MarshallCV226,Marshall Breakout,Marshall,,,Mini Camera,CY-CBL-6P-PFAN,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV226
+CV345,MarshallCV345,Marshall Hirose,Marshall,https://marshall-usa.com/discontinued/cameras/CV345.php,,Mini Camera,CY-CBL-6P-MARS-02,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV345
+CV350,MarshallCV350,Not still documented,Marshall,,,,,,,False,0,Fixed,LAN wired,Fixed,CV350
+CV355-10X,MarshallCV35510X,Marshall Ethernet,Marshall,https://marshall-usa.com/cameras/CV355-10X-IP/,,Mini Camera,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV355-10X
+CV355-30X,MarshallCV35530X,Marshall Ethernet,Marshall,https://marshall-usa.com/cameras/CV355-30X-IP/,,Mini Camera,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV355-30X
+CV366,,Marshall Hirose,Marshall,https://marshall-usa.com/cameras/CV568/,,Mini Camera,CY-CBL-6P-MARS-02,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV366
+CV368,,Marshall Hirose,Marshall,https://marshall-usa.com/cameras/CV568/,,Mini Camera,CY-CBL-6P-MARS-02,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV368
+CV370,,Marshall Ethernet,Marshall,https://marshall-usa.com/cameras/CV568/,,Mini Camera,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV370
+CV374,,Marshall Ethernet,Marshall,https://marshall-usa.com/cameras/CV568/,,Mini Camera,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV374
+CV420,,Marshall Ethernet,Marshall,https://marshall-usa.com/cameras/CV420-30X/,,Mini Camera,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV420
+CV420-30X,MarshallCV42030X,Not still documented,Marshall,,,,,,,False,0,Fixed,LAN wired,Fixed,CV420-30X
+CV420-30X-RS232,MarshallCV42030X232,Not still documented,Marshall,,,,,,,False,0,Fixed,LAN wired,Fixed,CV420-30X-RS232
+CV500,,Marshall PushLock,Marshall,https://marshall-usa.com/discontinued/cameras/CV500-MB.php,,Mini Camera,CY-CBL-6P-FAN100,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV500
+CV500,Pelco,Not still documented,Marshall,,,,,,,False,0,Fixed,LAN wired,Fixed,CV500
+CV502,,Marshall PushLock,Marshall,https://marshall-usa.com/discontinued/cameras/CV502-MB.php,,Mini Camera,CY-CBL-6P-FAN100,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV502
+CV502,MarshallCV502,Not still documented,Marshall,,,,,,,False,0,Fixed,LAN wired,Fixed,CV502
+CV503,MarshallCV503,Marshall Breakout,Marshall,,,Mini Camera,CY-CBL-6P-PFAN,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV503
+CV504,,Marshall Breakout,Marshall,,,Mini Camera,CY-CBL-6P-PFAN,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV504
+CV504,,Marshall Hirose,Marshall,https://marshall-usa.com/cameras/CV504/,,Mini Camera,CY-CBL-6P-MARS-02,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV504
+CV506,,Marshall Breakout,Marshall,,,Mini Camera,CY-CBL-6P-PFAN,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV506
+CV530,,Marshall Hirose,Marshall,https://marshall-usa.com/discontinued/cameras/CV503.php,,Mini Camera,CY-CBL-6P-MARS-02,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV530
+CV566,MarshallCV566,Marshall Hirose,Marshall,https://marshall-usa.com/cameras/CV568/,,Mini Camera,CY-CBL-6P-MARS-02,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV566
+CV568,MarshallCV568,Marshall Hirose,Marshall,https://marshall-usa.com/cameras/CV568/,,Mini Camera,CY-CBL-6P-MARS-02,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV568
+CV570,MarshallCV570,Marshall Ethernet,Marshall,https://marshall-usa.com/cameras/CV568/,,Mini Camera,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV570
+CV574,MarshallCV574,Marshall Ethernet,Marshall,https://marshall-usa.com/cameras/CV568/,,Mini Camera,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV574
+CV605,MarshallCV605,Not still documented,Marshall,,,,,,,False,0,Fixed,LAN wired,Fixed,CV605
+CV630,MarshallCV630,Marshall PTZ,Marshall,https://marshall-usa.com/cameras/CV630-IP/,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV630
+CV730,MarshallCV730,Marshall PTZ,Marshall,https://marshall-usa.com/cameras/CV730/,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,0,Fixed,LAN wired,Fixed,CV730
+MarshallGeneric,MarshallGeneric,Not still documented,Marshall,,,,,,,False,0,Fixed,LAN wired,Fixed,MarshallGeneric
+QDCam,QDCam,Not still documented,MediaEdge,,,,,,,False,0,Fixed,LAN wired,Fixed,QDCam
+PMW-EX1,,Not controllable,,https://pro.sony/fr_CH/products/handheld-camcorders/pmw-ex1,,Any,,,This camera is not remotely controllable.,False,0,Fixed,LAN wired,Fixed,PMW-EX1
+PXW-200,PXW-X200,Not compatible,,https://pro.sony/fr_BE/products/handheld-camcorders/pxw-x200,,Any,,,The camera protocol has not been integrated due to the low demand on this camera.,False,0,Fixed,LAN wired,Fixed,PXW-200
+PHD-02XP,PHD02XP,Not still documented,Pacific Corp.,,,,,,,False,0,Fixed,LAN wired,Fixed,PHD-02XP
+AG-CX350,CX350,Panasonic CX350,Panasonic,,,Handheld Camcorder,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/CX350,,False,0,Fixed,LAN wired,Fixed,AG-CX350
+AG-DVX200,Dvx200,Not still documented,Panasonic,,,,,,,False,0,Fixed,LAN wired,Fixed,AG-DVX200
+AG-HPX500,,Panasonic P2,Panasonic,,,Shoulder Camcorder,CY-CBL-6P-PAN-10P,https://support.cyanview.com/docs/Integrations/Panasonic/P2,,False,0,Fixed,LAN wired,Fixed,AG-HPX500
+AJ-HPX2700,,Panasonic P2,Panasonic,,,Shoulder Camcorder,CY-CBL-6P-PAN-10P,https://support.cyanview.com/docs/Integrations/Panasonic/P2,,False,0,Fixed,LAN wired,Fixed,AJ-HPX2700
+AJ-HPX3100,,Panasonic P2,Panasonic,,,Shoulder Camcorder,CY-CBL-6P-PAN-10P,https://support.cyanview.com/docs/Integrations/Panasonic/P2,,False,0,Fixed,LAN wired,Fixed,AJ-HPX3100
+AJ-PX270,PX270,Not still documented,Panasonic,,,,,,,False,0,Fixed,LAN wired,Fixed,AJ-PX270
+AJ-PX380,PX380,Not still documented,Panasonic,,,,,,,False,0,Fixed,LAN wired,Fixed,AJ-PX380
+AJ-PX5000,PX5000,Not still documented,Panasonic,,,,,,,False,0,Fixed,LAN wired,Fixed,AJ-PX5000
+AJ-PX800,PX800,Not still documented,Panasonic,,,,,,,False,0,Fixed,LAN wired,Fixed,AJ-PX800
+AK-UB300,AKUB300,Not still documented,Panasonic,,,,,,,False,0,Fixed,LAN wired,Fixed,AK-UB300
+AU-EVA1,EVA1,Not still documented,Panasonic,,,,,,,False,0,Fixed,LAN wired,Fixed,AU-EVA1
+AW-HE120,AWHE120,Panasonic PTZ,Panasonic,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/PanasonicPTZ,,False,0,Fixed,LAN wired,Fixed,AW-HE120
+AW-HE130,AWHE130,Panasonic PTZ,Panasonic,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/PanasonicPTZ,,False,0,Fixed,LAN wired,Fixed,AW-HE130
+AW-HE40,AWHE40,Not still documented,Panasonic,,,,,,,False,0,Fixed,LAN wired,Fixed,AW-HE40
+AW-HE42,AWHE42,Panasonic PTZ,Panasonic,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/PanasonicPTZ,,False,0,Fixed,LAN wired,Fixed,AW-HE42
+AW-HE50,AWHE50,Panasonic PTZ,Panasonic,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/PanasonicPTZ,,False,0,Fixed,LAN wired,Fixed,AW-HE50
+AW-HE60,AWHE60,Panasonic PTZ,Panasonic,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/PanasonicPTZ,,False,0,Fixed,LAN wired,Fixed,AW-HE60
+AW-HE70,AWHE70,Panasonic PTZ,Panasonic,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/PanasonicPTZ,,False,0,Fixed,LAN wired,Fixed,AW-HE70
+AW-HR140,AWHR140,Panasonic PTZ,Panasonic,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/PanasonicPTZ,,False,0,Fixed,LAN wired,Fixed,AW-HR140
+AW-UE100,AWUE100,Panasonic PTZ,Panasonic,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/PanasonicPTZ,,False,0,Fixed,LAN wired,Fixed,AW-UE100
+AW-UE150,AWUE150,Panasonic PTZ,Panasonic,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/PanasonicPTZ,,False,0,Fixed,LAN wired,Fixed,AW-UE150
+AW-UE160,AWUE160,Panasonic PTZ,Panasonic,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/PanasonicPTZ,,False,0,Fixed,LAN wired,Fixed,AW-UE160
+AW-UE70,AWUE70,Panasonic PTZ,Panasonic,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/PanasonicPTZ,,False,0,Fixed,LAN wired,Fixed,AW-UE70
+BGH1,BGH1,Panasonic BGH1,Panasonic,,,Block,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/BGH1,,False,0,Fixed,LAN wired,Fixed,BGH1
+BSH1,BSH1,Panasonic BGH1,Panasonic,,,Block,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/BGH1,,False,0,Fixed,LAN wired,Fixed,BSH1
+CX350,,Panasonic CX350,Panasonic,,,Handheld Camcorder,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/CX350,,False,0,Fixed,LAN wired,Fixed,CX350
+DC-BGH1/BS1H,LumixBGH1,Not still documented,Panasonic,,,,,,,False,0,Fixed,LAN wired,Fixed,DC-BGH1/BS1H
+DC-GH5S,LumixGH5S,Not still documented,Panasonic,,,,,,,False,0,Fixed,LAN wired,Fixed,DC-GH5S
+EVA1,,Panasonic EVA1,Panasonic,,,Large Sensor,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/EVA1,,False,0,Fixed,LAN wired,Fixed,EVA1
+Lumix DC-GH5S,,Panasonic DSLR,Panasonic,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Panasonic/GH5S,,False,0,Fixed,LAN wired,Fixed,Lumix DC-GH5S
+Serial,P2Serial,Not still documented,Panasonic,,,,,,,False,0,Fixed,LAN wired,Fixed,Serial
+Studio,PanaStudio,Not still documented,Panasonic,,,,,,,False,0,Fixed,LAN wired,Fixed,Studio
+UC4000,,Panasonic UC,Panasonic,https://eu.connect.panasonic.com/be/fr/products/broadcast-proav/ak-uc4000,,Shoulder Camcorder,Ethernet-RJ45,Not documented 202405,UC4000 very well covered,False,0,Fixed,LAN wired,Fixed,UC4000
+Varicam,,Panasonic Varicam,Panasonic,,,Handheld Camcorder,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/Varicam,,False,0,Fixed,LAN wired,Fixed,Varicam
+Varicam,Varicam,Not still documented,Panasonic,,,,,,,False,0,Fixed,LAN wired,Fixed,Varicam
+Komodo,RedKomodo,Red IP,RED,,,Large Sensor,IP-to-USB-C,https://support.cyanview.com/docs/Integrations/RED/Komodo,,False,0,Fixed,LAN wired,Fixed,Komodo
+V-Raptor,VRaptor,Red IP,RED,,,Large Sensor,IP-to-USB-C,https://support.cyanview.com/docs/Integrations/RED/Komodo,,False,0,Fixed,LAN wired,Fixed,V-Raptor
+20/40 UHD,Roboshot,Not still documented,RoboSHOT,,,,,,,False,0,Fixed,LAN wired,Fixed,20/40 UHD
+PIVOTCam,PivotCam,Not still documented,ROSS,,,,,,,False,0,Fixed,LAN wired,Fixed,PIVOTCam
+Alpha,SonyDslr,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,Alpha
+Alpha 7 C R,ILCE-7CR,Sony DSLR,Sony,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Sony/SonyMirrorless,,False,0,Fixed,LAN wired,Fixed,Alpha 7 C R
+Alpha 7 Mark 4,ILCE-7M4,Sony DSLR,Sony,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Sony/SonyMirrorless,,False,0,Fixed,LAN wired,Fixed,Alpha 7 Mark 4
+Alpha 7 R Mark 4 A,ILCE-7RM4A,Sony DSLR,Sony,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Sony/SonyMirrorless,,False,0,Fixed,LAN wired,Fixed,Alpha 7 R Mark 4 A
+Alpha 7 R Mark 5,ILCE-7RM5,Sony DSLR,Sony,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Sony/SonyMirrorless,,False,0,Fixed,LAN wired,Fixed,Alpha 7 R Mark 5
+Alpha 7C,ILCE-7C,Sony DSLR,Sony,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Sony/SonyMirrorless,,False,0,Fixed,LAN wired,Fixed,Alpha 7C
+Alpha 7C Mark 2,ILCE-7CM2,Sony DSLR,Sony,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Sony/SonyMirrorless,,False,0,Fixed,LAN wired,Fixed,Alpha 7C Mark 2
+Alpha 7S Mark 3,ILCE-7SM3,Sony DSLR,Sony,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Sony/SonyMirrorless,,False,0,Fixed,LAN wired,Fixed,Alpha 7S Mark 3
+Alpha 9 Mark 2,ILCE-9M2,Sony DSLR,Sony,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Sony/SonyMirrorless,,False,0,Fixed,LAN wired,Fixed,Alpha 9 Mark 2
+Alpha one,ILCE-1,Sony DSLR,Sony,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Sony/SonyMirrorless,,False,0,Fixed,LAN wired,Fixed,Alpha one
+BRC-H800,,Sony PTZ,Sony,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Sony/SonyPTZ,,False,0,Fixed,LAN wired,Fixed,BRC-H800
+BRC-H800,BRCH800,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,BRC-H800
+BRC-H900,,Sony PTZ,Sony,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Sony/SonyPTZ,,False,0,Fixed,LAN wired,Fixed,BRC-H900
+BRC-H900,BRCH900,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,BRC-H900
+BRC-X1000,,Sony PTZ,Sony,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Sony/SonyPTZ,,False,0,Fixed,LAN wired,Fixed,BRC-X1000
+BRC-X1000,BRCX1000,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,BRC-X1000
+BRC-X400,,Sony PTZ,Sony,,,PTZ,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Sony/SonyPTZ,,False,0,Fixed,LAN wired,Fixed,BRC-X400
+BRC-X400,BRCX400,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,BRC-X400
+Burano,,Sony Burano,Sony,,,Large Sensor,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Sony/SonyBurano,,False,0,Fixed,LAN wired,Fixed,Burano
+Burano,SonyBurano,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,Burano
+Camcorder,Camcorder700,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,Camcorder
+CBM,SonyCBM,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,CBM
+CNS-IP,SonyIp,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,CNS-IP
+CNS-Legacy,Sony700,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,CNS-Legacy
+CNS-MCS,SonyMcs,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,CNS-MCS
+FCB-7520,,Sony Visca,Sony,,,Block,CY-CBL-6P-FAN100,https://support.cyanview.com/docs/Integrations/Sony/SonyFCB,,False,0,Fixed,LAN wired,Fixed,FCB-7520
+FCB-8230,,Sony Visca,Sony,,,Block,CY-CBL-6P-FAN100,https://support.cyanview.com/docs/Integrations/Sony/SonyFCB,,False,0,Fixed,LAN wired,Fixed,FCB-8230
+FCB-8530,,Sony Visca,Sony,,,Block,CY-CBL-6P-FAN100,https://support.cyanview.com/docs/Integrations/Sony/SonyFCB,,False,0,Fixed,LAN wired,Fixed,FCB-8530
+FCB-8550,,Sony Visca,Sony,,,Block,CY-CBL-6P-FAN100,https://support.cyanview.com/docs/Integrations/Sony/SonyFCB,,False,0,Fixed,LAN wired,Fixed,FCB-8550
+FCB-H11,,Sony Visca,Sony,,,Block,CY-CBL-6P-FAN100,https://support.cyanview.com/docs/Integrations/Sony/SonyFCB,,False,0,Fixed,LAN wired,Fixed,FCB-H11
+FCB-H11,FCBH11,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,FCB-H11
+FCB7520,FCB7520,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,FCB7520
+FCB8230,FCB8230,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,FCB8230
+FCB8550,FCB8550,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,FCB8550
+FR7,SonyFr7,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,FR7
+FS5,PXW-FS5,Sony Lanc,Sony,,,Handheld Camcorder,CY-CBL-6P-LANC-2,https://support.cyanview.com/docs/Integrations/Sony/SonyLanc,,False,0,Fixed,LAN wired,Fixed,FS5
+FS7,PXW-FS7,Sony Lanc,Sony,,,Handheld Camcorder,CY-CBL-6P-LANC-2,https://support.cyanview.com/docs/Integrations/Sony/SonyLanc,,False,0,Fixed,LAN wired,Fixed,FS7
+FX3,ILME-FX3,Sony DSLR,Sony,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Sony/SonyMirrorless,,False,0,Fixed,LAN wired,Fixed,FX3
+FX30,ILME-FX30,Sony DSLR,Sony,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Sony/SonyMirrorless,,False,0,Fixed,LAN wired,Fixed,FX30
+FX6,ILME-FX6,Sony FX6,Sony,,,Large Sensor,USB-C-to-IP,https://support.cyanview.com/docs/Integrations/Sony/SonyFX6,,False,0,Fixed,LAN wired,Fixed,FX6
+FX6,ILME-FX6,Sony Lanc,Sony,,,Handheld Camcorder,CY-CBL-6P-LANC-2,https://support.cyanview.com/docs/Integrations/Sony/SonyLanc,,False,0,Fixed,LAN wired,Fixed,FX6
+FX6,SonyFX6,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,FX6
+FX9,PXW-FX9,Sony CBM,Sony,,,Large Sensor,WiFi,https://support.cyanview.com/docs/Integrations/Sony/SonyCBM,,False,0,Fixed,LAN wired,Fixed,FX9
+FX9,PXW-FX9,Sony FX9,Sony,,,Large Sensor,XDCA back,https://support.cyanview.com/docs/Integrations/Sony/SonyFX9,,False,0,Fixed,LAN wired,Fixed,FX9
+FX9,PXW-FX9,Sony FX9,Sony,,,Large Sensor,WiFi,https://support.cyanview.com/docs/Integrations/Sony/SonyFX9,,False,0,Fixed,LAN wired,Fixed,FX9
+FX9,SonyFX9,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,FX9
+LANC,SonyLanc,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,LANC
+PDW-700,PDW-700,Sony 8-Pin,Sony,https://pro.sony/ue_US/products/shoulder-camcorders/pdw-700,,Shoulder Camcorder,CY-CBL-SONY-8P-03,https://support.cyanview.com/docs/Integrations/Sony/Sony8Pin,Our solutions offers the same color control than the Sony RCP,False,0,Fixed,LAN wired,Fixed,PDW-700
+PDW-800,PDW-F800,Sony 8-Pin,Sony,https://pro.sony/ue_US/products/shoulder-camcorders/pdw-f800,"Sony 8-Pin pour CDC, Ethernet pour broadcast (Tally,……)",Shoulder Camcorder,CY-CBL-SONY-8P-03,https://support.cyanview.com/docs/Integrations/Sony/Sony8Pin,Our solutions offers the same color control than the Sony RCP,False,0,Fixed,LAN wired,Fixed,PDW-800
+PMW-EX3,,Sony 8-Pin,Sony,,"Poor control, no zoom and focus control on that legacy protocol",Shoulder Camcorder,CY-CBL-SONY-8P-03,https://support.cyanview.com/docs/Integrations/Sony/Sony8Pin,Our solutions offers the same color control than the Sony RCP,False,0,Fixed,LAN wired,Fixed,PMW-EX3
+PXW-350,PXW-X350,Sony 8-Pin,Sony,https://pro.sony/fr_BE/products/handheld-camcorders/pxw-x350,,Shoulder Camcorder,CY-CBL-SONY-8P-03,https://support.cyanview.com/docs/Integrations/Sony/Sony8Pin,Our solutions offers the same color control than the Sony RCP,False,0,Fixed,LAN wired,Fixed,PXW-350
+PXW-500,PXW-X500,Sony 8-Pin,Sony,https://pro.sony/fr_FR/products/shoulder-camcorders/pmw-500,"Sony 8-Pin pour CDC, Ethernet pour broadcast (Tally,……)",Shoulder Camcorder,CY-CBL-SONY-8P-03,https://support.cyanview.com/docs/Integrations/Sony/Sony8Pin,Our solutions offers the same color control than the Sony RCP,False,0,Fixed,LAN wired,Fixed,PXW-500
+RX0 Mark 2,DSC-RX0M2,Sony DSLR,Sony,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Sony/SonyMirrorless,,False,0,Fixed,LAN wired,Fixed,RX0 Mark 2
+Sony 6700,ILCE-6700,Sony DSLR,Sony,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Sony/SonyMirrorless,,False,0,Fixed,LAN wired,Fixed,Sony 6700
+Venice 1,Venice 1,Sony Venice,Sony,,,Large Sensor,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Sony/SonyVenice,,False,0,Fixed,LAN wired,Fixed,Venice 1
+Venice 2,Venice 2,Sony Venice,Sony,,,Large Sensor,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Sony/SonyVenice,,False,0,Fixed,LAN wired,Fixed,Venice 2
+Venice-IP,VeniceCBM,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,Venice-IP
+Venice-Legacy,Venice700,Not still documented,Sony,,,,,,,False,0,Fixed,LAN wired,Fixed,Venice-Legacy
+Z190,PXW-Z190,Sony Lanc,Sony,https://pro.sony/fr_FR/products/handheld-camcorders/pxw-z190#ProductSpecificationsBlock-pxw-z190,,Handheld Camcorder,CY-CBL-6P-LANC-2,https://support.cyanview.com/docs/Integrations/Sony/SonyLanc,,False,0,Fixed,LAN wired,Fixed,Z190
+Z280,PXW-Z280,Sony CBM,Sony,https://pro.sony/fr_FR/products/handheld-camcorders/pxw-z280,,Large Sensor,WiFi,https://support.cyanview.com/docs/Integrations/Sony/SonyCBM,,False,0,Fixed,LAN wired,Fixed,Z280
+ZV E1,ZV E1,Sony DSLR,Sony,,,DSLR,USB-A-to-USB-C,https://support.cyanview.com/docs/Integrations/Sony/SonyMirrorless,,False,0,Fixed,LAN wired,Fixed,ZV E1
+IK-HD1,Ikhd1,Not still documented,Toshiba,,,,,,,False,0,Fixed,LAN wired,Fixed,IK-HD1
+IK-HD5,Ikhd5,Not still documented,Toshiba,,,,,,,False,0,Fixed,LAN wired,Fixed,IK-HD5
+Generic,PtzOptics,Not still documented,VHD,,,,,,,False,0,Fixed,LAN wired,Fixed,Generic
+PH,VisionResearch,Not still documented,VisionResearch,,,,,,,False,0,Fixed,LAN wired,Fixed,PH
+Bullet HD,Yushida,Not still documented,Yushida,,,,,,,False,0,Fixed,LAN wired,Fixed,Bullet HD

@@ -1,0 +1,7 @@
+/cyaneval.env/*
+.DS_Store
+__pycache__/*
+test.py
+todelete.py
+test.ipynb
+requirements.old.txt

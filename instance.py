@@ -1,12 +1,12 @@
 import streamlit as st
 import pandas as pd
 import csv
-
+# Built a dataframe wiht camera instancesIntanes
 class Instances:
     def __init__(self,df=None) -> None:
         self.df = pd.DataFrame(df)
         self.columns_name = df.columns.values
-        self.df.index.name = 'instance'     
+        self.df.index.name = 'Instance'     
         self.property = Properties()   
         return 
 
@@ -18,8 +18,8 @@ class Instances:
         print("List of cameras",cameras.df.index.to_list())
         if not cameras.df.empty:
             for camera_index in cameras.df.index.to_list():
-                print("NUMBER VALUE:---> ", cameras.df.loc[camera_index,'number'],)
-                for i in range(int(cameras.df.loc[camera_index,'number'])):
+                print("NUMBER VALUE:---> ", cameras.df.loc[camera_index,'Number'],)
+                for i in range(int(cameras.df.loc[camera_index,'Number'])):
                     new_index = camera_index + "_" + str(i) 
                     print(new_index)
                     print(cameras.df.loc[camera_index])
@@ -30,7 +30,7 @@ class Instances:
                     #camera_lens_dict[new_index] = [camera_index].extend(variables)
                     camera_lens_dict[new_index] = list(variables)
             self.df = pd.DataFrame.from_dict(camera_lens_dict, orient = 'index', columns = self.columns_name)
-            self.df.index.name = 'instance'        
+            self.df.index.name = 'Instance'        
 
 
         print("\n\nCAMERA LENS DATAFRAME :")
@@ -51,8 +51,8 @@ class Instances:
             st.dataframe(
                 self.df,
                 column_config={
-                    "selected": "Is Selected",
-                    "number":st.column_config.NumberColumn(
+                    "Model": "Model",
+                    'Number':st.column_config.NumberColumn(
                         "# of Cams",
                         help="How much camera of this type in your use-case (0-15)?",
                         min_value=0,
@@ -60,12 +60,11 @@ class Instances:
                         step=1,
                         format="%d",
                     ),
-                    "Model": "Model",
                     "Brand": "Brand",
                     "Cable": "Cable",
-                    "lens": "Lens Type",
-                    "network": None,
-                    "base": None,
+                    'Lens': "Lens Type",
+                    'Network': None,
+                    'Base': None,
                     "SupportURL": None,
                     "ManufacturerURL": None,
                     "Reference": None,
@@ -74,7 +73,7 @@ class Instances:
                     "Message":None,
                     "Type":None
                 },
-                column_order=['Model','instance','network','lens','base'],
+                column_order=['Model','Instance','Network','Lens','Base'],
                 hide_index = True)
 
     def edit_camera_table(self,key='1'):
@@ -85,8 +84,8 @@ class Instances:
                 self.df,
                 key = key,
                 column_config={
-                    "instance": "Instance",
-                    "number":st.column_config.NumberColumn(
+                    'Instance': "Instance",
+                    'Number':st.column_config.NumberColumn(
                         "# Cams",
                         help="How much camera of this type in your use-case (0-15)?",
                         min_value=0,
@@ -96,19 +95,19 @@ class Instances:
                         format="%d",
                     ),
                     "Model": "Model",
-                    "lens": st.column_config.SelectboxColumn(
+                    'Lens': st.column_config.SelectboxColumn(
                         "Lens",
                         help="Lens type",
                         width="medium",
                         options= self.property.constraints[(key,'Lens')],
                         required=True),
-                    "network":  st.column_config.SelectboxColumn(
+                    'Network':  st.column_config.SelectboxColumn(
                         "Network",
                         help="Select the network type",
                         width="medium",
                         options=self.property.constraints[(key,'Network')],
                         required=True),
-                    "base":  st.column_config.SelectboxColumn(
+                    'Base':  st.column_config.SelectboxColumn(
                         "Basement",
                         help="Base type",
                         width="medium",
@@ -116,7 +115,6 @@ class Instances:
                         required=True),
                     "Brand": None,
                     "Cable": None,
-                    "selected": None,
                     "SupportURL": None,
                     "ManufacturerURL": None,
                     "Reference": None,
@@ -125,8 +123,8 @@ class Instances:
                     "Message":None,
                     "Type":None
                 },
-                disabled=['selected','number','cable'],
-                column_order=['Model','instance','network','lens','base'],
+                disabled=['Instance','Model','Number','Cable'],
+                column_order=['Model','Instance','Network','Lens','Base'],
                 hide_index = True)
             ## st.markdown(display)
             print("\nDATAFRAME AFTER EDIT")

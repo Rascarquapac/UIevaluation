@@ -1,0 +1,4 @@
+Instance,Reference,Protocol,Brand,ManufacturerURL,Remark,Type,Cable,SupportURL,Message,Selected,Number,Lens,Network,Base,Model,Device,Connected
+XF605_0,CanonXF605,Canon XC,Canon,https://fr.canon.be/video-cameras/xf605/ ,,Large Sensor,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Canon/CanonXC,,False,1.0,Fixed,LAN wired,Fixed,XF605,,False
+CV225_0,MarshallCV225,Marshall Breakout,Marshall,,,Mini Camera,CY-CBL-6P-PFAN,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,2.0,Fixed,LAN wired,Fixed,CV225,,False
+CV225_1,MarshallCV225,Marshall Breakout,Marshall,,,Mini Camera,CY-CBL-6P-PFAN,https://support.cyanview.com/docs/Integrations/Marshall/MarshallMinicam,,False,2.0,Fixed,LAN wired,Fixed,CV225,,False

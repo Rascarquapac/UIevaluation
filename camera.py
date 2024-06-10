@@ -2,7 +2,7 @@ import csv
 import pandas as pd
 import streamlit as st
 
-class Descriptor():
+class Camera():
     def __init__(self) -> None:
         self.df = pd.DataFrame()
         return
@@ -20,12 +20,12 @@ class Descriptor():
         del self.cameraProtocols_df['Brand']
         print(self.cameraProtocols_df)
         self.cameraDetails_df=pd.merge(self.cameras_df, self.cameraProtocols_df, on = ['Protocol'],how = 'left').set_index('Model')
-                # Add missing columns
-        self.cameraDetails_df = self.cameraDetails_df.assign(selected=False)
-        self.cameraDetails_df = self.cameraDetails_df.assign(number=0)
-        self.cameraDetails_df = self.cameraDetails_df.assign(lens='Fixed')
-        self.cameraDetails_df = self.cameraDetails_df.assign(network='LAN wired')
-        self.cameraDetails_df = self.cameraDetails_df.assign(base='Fixed')
+        # Add missing columns
+        self.cameraDetails_df = self.cameraDetails_df.assign(Selected=False)
+        self.cameraDetails_df = self.cameraDetails_df.assign(Number=0)
+        self.cameraDetails_df = self.cameraDetails_df.assign(Lens='Fixed')
+        self.cameraDetails_df = self.cameraDetails_df.assign(Network='LAN wired')
+        self.cameraDetails_df = self.cameraDetails_df.assign(Base='Fixed')
         ## To suppress ??
         self.cameraDetails_df['Model'] = self.cameraDetails_df.index
         print(self.cameraDetails_df)
@@ -33,7 +33,7 @@ class Descriptor():
         self.df = self.cameraDetails_df
         return 
     
-    def get_cameras(self, camera_pattern):
+    def cameras_from_pattern(self, camera_pattern):
         #filtered_df = df.filter(regex='^A', axis=0)
         #query = f"model.str.contains('.*{camera_pattern}')"
         #regularexp = f"'.*{camera_pattern}.*'"
@@ -56,7 +56,7 @@ class Descriptor():
     
     def print_selected(self):
         print("database->display_selected: Displaying selected rows:\n")
-        condition = self.df['selected'] == True
+        condition = self.df['Number'] > 0
         if not condition.empty : 
             print(self.df[condition])
         else: 
@@ -70,7 +70,8 @@ class Descriptor():
         print("\n\STEP DATAFRAME BEFORE MERGE:")
         print(step.df)
         step_df = step.df.copy()
-        selected_df = step_df[(step_df['selected'] == True) & (step_df['number'] > 0)]
+#        selected_df = step_df[(step_df['Selected'] == True) & (step_df['Number'] > 0)]
+        selected_df = step_df[(step_df['Number'] > 0)]
         print("\nSELECTED DATAFRAME BEFORE MERGE:")
         print(selected_df)
  
@@ -82,7 +83,7 @@ class Descriptor():
         else:
             for step_index in selected_df.index.to_list():
                 if step_index not in self.df.index:
-                    # add new indexe
+                    # add new index
                     new_indexes = self.df.index.insert(0,step_index)
                     self.df = self.df.reindex(new_indexes)
                 # add the row
@@ -102,8 +103,8 @@ class Descriptor():
             st.dataframe(
                 self.df,
                 column_config={
-                    "selected": "Is Selected",
-                    "number":st.column_config.NumberColumn(
+                    "Model": "Model",
+                    'Number':st.column_config.NumberColumn(
                         "# of Cams",
                         help="How much camera of this type in your use-case (0-15)?",
                         min_value=0,
@@ -111,7 +112,6 @@ class Descriptor():
                         step=1,
                         format="%d",
                     ),
-                    "Model": "Model",
                     "Brand": "Brand",
                     "Cable": "Cable",
                     "SupportURL": st.column_config.LinkColumn(
@@ -129,12 +129,11 @@ class Descriptor():
                         display_text = "Brand link",
                         max_chars = 30 ),
                     "Reference": None,
-#                    "supportText": None,
                     "Protocol":None,
                     "Message":None,
                     "Type":None
                 },
-                column_order=['selected','number','Model','Cable','SupportURL','ManufacturerURL'],
+                column_order=['Model','Number','Cable','SupportURL','ManufacturerURL'],
                 hide_index = True)
 
     def edit_camera_table(self):
@@ -144,8 +143,8 @@ class Descriptor():
             self.df = st.data_editor(
                 self.df,
                 column_config={
-                    "selected": "Is Selected",
-                    "number":st.column_config.NumberColumn(
+                    "Model": "Model",
+                    'Number':st.column_config.NumberColumn(
                         "# of Cams",
                         help="How much camera of this type in your use-case (0-15)?",
                         min_value=0,
@@ -153,7 +152,6 @@ class Descriptor():
                         step=1,
                         format="%d",
                     ),
-                    "Model": "Model",
                     "Brand": "Brand",
                     "Cable": "Cable",
                     "SupportURL": st.column_config.LinkColumn(
@@ -176,8 +174,8 @@ class Descriptor():
                     "Message":None,
                     "Type":None
                 },
-                disabled=['Model','SupportURL','ManufacturerURL'],
-                column_order=['selected','number','Model','Cable','SupportURL','ManufacturerURL'],
+                disabled=['Selected','Model','Cable','SupportURL','ManufacturerURL'],
+                column_order=['Model','Number','Cable','SupportURL','ManufacturerURL'],
                 hide_index = True)
             ## st.markdown(display)
             print("\nDATAFRAME AFTER EDIT")
@@ -185,4 +183,4 @@ class Descriptor():
             self.print_selected()
 
 if __name__  == "__main__":
-    reader = Descriptor()
+    reader = Camera()
