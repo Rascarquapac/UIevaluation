@@ -1,10 +1,12 @@
 /cyaneval.env/*
 /venv/*
-.DS_Store
+/data/selected_cameras.csv.DS_Store
+/.ipynb_checkpoints/*
 __pycache__/*
 test.py
 todelete.py
+salesagentbis.py
 test.ipynb
 requirements.old.txt
 test.ipynb
-/data/selected_cameras.csv
+mermaid_example.gl
