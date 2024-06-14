@@ -32,13 +32,24 @@ class Camera():
         self.df = self.cameraDetails_df
         return 
     
-    def cameras_from_pattern(self, camera_pattern):
+    def cameras_from_pattern(self, camera_pattern="",brand=""):
         #filtered_df = df.filter(regex='^A', axis=0)
         #query = f"model.str.contains('.*{camera_pattern}')"
         #regularexp = f"'.*{camera_pattern}.*'"
-        print("Camera Pattern = ",camera_pattern)
-        selection = self.df.filter(like=camera_pattern,axis=0)
-        #selection = self.df.filter(regex=regularexp,axis='Model')
+        print('Camera_pattern :',camera_pattern, '    Brand: ',brand)
+        if camera_pattern != None and camera_pattern != "":
+            camera_selection = self.df.filter(like=camera_pattern,axis=0)
+        else:
+            camera_selection = self.df
+        if brand != None and brand != "":
+            brand_query = f'Brand == "{brand}"'
+            selection = camera_selection.query(brand_query)
+        else:
+            selection = camera_selection
+        #search_pattern = f'Model.str.contains(".*{camera_pattern}") and Brand == "{brand}"'
+        #selection = self.df.query(search_pattern)
+        print('Camera_pattern :',camera_pattern, '    Brand: ',brand)
+        print('Selection: ', selection)
         return(selection)
 
     def text_message(self):

@@ -110,7 +110,7 @@ CV730,MarshallCV730,Marshall PTZ,Marshall,https://marshall-usa.com/cameras/CV730
 MarshallGeneric,MarshallGeneric,Not still documented,Marshall,,,,,,,False,0,Fixed,LAN wired,Fixed,MarshallGeneric
 QDCam,QDCam,Not still documented,MediaEdge,,,,,,,False,0,Fixed,LAN wired,Fixed,QDCam
 PMW-EX1,,Not controllable,,https://pro.sony/fr_CH/products/handheld-camcorders/pmw-ex1,,Any,,,This camera is not remotely controllable.,False,0,Fixed,LAN wired,Fixed,PMW-EX1
-PXW-200,PXW-X200,Not compatible,,https://pro.sony/fr_BE/products/handheld-camcorders/pxw-x200,,Any,,,The camera protocol has not been integrated due to the low demand on this camera.,False,0,Fixed,LAN wired,Fixed,PXW-200
+PXW-200,PXW-X200,Not compatible,Sony,https://pro.sony/fr_BE/products/handheld-camcorders/pxw-x200,,Any,,,The camera protocol has not been integrated due to the low demand on this camera.,False,0,Fixed,LAN wired,Fixed,PXW-200
 PHD-02XP,PHD02XP,Not still documented,Pacific Corp.,,,,,,,False,0,Fixed,LAN wired,Fixed,PHD-02XP
 AG-CX350,CX350,Panasonic CX350,Panasonic,,,Handheld Camcorder,Ethernet-RJ45,https://support.cyanview.com/docs/Integrations/Panasonic/CX350,,False,0,Fixed,LAN wired,Fixed,AG-CX350
 AG-DVX200,Dvx200,Not still documented,Panasonic,,,,,,,False,0,Fixed,LAN wired,Fixed,AG-DVX200

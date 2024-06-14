@@ -33,7 +33,7 @@ def ui_init():
     st.session_state.draw = Draw()
 
 def camera_pattern_input():
-    st.session_state.pattern = st.text_input(label="Camera Pattern:", value="",key="camera_pattern_input").upper()
+    st.session_state.pattern = st.text_input(label="Camera Pattern:", value="",key="camera_pattern_input",placeholder="Enter substring of camera name").upper()
     return (st.session_state.pattern)
 
 
@@ -55,8 +55,10 @@ with cameraSelection :
             camera_pattern = camera_pattern_input()
     with col2:
         if st.session_state.journey == "cam_pattern":
-            brand = st.selectbox("Select Brand:",("Sony", "Panasonic", "Dreamchip"))
-
+            brands= st.session_state.camera_base.df["Brand"].unique()
+            print(brands)
+            st.session_state.brand = st.selectbox("Select Brand:",brands,index=None,placeholder="Choose an option")
+            brand = st.session_state.brand
 
     # User Interface : collect regular expression for camera matching
     if st.session_state.journey == "cam_pattern":
@@ -71,8 +73,8 @@ with cameraSelection :
                 st.session_state.instance.camera_lens_init(st.session_state.camera_selected)
                 st.rerun()
         # Check if pattern entered
-        if st.session_state.pattern:
-            st.session_state.camera_selecting.df = st.session_state.camera_base.cameras_from_pattern(camera_pattern)
+        if st.session_state.pattern or st.session_state.brand :
+            st.session_state.camera_selecting.df = st.session_state.camera_base.cameras_from_pattern(camera_pattern,brand)
             st.markdown("Please select the camera used in your use-case and set the number of cameras")
             print(st.session_state.camera_selecting.df)
             #edit_camera_table(st.session_state.camera_selecting)
