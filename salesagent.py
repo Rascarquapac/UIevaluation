@@ -3,38 +3,38 @@ import pandas as pd
 import glob 
 import re
 
-
-# from camera import Cameras
-from camera   import Camera
+from camera import get_cameras,apply_pattern,display_camera_table,edit_camera_number, edit_camera_environment
 from instance import Instances
-from instance import Properties
-from analyze  import Analyze
+from property import Properties
 from message  import Messages
 from draw     import Draw
 from ui_sidebar import sidebar
+
+def update_selecting():
+    if "brand_selector" not in st.session_state:
+        st.session_state.selecting = st.session_state.base.pipe(apply_pattern,st.session_state.camera_pattern.upper())    
+    else:
+        st.session_state.selecting = st.session_state.base.pipe(apply_pattern,st.session_state.camera_pattern.upper(),st.session_state.brand_selector)    
 
 def ui_init():
     # Define first state
     st.session_state.journey = "cam_pattern"
     # Import full camera data
-    st.session_state.camera_base = Camera()
-    st.session_state.camera_base.get_csv()
-    # Initiate empty camera sets for active selection ("selecting") and the selected ("selected")
-    st.session_state.camera_selecting = Camera()
-    st.session_state.camera_selected = Camera()
+    st.session_state.base      = pd.DataFrame().pipe(get_cameras)
+    st.session_state.selecting = pd.DataFrame()
+    st.session_state.selected  = pd.DataFrame()
+    st.session_state.final     = pd.DataFrame()
+    st.session_state.brands = st.session_state.base["Brand"].unique()
     # Initiate empty camera instances 
-    st.session_state.instance = Instances(st.session_state.camera_base.df)
-    st.session_state.instance_selecting = Instances(st.session_state.camera_base.df)
-    st.session_state.instance_selected = Instances(st.session_state.camera_base.df)
+    st.session_state.instance = Instances()
+#    st.session_state.instance_selecting = Instances(st.session_state.camera_base.df)
+#    st.session_state.instance_selected = Instances(st.session_state.camera_base.df)
     # Get Properties and Messages from Cyanview data
     st.session_state.property = Properties()
     st.session_state.messages = Messages()
     # Initiate drawings
     st.session_state.draw = Draw()
-
-def camera_pattern_input():
-    st.session_state.pattern = st.text_input(label="Camera Pattern:", value="",key="camera_pattern_input",placeholder="Enter substring of camera name").upper()
-    return (st.session_state.pattern)
+    print("----> UI_INIT function EXECUTED")
 
 
 # User Interface initialisation
@@ -49,80 +49,40 @@ sidebar()
 cameraSelection, environmentSelection, tab3, tab4 = st.tabs(["Select Cameras","Select Environment" ,"Motivation", "Schema"])
 # Tab1 : cameras selection
 with cameraSelection :
+    st.subheader("Setup Camera Pool")
     col1, col2 = st.columns([0.5,0.5])
     with col1:
-        if st.session_state.journey == "cam_pattern":
-            camera_pattern = camera_pattern_input()
+        camera_pattern = st.text_input(label="Camera Pattern:", value="",key="camera_pattern",placeholder="Enter substring of camera name",on_change=update_selecting).upper()
     with col2:
-        if st.session_state.journey == "cam_pattern":
-            brands= st.session_state.camera_base.df["Brand"].unique()
-            print(brands)
-            st.session_state.brand = st.selectbox("Select Brand:",brands,index=None,placeholder="Choose an option")
-            brand = st.session_state.brand
+        brand = st.selectbox("Select Brand:",st.session_state.brands,index=None,placeholder="Choose an option",key="brand_selector",on_change=update_selecting)
+    selection = edit_camera_number(st.session_state.selecting)
+    st.divider()
+    st.subheader("Current Camera Pool")
+    print("DUPLICATED:")
+    print(f"Duplicated in session_state.base: {st.session_state.base.index[st.session_state.base.index.duplicated()]}")
+    if isinstance(selection, pd.DataFrame):
+        print(f"Duplicated in selection: {selection.index[selection.index.duplicated()]}")
+    
+    st.session_state.base.update(selection)
+    st.session_state.selected = st.session_state.base[(st.session_state.base['Number'] > 0)]
+    display_camera_table(st.session_state.selected)
 
-    # User Interface : collect regular expression for camera matching
-    if st.session_state.journey == "cam_pattern":
-        # Display current camera selection if thre is one
-        if len(st.session_state.camera_selected.df.index) != 0 :
-            st.subheader("Current Selection of Cameras")
-            # display_camera_table(st.session_state.camera_selected)
-            st.session_state.camera_selected.display_camera_table()
-            print("Cyaneval->/State=cam_pattern: Camera table displayed")
-            if st.button("Set Connections"):
-                st.session_state.journey = "properties_select"
-                st.session_state.instance.camera_lens_init(st.session_state.camera_selected)
-                st.rerun()
-        # Check if pattern entered
-        if st.session_state.pattern or st.session_state.brand :
-            st.session_state.camera_selecting.df = st.session_state.camera_base.cameras_from_pattern(camera_pattern,brand)
-            st.markdown("Please select the camera used in your use-case and set the number of cameras")
-            print(st.session_state.camera_selecting.df)
-            #edit_camera_table(st.session_state.camera_selecting)
-            st.session_state.camera_selecting.edit_camera_table()
-            ## Choose next states
-            st.divider()
-            if st.button("Add camera selection"):
-                st.session_state.camera_selected.merge(st.session_state.camera_selecting,None)
-                print("DEBUG: merge result: ")
-                print(st.session_state.camera_selected.df)
-                #display_camera_table(st.session_state.camera_selected)
-                st.session_state.camera_selected.display_camera_table()
-                st.rerun()
-    elif st.session_state.journey == "properties_select":
-        print("STREAMLITE STATE = properties_select")
-        st.subheader('Selecting Properties for the cameras instances:')
+with environmentSelection:
+    if not st.session_state.selected.empty :
+        st.subheader('Select Network and Lens Types:')
         blocks = {}
-        print("INSTANCE DES CAMERASxLENSxNETWORKxBASE AVANT EDITION")
-        print(st.session_state.instance.df)
         for camera_type in st.session_state.property.cameraTypes:
             #filter instance dataframe by type
-            selected_rows = st.session_state.instance.df.loc[st.session_state.instance.df['Type'] == camera_type]
+            selected_rows = st.session_state.selected.loc[st.session_state.selected['Type'] == camera_type]
             if not selected_rows.empty :
-                st.session_state.instance_selecting.df = selected_rows 
-                #display_camera_table(st.session_state.camera_selected)
-                blocks[camera_type] = st.session_state.instance_selecting.edit_camera_table(key=camera_type)
-        print("INSTANCE DES CAMERASxLENSxNETWORKxBASE APRES EDITION")
-        print(st.session_state.instance_selected.merge(blocks))
-
-        if st.button("Analyze the Use-case"):
-            st.session_state.journey = "analyzing"
-            st.rerun()
-    elif st.session_state.journey == "analyzing":
-        print("STREAMLITE STATE = analyzing")
-        st.subheader('Analysis')
-        analyze = Analyze(st.session_state.instance.df)
-        st.subheader('Schematic')
-        print("MERMAID CODE:",st.session_state.draw.test())
-        st.session_state.draw.mermaid()
-
-        if st.button("Go To Start"):
-            st.session_state.journey = "cam_pattern"
-            st.rerun()
-    else:
+                blocks[camera_type] = edit_camera_environment(selected_rows,key=camera_type)
+        #print("INSTANCE DES CAMERASxLENSxNETWORKxBASE APRES EDITION")
+        st.session_state.final = pd.concat(list(blocks.values()))
+    if st.button("Analyze"):
         pass
-with environmentSelection:
-    st.subheader('Analysis')
-    analyze = Analyze(st.session_state.instance.df)    
+#        st.session_state.instance.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
+#        st.session_state.instance.create(st.session_state.final)
+#        st.session_state.instance.analyze()
 
 with tab3:
     if st.button("Motivation"):

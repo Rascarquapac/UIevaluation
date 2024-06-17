@@ -33,8 +33,8 @@ class Messages():
                     name = result.group(3)
                 else:
                     message += line
-                    print("Keys: ",context, state,name)
-                    print("Message: ",message)
+                    # print("Keys: ",context, state,name)
+                    # print("Message: ",message)
                 line = reader.readline()
             # Store last message
             store(context,state,name,message)

@@ -1,196 +1,214 @@
 import csv
 import pandas as pd
 import streamlit as st
+from property import Properties
 
-class Camera():
-    def __init__(self) -> None:
-        self.df = pd.DataFrame()
-        return
-    
-    def get_csv(self):
-        self.set_cameras()
+def get_cameras(df):
+    cameras = pd.read_csv("./data/CyanviewDescriptor - Cameras.csv")
+    cam_df  = pd.DataFrame(cameras)
+    try:
+        columns = cam_df.columns[cam_df.columns.duplicated(keep=False)]
+        rows = cam_df.index[cam_df.index.duplicated(keep=False)]
+        if not columns.empty :
+            print("Duplicated Columns :\n",columns)
+            raise Exception('Duplicated Columns in CyanviewDescriptor - Cameras.csv')
+        if not rows.empty :
+            print("Duplicated Rows :\n",rows)
+            raise Exception('Duplicated Rows in CyanviewDescriptor - Cameras.csv')
+    except Exception as e:
+        print(str(e))
+    protocols = pd.read_csv("./data/CyanviewDescriptor - CameraProtocols.csv")
+    proto_df = pd.DataFrame(protocols)
+    del proto_df['Brand']
+    df = pd.merge(cam_df, proto_df, on = ['Protocol'],how = 'left').set_index('Model')
+    # Add missing columns
+    df = df.assign(Selected=False)
+    df = df.assign(Number=0)
+    df = df.assign(Lens='Fixed')
+    df = df.assign(Network='LAN wired')
+    df = df.assign(Base='Fixed')
+    ## To suppress ??
+    #df['Model'] = df.index
+    df.to_csv("./data/Generated_CameraDetails.csv")
+    return(df)
 
-    def set_cameras(self):
-        cameras_df = pd.read_csv("./data/CyanviewDescriptor - Cameras.csv")
-        self.cameras_df = pd.DataFrame(cameras_df)
-        print(self.cameras_df)
-        cameraProtocols_df = pd.read_csv("./data/CyanviewDescriptor - CameraProtocols.csv")
-        self.cameraProtocols_df = pd.DataFrame(cameraProtocols_df)
-        del self.cameraProtocols_df['Brand']
-        print(self.cameraProtocols_df)
-        self.cameraDetails_df=pd.merge(self.cameras_df, self.cameraProtocols_df, on = ['Protocol'],how = 'left').set_index('Model')
-        # Add missing columns
-        self.cameraDetails_df = self.cameraDetails_df.assign(Selected=False)
-        self.cameraDetails_df = self.cameraDetails_df.assign(Number=0)
-        self.cameraDetails_df = self.cameraDetails_df.assign(Lens='Fixed')
-        self.cameraDetails_df = self.cameraDetails_df.assign(Network='LAN wired')
-        self.cameraDetails_df = self.cameraDetails_df.assign(Base='Fixed')
-        ## To suppress ??
-        self.cameraDetails_df['Model'] = self.cameraDetails_df.index
-        print(self.cameraDetails_df)
-        self.cameraDetails_df.to_csv("./data/Generated_CameraDetails.csv")
-        self.df = self.cameraDetails_df
-        return 
-    
-    def cameras_from_pattern(self, camera_pattern="",brand=""):
-        #filtered_df = df.filter(regex='^A', axis=0)
-        #query = f"model.str.contains('.*{camera_pattern}')"
-        #regularexp = f"'.*{camera_pattern}.*'"
-        print('Camera_pattern :',camera_pattern, '    Brand: ',brand)
-        if camera_pattern != None and camera_pattern != "":
-            camera_selection = self.df.filter(like=camera_pattern,axis=0)
-        else:
-            camera_selection = self.df
-        if brand != None and brand != "":
-            brand_query = f'Brand == "{brand}"'
-            selection = camera_selection.query(brand_query)
-        else:
-            selection = camera_selection
-        #search_pattern = f'Model.str.contains(".*{camera_pattern}") and Brand == "{brand}"'
-        #selection = self.df.query(search_pattern)
-        print('Camera_pattern :',camera_pattern, '    Brand: ',brand)
-        print('Selection: ', selection)
-        return(selection)
+def apply_pattern(df, camera_pattern="",brand=""):
+    if camera_pattern != None and camera_pattern != "":
+        camera_selection = df.filter(like=camera_pattern,axis=0)
+    else:
+        camera_selection = df
+    if brand != None and brand != "":
+        brand_query = f'Brand == "{brand}"'
+        selection = camera_selection.query(brand_query)
+    else:
+        selection = camera_selection
+    #search_pattern = f'Model.str.contains(".*{camera_pattern}") and Brand == "{brand}"'
+    #selection = df.query(search_pattern)
+    return (selection)
 
-    def text_message(self):
-        display=""
-        if not self.df.empty: 
-            display = "### The following compatible cameras match your description.\n"
-            for index in self.df.index.to_list():
-                row = self.df.loc[index]
-                display += f"### Model {index}\n"
-                display += f"+ Brand: {row['Brand']}\n"
-                display += f"+ Cable: {row['Cable']}\n"
-                display += f"+ Cyanview support: ['Support URL']({row['SupportURL']})\n"
-        return(display)
-    
-    def print_selected(self):
-        print("database->display_selected: Displaying selected rows:\n")
-        condition = self.df['Number'] > 0
-        if not condition.empty : 
-            print(self.df[condition])
-        else: 
-            print(" No row match")
-        return
-    
-    def merge(self,step,condition=None):
-        print("DEBUG:database->merge():")
-        print("\n\nRESULT DATAFRAME BEFORE MERGE:")
-        print(self.df)
-        print("\n\STEP DATAFRAME BEFORE MERGE:")
-        print(step.df)
-        step_df = step.df.copy()
-#        selected_df = step_df[(step_df['Selected'] == True) & (step_df['Number'] > 0)]
-        selected_df = step_df[(step_df['Number'] > 0)]
-        print("\nSELECTED DATAFRAME BEFORE MERGE:")
-        print(selected_df)
- 
-        if condition != None: query = condition
-        else: query = f"selected == True"
-        # Index defined so minimum length is 1 
-        if self.df.empty:
-            self.df = selected_df
-        else:
-            for step_index in selected_df.index.to_list():
-                if step_index not in self.df.index:
-                    # add new index
-                    new_indexes = self.df.index.insert(0,step_index)
-                    self.df = self.df.reindex(new_indexes)
-                # add the row
-                print("Index : ",step_index)
-                print("LIGNE de RESULT")
-                print(self.df.loc[step_index])
-                print("LIGNE de STEP SELECTED")
-                print(selected_df.loc[step_index])
-                print("AFFECTATION")
-                self.df.loc[step_index] = selected_df.loc[step_index]
-        print("\n\nRESULT DATAFRAME AFTER MERGE:")
-        print(self.df)
+def display_camera_table(df):
+    print("DEBUG:cyaneval->display_camera_table ...")
+    if (len(df.index) != 0):
+        st.dataframe(
+            df,
+            column_config={
+                "Model": "Model",
+                'Number':st.column_config.NumberColumn(
+                    "# of Cams",
+                    help="How much camera of this type in your use-case (0-15)?",
+                    min_value=0,
+                    max_value=15,
+                    step=1,
+                    format="%d",
+                ),
+                "Brand": "Brand",
+                "Cable": "Cable",
+                "SupportURL": st.column_config.LinkColumn(
+                    "Support URL",
+                    help = "Reference in Cyanview Support Website",
+                    validate = None,
+#                            display_text = "\[(.*?)\]",
+                    display_text = "Support Link",
+                    max_chars = 30 ),
+                "ManufacturerURL": st.column_config.LinkColumn(
+                    "Brand URL",
+                    help = "Reference on Brand website",
+                    validate = None,
+#                            display_text = "\[(.*?)\]",
+                    display_text = "Brand link",
+                    max_chars = 30 ),
+                "Reference": None,
+                "Protocol":None,
+                "Message":None,
+                "Type":None
+            },
+            column_order=['Model','Number','Cable','SupportURL','ManufacturerURL'],
+            hide_index = True)
+        return(df)
 
-    def display_camera_table(self):
-        print("DEBUG:cyaneval->display_camera_table ...")
-        if (len(self.df.index) != 0):
-            st.dataframe(
-                self.df,
-                column_config={
+def edit_camera_number(df):
+    # Validate inputs
+    if (len(df.index) != 0): 
+        df = st.data_editor(
+            df,
+            height = 200,
+            column_config={
+                'Number':st.column_config.NumberColumn(
+                    "# of Cams",
+                    help="How much camera of this type in your use-case (0-15)?",
+                    min_value=0,
+                    max_value=15,
+                    step=1,
+                    format="%d",
+                ),
+                "Model": "Model",
+                "Brand": "Brand",
+                "Cable": "Cable",
+                "SupportURL": st.column_config.LinkColumn(
+                    "Support URL",
+                    help = "Reference in Cyanview Support Website",
+                    validate = None,
+#                            display_text = "\[(.*?)\]",
+                    display_text = "Support Link",
+                    max_chars = 30 ),
+                "ManufacturerURL": st.column_config.LinkColumn(
+                    "Brand URL",
+                    help = "Reference on Brand website",
+                    validate = None,
+#                            display_text = "\[(.*?)\]",
+                    display_text = "Brand link",
+                    max_chars = 30 ),
+                "Reference": None,
+                # "supportText": None,
+                "Protocol":None,
+                "Message":None,
+                "Type":None
+            },
+            disabled=['Selected','Model','Cable','SupportURL','ManufacturerURL'],
+            column_order=['Number','Model','Brand','Cable','SupportURL','ManufacturerURL'],
+            hide_index = True,
+            use_container_width = True,
+            key = "camera_number",
+#            on_change = st.rerun,
+            )
+        ## st.markdown(display)
+        #print("\nDATAFRAME AFTER EDIT")
+        #print(df)
+        return(df)
+
+def edit_camera_environment(df,key):
+    # Validate inputs
+    print("--------------------->CONSTRAINTS")
+    print(st.session_state.property.constraints)
+    print("END OF ONSTRAINTS---------------->")
+    if (len(df.index) != 0): 
+        df = st.data_editor(
+            df,
+            column_config={
+                    "Type": "Type",
                     "Model": "Model",
                     'Number':st.column_config.NumberColumn(
-                        "# of Cams",
+                        "# Cams",
                         help="How much camera of this type in your use-case (0-15)?",
                         min_value=0,
                         max_value=15,
                         step=1,
+                        default=0,
                         format="%d",
                     ),
-                    "Brand": "Brand",
-                    "Cable": "Cable",
-                    "SupportURL": st.column_config.LinkColumn(
-                        "Support URL",
-                        help = "Reference in Cyanview Support Website",
-                        validate = None,
-    #                            display_text = "\[(.*?)\]",
-                        display_text = "Support Link",
-                        max_chars = 30 ),
-                    "ManufacturerURL": st.column_config.LinkColumn(
-                        "Brand URL",
-                        help = "Reference on Brand website",
-                        validate = None,
-    #                            display_text = "\[(.*?)\]",
-                        display_text = "Brand link",
-                        max_chars = 30 ),
-                    "Reference": None,
-                    "Protocol":None,
-                    "Message":None,
-                    "Type":None
-                },
-                column_order=['Model','Number','Cable','SupportURL','ManufacturerURL'],
-                hide_index = True)
+                    'Lens': st.column_config.SelectboxColumn(
+                        "Lens",
+                        help="Lens type",
+                        width="medium",
+                        options= st.session_state.property.constraints[(key,'Lens')],
+                        required=True),
+                    'Network':  st.column_config.SelectboxColumn(
+                        "Network",
+                        help="Select the network type",
+                        width="medium",
+                        options=st.session_state.property.constraints[(key,'Network')],
+                        required=True),
+                    'Base':  st.column_config.SelectboxColumn(
+                        "Basement",
+                        help="Base type",
+                        width="medium",
+                        options=st.session_state.property.constraints[(key,'Base')],
+                        required=True),
+                "Brand": "Brand",
+                "Cable": "Cable",
+                "SupportURL": st.column_config.LinkColumn(
+                    "Support URL",
+                    help = "Reference in Cyanview Support Website",
+                    validate = None,
+#                            display_text = "\[(.*?)\]",
+                    display_text = "Support Link",
+                    max_chars = 30 ),
+                "ManufacturerURL": st.column_config.LinkColumn(
+                    "Brand URL",
+                    help = "Reference on Brand website",
+                    validate = None,
+#                            display_text = "\[(.*?)\]",
+                    display_text = "Brand link",
+                    max_chars = 30 ),
+                "Reference": None,
+                # "supportText": None,
+                "Message":None,
+            },
+            disabled=['Selected','Model','Cable','SupportURL','ManufacturerURL'],
+            column_order=['Type','Number','Model','Network','Lens','Base'],
+            hide_index = True,
+            use_container_width = True,
+            key = key,
+#            on_change = st.rerun,
+            )
+        ## st.markdown(display)
+        #print("\nDATAFRAME AFTER EDIT")
+        #print(df)
+        return(df)
 
-    def edit_camera_table(self):
-        # Validate inputs
-        if (len(self.df.index) != 0): 
-            display = self.text_message()
-            self.df = st.data_editor(
-                self.df,
-                column_config={
-                    "Model": "Model",
-                    'Number':st.column_config.NumberColumn(
-                        "# of Cams",
-                        help="How much camera of this type in your use-case (0-15)?",
-                        min_value=0,
-                        max_value=15,
-                        step=1,
-                        format="%d",
-                    ),
-                    "Brand": "Brand",
-                    "Cable": "Cable",
-                    "SupportURL": st.column_config.LinkColumn(
-                        "Support URL",
-                        help = "Reference in Cyanview Support Website",
-                        validate = None,
-    #                            display_text = "\[(.*?)\]",
-                        display_text = "Support Link",
-                        max_chars = 30 ),
-                    "ManufacturerURL": st.column_config.LinkColumn(
-                        "Brand URL",
-                        help = "Reference on Brand website",
-                        validate = None,
-    #                            display_text = "\[(.*?)\]",
-                        display_text = "Brand link",
-                        max_chars = 30 ),
-                    "Reference": None,
-                   # "supportText": None,
-                    "Protocol":None,
-                    "Message":None,
-                    "Type":None
-                },
-                disabled=['Selected','Model','Cable','SupportURL','ManufacturerURL'],
-                column_order=['Model','Number','Cable','SupportURL','ManufacturerURL'],
-                hide_index = True)
-            ## st.markdown(display)
-            print("\nDATAFRAME AFTER EDIT")
-            print(self.df)
-            self.print_selected()
 
 if __name__  == "__main__":
-    reader = Camera()
+    reader = pd.DataFrame().pipe(get_cameras).pipe(apply_pattern,"CV","")
+    #result = reader.pipe(get_cameras).pipe(apply_pattern,"CV","")
+    print("RESULT:\n")
+    print(reader)
