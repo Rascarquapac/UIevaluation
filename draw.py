@@ -3,12 +3,16 @@ import streamlit.components.v1 as components
 import graphviz
 
 class Draw():
-    def __init__(self) -> None:
-        self.code =     """
-        graph LR
-            A --> B --> C
-        """
-    
+    def __init__(self,name) -> None:
+        self.graph = graphviz.Graph(name=name)
+        self.graph.attr(rankdir='RL', size='6,3',style='filled',color='lightyellow',label=name)
+        self.graph.node_attr.update(style='filled',shape= 'box',color='lightcyan1')
+        self.graph.edge_attr.update(fontsize='8pt')
+        self.subgraphs = {} # subgraphs XOR nodes  
+        self.nodes={}
+    def add_node(self,name):
+        # add a node to the current graph
+        self.nodes[name] = self.graph.node(name=name,label=name)
     #@st.cache_data    
     def mermaid(self) -> None:
         self.code = '''
@@ -67,4 +71,7 @@ class Draw():
         graph.edge('ci0_0','poe_switcher','Ethernet cable')
         graph.edge('ci0_1','poe_switcher','Ethernet cable')
         return(graph)
+    def to_graphviz(self,instance):
+        pass
+
 

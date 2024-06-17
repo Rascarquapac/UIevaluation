@@ -1,6 +1,5 @@
-import streamlit as st
 import pandas as pd
-import csv
+import graphviz as gv
 from property import Properties
 
 # Built a dataframe wiht camera instancesIntanes
@@ -48,6 +47,12 @@ class Instances:
                 'Cine Lens': ['external', 'CY-CBL-B4 et CY-CBL-FUJI-2'], 
                 'Photo Lens': ['external', None]}, 
             orient = 'index')
+    def init_graph(self,name):
+        graph = gv.Graph(name=name)
+        graph.attr(rankdir='RL', size='6,3',style='filled',color='lightyellow',label=name)
+        graph.node_attr.update(style='filled',shape= 'box',color='lightcyan1')
+        graph.edge_attr.update(fontsize='8pt')
+        return(graph)
 ################## STREAMLIT #######################       
     def display_camera_table(self):
         print("DEBUG:cyaneval->display_camera_table ...")
@@ -188,6 +193,30 @@ class Instances:
                 case "WAN video" : return "RIO"
                 case _           : return "Unlisted" 
         self.df['Device'] = self.df.apply(lambda row: select(row['Device'],row['Network']), axis=1)
+#################### DRAW  ############################
+    def draw_instances(self):
+        top_graph = self.init_graph("Gear Pool")
+        for camtype in self.property.options['CameraTypes']:
+            camtype_df = self.df[(self.df['Type'] == camtype)]
+            if not camtype_df.empty:
+                print("Camera Type: ", camtype)
+                graph = self.init_graph(camtype)
+                top_graph.subgraph(graph)
+                switcher_name = "Switcher_" + camtype 
+                graph.node(name=switcher_name,label=switcher_name)
+                for instance in camtype_df.index:
+                    device = camtype_df.loc[instance,'Device']
+                    cable  = camtype_df.loc[instance,'Cable']
+                    print("    Instance = ",instance)
+                    print("    Device   = ",device)
+                    print("    Cable    = ",cable)
+                    graph.node(name=instance,label=instance)
+                    graph.node(name=device,label=device)
+                    graph.edge(instance,device,cable)
+                    graph.edge(switcher_name,device,"Ethernet Link")
+        return(top_graph)
+                
+
 
 
 if __name__ == "__main__":
@@ -195,4 +224,7 @@ if __name__ == "__main__":
     instance.debug_camerapool_to_instancepool()
     instance.analyze()
     print(instance.df)
+    print(instance.property.options)
+    print(instance.property.options['CameraTypes'])
+    instance.draw_instances()
 

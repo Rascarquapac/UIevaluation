@@ -42,7 +42,7 @@ if 'journey' not in st.session_state:
     ui_init()
 # Set title
 st.header('Cyanview Gear Selector V0.0')
-st.logo("data/cyanview_logo_temp.png")
+# not available in streamlit 1.34 … st.logo("data/cyanview_logo_temp.png")
 # Set sidebar
 sidebar()
 # Set tabs
@@ -92,3 +92,4 @@ with tab3:
 with tab4:
     if st.button("Display Schematic"):
         st.rerun()
+    st.write(st.session_state.draw.graphviztest())
