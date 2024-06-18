@@ -47,9 +47,9 @@ class Instances:
                 'Cine Lens': ['external', 'CY-CBL-B4 et CY-CBL-FUJI-2'], 
                 'Photo Lens': ['external', None]}, 
             orient = 'index')
-    def init_graph(self,name):
-        graph = gv.Graph(name=name)
-        graph.attr(rankdir='RL', size='6,3',style='filled',color='lightyellow',label=name)
+    def init_graph(self,name,rank='sink'):
+        graph = gv.Graph(name='cluster_' + name)
+        graph.attr(rankdir='RL', size='6,3',style='filled',color='lightyellow',label=name,rank=rank)
         graph.node_attr.update(style='filled',shape= 'box',color='lightcyan1')
         graph.edge_attr.update(fontsize='8pt')
         return(graph)
@@ -195,36 +195,33 @@ class Instances:
         self.df['Device'] = self.df.apply(lambda row: select(row['Device'],row['Network']), axis=1)
 #################### DRAW  ############################
     def draw_instances(self):
-        top_graph = self.init_graph("Gear Pool")
+        top   = self.init_graph("Cyanview")
+        switchers = []
         for camtype in self.property.options['CameraTypes']:
             camtype_df = self.df[(self.df['Type'] == camtype)]
             if not camtype_df.empty:
                 print("Camera Type: ", camtype)
-                graph = self.init_graph(camtype)
-                top_graph.subgraph(graph)
+                venue = self.init_graph(camtype,'source')
                 switcher_name = "Switcher_" + camtype 
-                graph.node(name=switcher_name,label=switcher_name)
                 for instance in camtype_df.index:
                     device = camtype_df.loc[instance,'Device']
                     cable  = camtype_df.loc[instance,'Cable']
-                    print("    Instance = ",instance)
-                    print("    Device   = ",device)
-                    print("    Cable    = ",cable)
-                    graph.node(name=instance,label=instance)
-                    graph.node(name=device,label=device)
-                    graph.edge(instance,device,cable)
-                    graph.edge(switcher_name,device,"Ethernet Link")
-        return(top_graph)
+                    device_id = device + camtype
+                    # print("    Instance = ",instance)
+                    # print("    Device   = ",device)
+                    # print("    Cable    = ",cable)
+                    venue.node(name=instance,label=instance)
+                    venue.node(name=device_id,label=device)
+                    venue.edge(instance,device_id,cable)
+                    switchers.append((device_id,switcher_name))
+                top.subgraph(venue)
+                print(switchers)
+        croom = self.init_graph("Control",'sink')
+        for edge in switchers:
+            (device_id,switcher_id) = edge
+            croom.node(name=switcher_id,label=switcher_id)
+            croom.edge(device_id,switcher_id,"Ethernet Link")
+        top.subgraph(croom)
+        return(top)
                 
-
-
-
-if __name__ == "__main__":
-    instance = Instances()
-    instance.debug_camerapool_to_instancepool()
-    instance.analyze()
-    print(instance.df)
-    print(instance.property.options)
-    print(instance.property.options['CameraTypes'])
-    instance.draw_instances()
 

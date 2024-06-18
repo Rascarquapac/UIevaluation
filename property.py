@@ -69,10 +69,10 @@ class Properties():
                         if row[i] != "":
                             self.options[self.keyOrder[i]].append(row[i])
                 line_count += 1
-            print(f'Processed {line_count} lines.')
-            print(self.options)
-            for key in self.options:
-                print("\n\n",key," : ",self.options[key])
+            # print(f'Processed {line_count} lines.')
+            # print(self.options)
+            # for key in self.options:
+                # print("\n\n",key," : ",self.options[key])
 
     def get_constraints(self):
         self.constraints = {}
@@ -80,17 +80,17 @@ class Properties():
         self.constraints_df = pd.DataFrame(constraints_df)
         constraints_dict = self.constraints_df.to_dict()
         for key,dico in constraints_dict.items():
-            print("\nRow Dict: ", dico)
+            # print("\nRow Dict: ", dico)
             listFromDict = []
             for index,value in dico.items():
                 if not (value != value):
                     listFromDict.append(value)
-            print("Row list: ",listFromDict)
+            # print("Row list: ",listFromDict)
             constraints_dict[key] = listFromDict.copy()
         self.constraints = constraints_dict
-        print(list(constraints_dict.keys()))
-        print(constraints_dict[('Slow Motion', 'Network')])
-        print(constraints_dict)
+        # print(list(constraints_dict.keys()))
+        # print(constraints_dict[('Slow Motion', 'Network')])
+        # print(constraints_dict)
 
 
 
