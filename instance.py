@@ -5,54 +5,58 @@ from property import Properties
 # Built a dataframe wiht camera instances
 class Instances:
     def __init__(self) -> None:
+        self.property = Properties()
         self.df = pd.DataFrame()
-        self.property = Properties()  
-        self.active = False
-        return 
-
-    def create(self,cameras_df):
-        self.columns_name = cameras_df.columns.values
+        return
+################## ANALYZE ############################
+    def setup(self,cameras_df=None):
+        def dico(cameras_df):
+            paths_dict = {}
+            if not cameras_df.empty:
+                for camera_index in cameras_df.index.to_list():
+                    for i in range(int(cameras_df.loc[camera_index,'Number'])):
+                        new_index = str(camera_index) + "_" + str(i) 
+                        variables = []
+                        variables.extend(cameras_df.loc[camera_index].tolist())
+                        paths_dict[new_index] = list(variables)
+            return (paths_dict)
+        def columns():
+            self.df.drop(columns=['SupportURL', 'ManufacturerURL','Remark','Unnamed: 6','Unnamed: 7','Selected','Message'], inplace=True)
+        paths_dict = dico(cameras_df)
         self.df.index.name = 'Instance'     
-
-        print("################### DEBUG CAMERA_LENS_INIT#######################")
-        print("CAMERAS DATAFRAME")
-        print(cameras_df)
-        camera_lens_dict = {}
-        print("List of cameras",cameras_df.index.to_list())
-        if not cameras_df.empty:
-            for camera_index in cameras_df.index.to_list():
-                print("NUMBER VALUE:---> ", cameras_df.loc[camera_index,'Number'],)
-                for i in range(int(cameras_df.loc[camera_index,'Number'])):
-                    new_index = str(camera_index) + "_" + str(i) 
-                    print(new_index)
-                    print(cameras_df.loc[camera_index])
-                    variables = []
-                    variables.extend(cameras_df.loc[camera_index].tolist())
-                    # variables.extend(['Fixed','Wired Lan','Fixed'])
-                    print(variables)
-                    #camera_lens_dict[new_index] = [camera_index].extend(variables)
-                    camera_lens_dict[new_index] = list(variables)
-            self.df = pd.DataFrame.from_dict(camera_lens_dict, orient = 'index', columns = self.columns_name)
-            self.df.index.name = 'Instance'        
-        self.df.drop(columns=['SupportURL', 'ManufacturerURL','Remark','Unnamed: 6','Unnamed: 7','Selected','Message'], inplace=True)
-
-        print("\n\nCAMERA LENS DATAFRAME :")
-        print(self.df)
-################## CANDIDATES #######################
-    def lens_init(self):
-        self.df = pd.DataFrame.from_dict({
-                'Camera Brand Motorized Lens':  [None, None], 
-                'ENG Canon Lens': [None, 'CY-CBL-B4-01'],
-                'ENG Fuji Lens': [None, 'CY-CBL-B4 et CY-CBL-FUJI-2'],
-                'Cine Lens': ['external', 'CY-CBL-B4 et CY-CBL-FUJI-2'], 
-                'Photo Lens': ['external', None]}, 
-            orient = 'index')
-    def init_graph(self,name,rank='sink'):
-        graph = gv.Graph(name='cluster_' + name)
-        graph.attr(rankdir='RL', size='6,3',style='filled',color='lightyellow',label=name,rank=rank)
-        graph.node_attr.update(style='filled',shape= 'box',color='lightcyan1')
-        graph.edge_attr.update(fontsize='8pt')
-        return(graph)
+        self.df = pd.DataFrame.from_dict(paths_dict, orient = 'index', columns = cameras_df.columns.values)
+        columns()       
+        return 
+    def analyze(self):
+        self.device_from_cable()
+        self.device_from_network()
+        # self.lens()
+        # self.base()
+        # self.max_latency()
+        # self.max_throughput()
+    def device_from_cable(self):
+        def select(cable):
+            match cable:
+                case cable if cable[0:7] == "CY-CBL-" : return "CI0"
+                case "Ethernet-RJ45"  : return "PassThru"
+                case "USB-A-to-USB-C" : return "PassThru"
+                case "IP-to-USB-C"    : return "PassThru"
+                case "BM-SDI"         : return "PassThru"
+                case "JVC USB-to-IP"  : return "PassThru" 
+                case "XDCA back"      : return "PassThru" 
+                case _                : return "PassThru" 
+        self.df['Device'] = self.df.apply(lambda row: select(row['Cable']), axis=1)
+    def device_from_network(self):
+        def select(current_device,network):
+            match network:
+                case "LAN wired" : return current_device
+                case "LAN RF"    : return current_device
+                case "WAN wired" : return "RIO"
+                case "WAN RF"    : return "RIO"
+                case "RF video"  : return "RIO-Live"
+                case "WAN video" : return "RIO"
+                case _           : return "Unlisted" 
+        self.df['Device'] = self.df.apply(lambda row: select(row['Device'],row['Network']), axis=1)
 ################## STREAMLIT #######################       
     def display_camera_table(self):
         print("DEBUG:cyaneval->display_camera_table ...")
@@ -152,47 +156,28 @@ class Instances:
         if self.df.empty:
             camera_df= pd.read_csv("./data/camera_pool.csv")
             camera_df.set_index('Model', inplace=True)
-            self.create(camera_df)
+            self.setup(camera_df)
     def debug_instancepool_to_csv(self):
         if not self.df.empty:
             self.df.to_csv("./data/instance_pool.csv")
     def debug_csv_to_instancepool(self):
         if self.df.empty:
             self.df.read_csv("./data/instance_pool.csv")
-################## ANALYZE ############################
-    def analyze(self):
-        self.device_from_cable()
-        self.device_from_network()
-        # self.lens()
-        # self.base()
-        # self.max_latency()
-        # self.max_throughput()
-        print("###########-> DATAFRAME LAN_wired: ")
-        print(self.df)
-        print(self.df[['Type','Network','Cable','Device']])    
-    def device_from_cable(self):
-        def select(cable):
-            match cable:
-                case cable if cable[0:7] == "CY-CBL-" : return "CI0"
-                case "Ethernet-RJ45"  : return "PassThru"
-                case "USB-A-to-USB-C" : return "PassThru"
-                case "IP-to-USB-C"    : return "PassThru"
-                case "BM-SDI"         : return "PassThru"
-                case "JVC USB-to-IP"  : return "PassThru" 
-                case "XDCA back"      : return "PassThru" 
-                case _                : return "PassThru" 
-        self.df['Device'] = self.df.apply(lambda row: select(row['Cable']), axis=1)
-    def device_from_network(self):
-        def select(current_device,network):
-            match network:
-                case "LAN wired" : return current_device
-                case "LAN RF"    : return current_device
-                case "WAN wired" : return "RIO"
-                case "WAN RF"    : return "RIO"
-                case "RF video"  : return "RIO-Live"
-                case "WAN video" : return "RIO"
-                case _           : return "Unlisted" 
-        self.df['Device'] = self.df.apply(lambda row: select(row['Device'],row['Network']), axis=1)
+################## CANDIDATES #######################
+    def lens_init(self):
+        self.df = pd.DataFrame.from_dict({
+                'Camera Brand Motorized Lens':  [None, None], 
+                'ENG Canon Lens': [None, 'CY-CBL-B4-01'],
+                'ENG Fuji Lens': [None, 'CY-CBL-B4 et CY-CBL-FUJI-2'],
+                'Cine Lens': ['external', 'CY-CBL-B4 et CY-CBL-FUJI-2'], 
+                'Photo Lens': ['external', None]}, 
+            orient = 'index')
+    def init_graph(self,name,rank='sink'):
+        graph = gv.Graph(name='cluster_' + name)
+        graph.attr(rankdir='RL', size='6,3',style='filled',color='lightyellow',label=name,rank=rank)
+        graph.node_attr.update(style='filled',shape= 'box',color='lightcyan1')
+        graph.edge_attr.update(fontsize='8pt')
+        return(graph)
 #################### DRAW  ############################
     def draw_instances(self):
         top   = self.init_graph("Cyanview")
@@ -225,7 +210,5 @@ class Instances:
         return(top)
 if __name__ == "__main__":
     instance = Instances()
-    # instance.debug_camerapool_to_instancepool()
-    # instance.debug_instancepool_to_csv()
-    instance.debug_csv_to_instancepool()                
+    instance.debug_camerapool_to_instancepool()                
 
