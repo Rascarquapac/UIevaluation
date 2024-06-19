@@ -2,7 +2,7 @@ import pandas as pd
 import graphviz as gv
 from property import Properties
 
-# Built a dataframe wiht camera instancesIntanes
+# Built a dataframe wiht camera instances
 class Instances:
     def __init__(self) -> None:
         self.df = pd.DataFrame()
@@ -223,5 +223,9 @@ class Instances:
             croom.edge(device_id,switcher_id,"Ethernet Link")
         top.subgraph(croom)
         return(top)
-                
+if __name__ == "__main__":
+    instance = Instances()
+    # instance.debug_camerapool_to_instancepool()
+    # instance.debug_instancepool_to_csv()
+    instance.debug_csv_to_instancepool()                
 

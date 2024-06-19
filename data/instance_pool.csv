@@ -1,0 +1,21 @@
+Instance,Reference,Protocol,Brand,Type,Cable,Number,Lens,Network,Base
+AtomOne 4K_0,Atom4K,DreamChip Serial,Dreamchip,Mini Camera,CY-CBL-6P-DCHIP-02,4,Fixed,LAN wired,Fixed
+AtomOne 4K_1,Atom4K,DreamChip Serial,Dreamchip,Mini Camera,CY-CBL-6P-DCHIP-02,4,Fixed,LAN wired,Fixed
+AtomOne 4K_2,Atom4K,DreamChip Serial,Dreamchip,Mini Camera,CY-CBL-6P-DCHIP-02,4,Fixed,LAN wired,Fixed
+AtomOne 4K_3,Atom4K,DreamChip Serial,Dreamchip,Mini Camera,CY-CBL-6P-DCHIP-02,4,Fixed,LAN wired,Fixed
+CV225_0,MarshallCV225,Marshall Breakout,Marshall,Mini Camera,CY-CBL-6P-PFAN,2,Fixed,LAN RF,Fixed
+CV225_1,MarshallCV225,Marshall Breakout,Marshall,Mini Camera,CY-CBL-6P-PFAN,2,Fixed,LAN RF,Fixed
+AW-HE130_0,AWHE130,Panasonic PTZ,Panasonic,PTZ,Ethernet-RJ45,4,Fixed,LAN wired,Fixed
+AW-HE130_1,AWHE130,Panasonic PTZ,Panasonic,PTZ,Ethernet-RJ45,4,Fixed,LAN wired,Fixed
+AW-HE130_2,AWHE130,Panasonic PTZ,Panasonic,PTZ,Ethernet-RJ45,4,Fixed,LAN wired,Fixed
+AW-HE130_3,AWHE130,Panasonic PTZ,Panasonic,PTZ,Ethernet-RJ45,4,Fixed,LAN wired,Fixed
+BRC-H800_0,BRCH800,Sony PTZ,Sony,PTZ,Ethernet-RJ45,2,Fixed,WAN wired,Fixed
+BRC-H800_1,BRCH800,Sony PTZ,Sony,PTZ,Ethernet-RJ45,2,Fixed,WAN wired,Fixed
+PXW-500_0,PXW-X500,Sony 8-Pin,Sony,Shoulder Camcorder,CY-CBL-SONY-8P-03,4,Fixed,LAN RF,Fixed
+PXW-500_1,PXW-X500,Sony 8-Pin,Sony,Shoulder Camcorder,CY-CBL-SONY-8P-03,4,Fixed,LAN RF,Fixed
+PXW-500_2,PXW-X500,Sony 8-Pin,Sony,Shoulder Camcorder,CY-CBL-SONY-8P-03,4,Fixed,LAN RF,Fixed
+PXW-500_3,PXW-X500,Sony 8-Pin,Sony,Shoulder Camcorder,CY-CBL-SONY-8P-03,4,Fixed,LAN RF,Fixed
+Alpha 7 Mark 4_0,ILCE-7M4,Sony DSLR,Sony,DSLR,USB-A-to-USB-C,1,Fixed,LAN wired,Fixed
+FX3_0,ILME-FX3,Sony DSLR,Sony,DSLR,USB-A-to-USB-C,1,Fixed,LAN wired,Fixed
+Burano_0,SonyBurano,Sony Burano,Sony,Large Sensor,Ethernet-RJ45,2,Fixed,WAN RF,Fixed
+Burano_1,SonyBurano,Sony Burano,Sony,Large Sensor,Ethernet-RJ45,2,Fixed,WAN RF,Fixed
