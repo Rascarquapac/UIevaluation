@@ -4,7 +4,7 @@ import streamlit as st
 from property import Properties
 
 def get_cameras(df):
-    cameras = pd.read_csv("./data/CyanviewDescriptor - Cameras.csv")
+    cameras = pd.read_csv("./data/CyanviewDescriptor - Cameras.csv",usecols=['Model','Reference','Protocol','Brand','ManufacturerURL','Remark'])
     cam_df  = pd.DataFrame(cameras)
     try:
         columns = cam_df.columns[cam_df.columns.duplicated(keep=False)]
@@ -17,7 +17,7 @@ def get_cameras(df):
             raise Exception('Duplicated Rows in CyanviewDescriptor - Cameras.csv')
     except Exception as e:
         print(str(e))
-    protocols = pd.read_csv("./data/CyanviewDescriptor - CameraProtocols.csv")
+    protocols = pd.read_csv("./data/CyanviewDescriptor - CameraProtocols.csv",usecols=["Protocol","Brand","Type","Cable","SupportURL","Message","MaxDelayToComplete","ControlCoverage","Bidrectionnal"])
     proto_df = pd.DataFrame(protocols)
     del proto_df['Brand']
     df = pd.merge(cam_df, proto_df, on = ['Protocol'],how = 'left').set_index('Model')

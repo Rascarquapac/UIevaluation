@@ -37,8 +37,7 @@ class Messages():
                     # print("Message: ",message)
                 line = reader.readline()
             # Store last message
-            store(context,state,name,message)
-           
+            store(context,state,name,message)           
         return
             
 if __name__ == "__main__":

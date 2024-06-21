@@ -45,7 +45,6 @@ class Properties():
                 'networks': self.options["NetworkTypes"],
                 'bases'   : self.options["BaseTypes"]},
             }
-        print(self.options)
 
     def get_options(self):
         self.options = {}

@@ -33,7 +33,7 @@ def ui_init():
     st.session_state.property = Properties()
     st.session_state.messages = Messages()
     # Initiate drawings
-    st.session_state.draw = Draw()
+    st.session_state.done = False
     print("----> UI_INIT function EXECUTED")
 
 
@@ -79,17 +79,18 @@ with environmentSelection:
         #print("INSTANCE DES CAMERASxLENSxNETWORKxBASE APRES EDITION")
         st.session_state.final = pd.concat(list(blocks.values()))
     if st.button("Analyze"):
-        pass
 #        st.session_state.instance.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
-#        st.session_state.instance.create(st.session_state.final)
-#        st.session_state.instance.analyze()
+         st.session_state.instance.setup(st.session_state.final)        
+         st.session_state.instance.analyze()
+         st.session_state.done = True
 
 with tab3:
     if st.button("Motivation"):
         st.rerun()
-    st.session_state.draw.mermaid()
+    #st.session_state.draw.mermaid()
 
 with tab4:
     if st.button("Display Schematic"):
         st.rerun()
-    st.write(st.session_state.draw.graphviztest())
+    if st.session_state.done:
+        st.write(st.session_state.instance.draw_all())
