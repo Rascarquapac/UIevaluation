@@ -46,7 +46,7 @@ st.header('Cyanview Gear Selector V0.0')
 # Set sidebar
 sidebar()
 # Set tabs
-cameraSelection, environmentSelection, tab3, tab4 = st.tabs(["Select Cameras","Select Environment" ,"Motivation", "Schema"])
+cameraSelection, environmentSelection, motivations, schema = st.tabs(["Select Cameras","Select Environment" ,"Motivations", "Schema"])
 # Tab1 : cameras selection
 with cameraSelection :
     st.subheader("Setup Camera Pool")
@@ -84,12 +84,20 @@ with environmentSelection:
          st.session_state.instance.analyze()
          st.session_state.done = True
 
-with tab3:
+with motivations:
     if st.button("Motivation"):
         st.rerun()
     #st.session_state.draw.mermaid()
-
-with tab4:
+    with st.expander("See explanation"):
+        st.write('''
+            The chart above shows some numbers I picked for you.
+            I rolled actual dice for these, so they're *guaranteed* to
+            be random.
+            [Link](https://share.streamlit.io/streamlit/emoji-shortcodes)
+            ''')
+        st.image("https://static.streamlit.io/examples/dice.jpg")
+    # st.session_state.messages.cameras(st.session_state.instance.df)
+with schema:
     if st.button("Display Schematic"):
         st.rerun()
     if st.session_state.done:

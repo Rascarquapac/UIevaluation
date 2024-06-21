@@ -3,9 +3,9 @@ import re
 class Messages():
     def __init__(self) -> None:
         self.dic={}
-        self.read_messages()
+        self.load_messages()
         pass
-    def read_messages(self):
+    def load_messages(self):
         def store(context,state,name,message):
             if context not in self.dic : self.dic[context]={}
             if state not in self.dic[context]: self.dic[context][state]={}
@@ -39,7 +39,8 @@ class Messages():
             # Store last message
             store(context,state,name,message)           
         return
-            
+    def cameras(self,df):
+        pass        
 if __name__ == "__main__":
     message=Messages()
     print(message.dic) 
