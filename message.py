@@ -40,7 +40,32 @@ class Messages():
             store(context,state,name,message)           
         return
     def cameras(self,df):
-        pass        
+        def control_message(controlLevel):
+            match controlLevel:
+                case 0: return "no"
+                case 1|2: return "basic"
+                case 3|4: return "nice"
+                case 5: return "advanced"
+                case _: return "to be defined"
+        message = ""
+        if df.empty:
+            message = "No camera selected"
+        else:
+            print(df)
+            print(df.columns)
+            for camera in df.index.to_list():
+                model = camera
+                reference = df.loc[camera,'Reference']
+                controlcoverage = df.loc[camera,"ControlCoverage"]
+                supporturl = df.loc[camera,"SupportURL"]
+                brand = df.loc[camera,"Brand"]
+                manufacturerurl = df.loc[camera,"ManufacturerURL"]
+                message += f"""
+                The camera **{model}** ({reference}) offers a {control_message(controlcoverage)} control coverage.
+                More information on cyanview support of the camera can be found on the [Cyanview support page for {model}]({supporturl}). The {brand} page for this camera is [{model}]({manufacturerurl}).
+
+                """ 
+        return(message)
 if __name__ == "__main__":
     message=Messages()
     print(message.dic) 

@@ -6,7 +6,7 @@ class Properties():
         self.get_options()
         self.get_constraints()
         self.cameraTypes  = ['Slow Motion','Mini Camera','PTZ','Shoulder Camcorder',
-                              'Handheld Camcorder','Block','DSLR','System','Large Sensor'] 
+                              'Handheld Camcorder','Block','DSLR','System','Large Sensor','Unknown'] 
         self.description = {
             'Slow Motion': {
                 'lenses'  : ["Fixed","B4 ENG"],

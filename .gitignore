@@ -4,6 +4,7 @@
 /data/selected_cameras.csv
 /.ipynb_checkpoints/*
 __pycache__/*
+/.streamlit/*
 test*
 todelete.py
 test.ipynb
@@ -14,4 +15,6 @@ salesagentbis.py
 salesagent_prev.py
 camera_prev.py
 test_streamlit_trigering.py
+test_mermaid.py
+test_mermaid.ipynb
 .DS_Store

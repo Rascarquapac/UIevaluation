@@ -17,3 +17,5 @@ A sample Streamlit application do determine Cyanview resources required by a giv
 - Display result with Mermaid
   - Check [this solution](https://discuss.streamlit.io/t/st-markdown-does-not-render-mermaid-graphs/25576/4)
 ## CODE
+## SSL Certificates:
+/Applications/Python\ 3.12/Install\ Certificates.command

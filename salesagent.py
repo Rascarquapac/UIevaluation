@@ -1,7 +1,9 @@
 import streamlit as st
+import streamlit_mermaid as stmd
 import pandas as pd
 import glob 
 import re
+from streamlit_gsheets import GSheetsConnection
 
 from camera import get_cameras,apply_pattern,display_camera_table,edit_camera_number, edit_camera_environment
 from instance import Instances
@@ -9,6 +11,7 @@ from property import Properties
 from message  import Messages
 from draw     import Draw
 from ui_sidebar import sidebar
+from test_mermaid import mermaid_stdm,mermaid_components_html,render_svg_example,mermaid_py_sample,mermaid_py_graph 
 
 def update_selecting():
     if "brand_selector" not in st.session_state:
@@ -34,6 +37,10 @@ def ui_init():
     st.session_state.messages = Messages()
     # Initiate drawings
     st.session_state.done = False
+    st.session_state.code ="""
+graph TD
+    A --> B
+"""
     print("----> UI_INIT function EXECUTED")
 
 
@@ -46,26 +53,29 @@ st.header('Cyanview Gear Selector V0.0')
 # Set sidebar
 sidebar()
 # Set tabs
-cameraSelection, environmentSelection, motivations, schema = st.tabs(["Select Cameras","Select Environment" ,"Motivations", "Schema"])
+cameraSelection, environmentSelection, motivations, mermaid,graphviz, test = st.tabs(["Select Cameras","Select Environment" ,"Motivations", "Mermaid","Graphviz","TEST"])
 # Tab1 : cameras selection
 with cameraSelection :
     st.subheader("Setup Camera Pool")
     col1, col2 = st.columns([0.5,0.5])
     with col1:
-        camera_pattern = st.text_input(label="Camera Pattern:", value="",key="camera_pattern",placeholder="Enter substring of camera name",on_change=update_selecting).upper()
-    with col2:
         brand = st.selectbox("Select Brand:",st.session_state.brands,index=None,placeholder="Choose an option",key="brand_selector",on_change=update_selecting)
+    with col2:
+        camera_pattern = st.text_input(label="Camera Pattern:", value="",key="camera_pattern",placeholder="Enter substring of camera name",on_change=update_selecting).upper()
     selection = edit_camera_number(st.session_state.selecting)
     st.divider()
-    st.subheader("Current Camera Pool")
+    st.caption("Your current cameras pool selection")
     print("DUPLICATED:")
     print(f"Duplicated in session_state.base: {st.session_state.base.index[st.session_state.base.index.duplicated()]}")
     if isinstance(selection, pd.DataFrame):
         print(f"Duplicated in selection: {selection.index[selection.index.duplicated()]}")
-    
     st.session_state.base.update(selection)
     st.session_state.selected = st.session_state.base[(st.session_state.base['Number'] > 0)]
+    st.session_state.selected.style.set_properties(**{'background_color': 'lightgreen'})
     display_camera_table(st.session_state.selected)
+    with st.expander("More Info",expanded=False):
+        message = st.session_state.messages.cameras(st.session_state.selected)
+        st.write(message)
 
 with environmentSelection:
     if not st.session_state.selected.empty :
@@ -76,7 +86,9 @@ with environmentSelection:
             selected_rows = st.session_state.selected.loc[st.session_state.selected['Type'] == camera_type]
             if not selected_rows.empty :
                 blocks[camera_type] = edit_camera_environment(selected_rows,key=camera_type)
-        #print("INSTANCE DES CAMERASxLENSxNETWORKxBASE APRES EDITION")
+        print("INSTANCE DES CAMERASxLENSxNETWORKxBASE APRES EDITION")
+        print("Camera types :",st.session_state.property.cameraTypes)
+        print("Blocks: ",blocks)
         st.session_state.final = pd.concat(list(blocks.values()))
     if st.button("Analyze"):
 #        st.session_state.instance.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
@@ -87,18 +99,33 @@ with environmentSelection:
 with motivations:
     if st.button("Motivation"):
         st.rerun()
-    #st.session_state.draw.mermaid()
-    with st.expander("See explanation"):
-        st.write('''
-            The chart above shows some numbers I picked for you.
-            I rolled actual dice for these, so they're *guaranteed* to
-            be random.
-            [Link](https://share.streamlit.io/streamlit/emoji-shortcodes)
-            ''')
-        st.image("https://static.streamlit.io/examples/dice.jpg")
-    # st.session_state.messages.cameras(st.session_state.instance.df)
-with schema:
-    if st.button("Display Schematic"):
-        st.rerun()
+with graphviz:
     if st.session_state.done:
+        # GRAPHVIZ RENDERING
         st.write(st.session_state.instance.draw_all())
+with mermaid:
+    if st.session_state.done:
+        # MERMAID RENDERING
+        svg_code = st.session_state.instance.get_mermaid_code()
+        mermaid_graph=st.session_state.instance.graph_mermaid(svg_code)
+        html = st.session_state.instance.streamlit_mermaid(mermaid_graph)
+        st.write(html, unsafe_allow_html=True)
+
+with test:
+    # if st.session_state.done:
+        # code = st.session_state.instance.get_mermaid_code()
+        # svg_code = st.session_state.instance.get_mermaid_code()
+    svg_code = None
+    mermaid_graph=st.session_state.instance.graph_mermaid(svg_code)
+    html = st.session_state.instance.streamlit_mermaid(mermaid_graph)
+    st.write(html, unsafe_allow_html=True)
+        # mermaid = stmd.st_mermaid(st.session_state.code)
+        # st.write(mermaid)
+    # Create a connection object.
+    # conn = st.connection("gsheets", type=GSheetsConnection)
+    # df = conn.read(
+    #     worksheet="Cameras",
+    #     ttl=0, #ttl="10m",
+    #     usecols=[0, 1],
+    #     nrows=3,
+    # )
