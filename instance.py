@@ -52,6 +52,7 @@ class Instances:
         # self.base()
         # self.max_latency()
         # self.max_throughput()
+        self.df.to_csv('./debug_anayzed_cameras.csv')
     def device_from_cable(self):
         def select(cable):
             match cable:

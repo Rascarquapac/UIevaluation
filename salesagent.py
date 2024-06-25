@@ -1,17 +1,14 @@
 import streamlit as st
-import streamlit_mermaid as stmd
 import pandas as pd
 import glob 
 import re
-from streamlit_gsheets import GSheetsConnection
 
-from camera import get_cameras,apply_pattern,display_camera_table,edit_camera_number, edit_camera_environment
+from camera import get_cameras,apply_pattern,display_camera_table,edit_camera_number, edit_camera_network,edit_camera_lens
 from instance import Instances
 from property import Properties
 from message  import Messages
 from draw     import Draw
 from ui_sidebar import sidebar
-from test_mermaid import mermaid_stdm,mermaid_components_html,render_svg_example,mermaid_py_sample,mermaid_py_graph 
 
 def update_selecting():
     if "brand_selector" not in st.session_state:
@@ -53,7 +50,7 @@ st.header('Cyanview Gear Selector V0.0')
 # Set sidebar
 sidebar()
 # Set tabs
-cameraSelection, environmentSelection, motivations, mermaid,graphviz, test = st.tabs(["Select Cameras","Select Environment" ,"Motivations", "Mermaid","Graphviz","TEST"])
+cameraSelection, networkSelection,lensSelection, motivations, mermaid,graphviz, test = st.tabs(["Cameras","Network" ,"Lens","Motivations", "Mermaid","Graphviz","TEST"])
 # Tab1 : cameras selection
 with cameraSelection :
     st.subheader("Setup Camera Pool")
@@ -77,20 +74,38 @@ with cameraSelection :
         message = st.session_state.messages.cameras(st.session_state.selected)
         st.write(message)
 
-with environmentSelection:
+with networkSelection:
     if not st.session_state.selected.empty :
-        st.subheader('Select Network and Lens Types:')
+        st.subheader('Select networks (optional):')
         blocks = {}
         for camera_type in st.session_state.property.cameraTypes:
             #filter instance dataframe by type
             selected_rows = st.session_state.selected.loc[st.session_state.selected['Type'] == camera_type]
             if not selected_rows.empty :
-                blocks[camera_type] = edit_camera_environment(selected_rows,key=camera_type)
+                blocks[camera_type] = edit_camera_network(selected_rows,key=camera_type)
         print("INSTANCE DES CAMERASxLENSxNETWORKxBASE APRES EDITION")
         print("Camera types :",st.session_state.property.cameraTypes)
         print("Blocks: ",blocks)
         st.session_state.final = pd.concat(list(blocks.values()))
-    if st.button("Analyze"):
+    if st.button("Analyze",key="networkanalysis"):
+#        st.session_state.instance.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
+         st.session_state.instance.setup(st.session_state.final)        
+         st.session_state.instance.analyze()
+         st.session_state.done = True
+with lensSelection:
+    if not st.session_state.selected.empty :
+        st.subheader('Select Lens (optional):')
+        blocks = {}
+        for camera_type in st.session_state.property.cameraTypes:
+            #filter instance dataframe by type
+            selected_rows = st.session_state.selected.loc[st.session_state.selected['Type'] == camera_type]
+            if not selected_rows.empty :
+                blocks[camera_type] = edit_camera_lens(selected_rows,key=camera_type)
+        print("INSTANCE DES CAMERASxLENSxNETWORKxBASE APRES EDITION")
+        print("Camera types :",st.session_state.property.cameraTypes)
+        print("Blocks: ",blocks)
+        st.session_state.final = pd.concat(list(blocks.values()))
+    if st.button("Analyze",key="lensanalysis"):
 #        st.session_state.instance.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
          st.session_state.instance.setup(st.session_state.final)        
          st.session_state.instance.analyze()

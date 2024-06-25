@@ -45,7 +45,6 @@ def apply_pattern(df, camera_pattern="",brand=""):
     #search_pattern = f'Model.str.contains(".*{camera_pattern}") and Brand == "{brand}"'
     #selection = df.query(search_pattern)
     return (selection)
-
 def display_camera_table(df):
     print("DEBUG:cyaneval->display_camera_table ...")
     if (len(df.index) != 0):
@@ -85,7 +84,6 @@ def display_camera_table(df):
             column_order=['Model','Number','Cable','SupportURL','ManufacturerURL'],
             hide_index = True)
         return(df)
-
 def edit_camera_number(df):
     # Validate inputs
     if (len(df.index) != 0): 
@@ -135,8 +133,7 @@ def edit_camera_number(df):
         #print("\nDATAFRAME AFTER EDIT")
         #print(df)
         return(df)
-
-def edit_camera_environment(df,key):
+def edit_camera_network(df,key):
     # Validate inputs
     print("--------------------->CONSTRAINTS")
     print(st.session_state.property.constraints)
@@ -198,13 +195,83 @@ def edit_camera_environment(df,key):
             column_order=['Type','Number','Model','Network','Lens','Base'],
             hide_index = True,
             use_container_width = True,
-            key = key,
+            key = key+"_network",
 #            on_change = st.rerun,
             )
         ## st.markdown(display)
         #print("\nDATAFRAME AFTER EDIT")
         #print(df)
         return(df)
+def edit_camera_lens(df,key):
+    # Validate inputs
+    print("--------------------->CONSTRAINTS")
+    print(st.session_state.property.constraints)
+    print("END OF ONSTRAINTS---------------->")
+    if (len(df.index) != 0): 
+        df = st.data_editor(
+            df,
+            column_config={
+                    "Type": "Type",
+                    "Model": "Model",
+                    'Number':st.column_config.NumberColumn(
+                        "# Cams",
+                        help="How much camera of this type in your use-case (0-15)?",
+                        min_value=0,
+                        max_value=15,
+                        step=1,
+                        default=0,
+                        format="%d",
+                    ),
+                    'Lens': st.column_config.SelectboxColumn(
+                        "Lens",
+                        help="Lens type",
+                        width="medium",
+                        options= st.session_state.property.constraints[(key,'Lens')],
+                        required=True),
+                    'Network':  st.column_config.SelectboxColumn(
+                        "Network",
+                        help="Select the network type",
+                        width="medium",
+                        options=st.session_state.property.constraints[(key,'Network')],
+                        required=True),
+                    'Base':  st.column_config.SelectboxColumn(
+                        "Basement",
+                        help="Base type",
+                        width="medium",
+                        options=st.session_state.property.constraints[(key,'Base')],
+                        required=True),
+                "Brand": "Brand",
+                "Cable": "Cable",
+                "SupportURL": st.column_config.LinkColumn(
+                    "Support URL",
+                    help = "Reference in Cyanview Support Website",
+                    validate = None,
+#                            display_text = "\[(.*?)\]",
+                    display_text = "Support Link",
+                    max_chars = 30 ),
+                "ManufacturerURL": st.column_config.LinkColumn(
+                    "Brand URL",
+                    help = "Reference on Brand website",
+                    validate = None,
+#                            display_text = "\[(.*?)\]",
+                    display_text = "Brand link",
+                    max_chars = 30 ),
+                "Reference": None,
+                # "supportText": None,
+                "Message":None,
+            },
+            disabled=['Selected','Model','Cable','SupportURL','ManufacturerURL'],
+            column_order=['Type','Number','Model','Network','Lens','Base'],
+            hide_index = True,
+            use_container_width = True,
+            key = key+"_lens",
+#            on_change = st.rerun,
+            )
+        ## st.markdown(display)
+        #print("\nDATAFRAME AFTER EDIT")
+        #print(df)
+        return(df)
+
 
 
 if __name__  == "__main__":

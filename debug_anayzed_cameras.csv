@@ -1,0 +1,13 @@
+,Reference,Protocol,Brand,Type,Cable,MaxDelayToComplete,ControlCoverage,Bidrectionnal,Number,Lens,Network,Base,Camera_id,Device,Device_id,Switch_id,RCP_id,Camgroup,RCPtype
+CV225_0,MarshallCV225,Marshall Breakout,Marshall,Mini Camera,CY-CBL-6P-PFAN,500.0,1.0,No,3,Fixed,LAN wired,Fixed,CV225_0,CI0,CI0_0,Mini Camera Switch,CY-RCP-QUATTRO_0,Mini Camera,CY-RCP-QUATTRO
+CV225_1,MarshallCV225,Marshall Breakout,Marshall,Mini Camera,CY-CBL-6P-PFAN,500.0,1.0,No,3,Fixed,LAN wired,Fixed,CV225_1,CI0,CI0_0,Mini Camera Switch,CY-RCP-QUATTRO_0,Mini Camera,CY-RCP-QUATTRO
+CV225_2,MarshallCV225,Marshall Breakout,Marshall,Mini Camera,CY-CBL-6P-PFAN,500.0,1.0,No,3,Fixed,LAN wired,Fixed,CV225_2,CI0,CI0_1,Mini Camera Switch,CY-RCP-QUATTRO_0,Mini Camera,CY-RCP-QUATTRO
+AW-HE42_0,AWHE42,Panasonic PTZ,Panasonic,PTZ,Ethernet-RJ45,500.0,2.0,,6,Fixed,LAN wired,Fixed,AW-HE42_0,PassThru,PassThru_1,PTZ Switch,CY-RCP-OCTO-J_0,PTZ,CY-RCP-OCTO-J
+AW-HE42_1,AWHE42,Panasonic PTZ,Panasonic,PTZ,Ethernet-RJ45,500.0,2.0,,6,Fixed,LAN wired,Fixed,AW-HE42_1,PassThru,PassThru_1,PTZ Switch,CY-RCP-OCTO-J_0,PTZ,CY-RCP-OCTO-J
+AW-HE42_2,AWHE42,Panasonic PTZ,Panasonic,PTZ,Ethernet-RJ45,500.0,2.0,,6,Fixed,LAN wired,Fixed,AW-HE42_2,PassThru,PassThru_1,PTZ Switch,CY-RCP-OCTO-J_0,PTZ,CY-RCP-OCTO-J
+AW-HE42_3,AWHE42,Panasonic PTZ,Panasonic,PTZ,Ethernet-RJ45,500.0,2.0,,6,Fixed,LAN wired,Fixed,AW-HE42_3,PassThru,PassThru_1,PTZ Switch,CY-RCP-OCTO-J_0,PTZ,CY-RCP-OCTO-J
+AW-HE42_4,AWHE42,Panasonic PTZ,Panasonic,PTZ,Ethernet-RJ45,500.0,2.0,,6,Fixed,LAN wired,Fixed,AW-HE42_4,PassThru,PassThru_1,PTZ Switch,CY-RCP-OCTO-J_0,PTZ,CY-RCP-OCTO-J
+AW-HE42_5,AWHE42,Panasonic PTZ,Panasonic,PTZ,Ethernet-RJ45,500.0,2.0,,6,Fixed,LAN wired,Fixed,AW-HE42_5,PassThru,PassThru_1,PTZ Switch,CY-RCP-OCTO-J_0,PTZ,CY-RCP-OCTO-J
+FS5_0,PXW-FS5,Sony Lanc,Sony,Handheld Camcorder,CY-CBL-6P-LANC-2,500.0,1.0,No,3,Fixed,LAN wired,Fixed,FS5_0,CI0,CI0_3,Handheld Camcorder Switch,CY-RCP-DUO-J_0,Handheld Camcorder,CY-RCP-DUO-J
+FS5_1,PXW-FS5,Sony Lanc,Sony,Handheld Camcorder,CY-CBL-6P-LANC-2,500.0,1.0,No,3,Fixed,LAN wired,Fixed,FS5_1,CI0,CI0_3,Handheld Camcorder Switch,CY-RCP-DUO-J_1,Handheld Camcorder,CY-RCP-DUO-J
+FS5_2,PXW-FS5,Sony Lanc,Sony,Handheld Camcorder,CY-CBL-6P-LANC-2,500.0,1.0,No,3,Fixed,LAN wired,Fixed,FS5_2,CI0,CI0_4,Handheld Camcorder Switch,CY-RCP-DUO-J_2,Handheld Camcorder,CY-RCP-DUO-J
