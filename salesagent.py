@@ -34,12 +34,6 @@ def ui_init():
     st.session_state.messages = Messages()
     # Initiate drawings
     st.session_state.done = False
-    st.session_state.code ="""
-graph TD
-    A --> B
-"""
-    print("----> UI_INIT function EXECUTED")
-
 
 # User Interface initialisation
 if 'journey' not in st.session_state:
@@ -51,7 +45,6 @@ st.header('Cyanview Gear Selector V0.0')
 sidebar()
 # Set tabs
 cameraSelection, networkSelection,lensSelection, motivations, mermaid,graphviz, test = st.tabs(["Cameras","Network" ,"Lens","Motivations", "Mermaid","Graphviz","TEST"])
-# Tab1 : cameras selection
 with cameraSelection :
     st.subheader("Setup Camera Pool")
     col1, col2 = st.columns([0.5,0.5])
@@ -134,13 +127,3 @@ with test:
     mermaid_graph=st.session_state.instance.graph_mermaid(svg_code)
     html = st.session_state.instance.streamlit_mermaid(mermaid_graph)
     st.write(html, unsafe_allow_html=True)
-        # mermaid = stmd.st_mermaid(st.session_state.code)
-        # st.write(mermaid)
-    # Create a connection object.
-    # conn = st.connection("gsheets", type=GSheetsConnection)
-    # df = conn.read(
-    #     worksheet="Cameras",
-    #     ttl=0, #ttl="10m",
-    #     usecols=[0, 1],
-    #     nrows=3,
-    # )
