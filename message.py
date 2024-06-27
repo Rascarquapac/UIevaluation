@@ -53,10 +53,10 @@ class Messages():
     def cameras(self,df):
         def control_message(controlLevel):
             match controlLevel:
-                case 0: return "no"
-                case 1|2: return "basic"
-                case 3|4: return "nice"
-                case 5: return "advanced"
+                case 0: return "no control"
+                case 1|2: return "a basic control"
+                case 3|4: return "a good control"
+                case 5: return "an advanced control"
                 case _: return "to be defined"
         message = ""
         if df.empty:
@@ -71,11 +71,10 @@ class Messages():
                 supporturl = df.loc[camera,"SupportURL"]
                 brand = df.loc[camera,"Brand"]
                 manufacturerurl = df.loc[camera,"ManufacturerURL"]
-                message += f"""
-                The camera **{model}** ({reference}) offers a {control_message(controlcoverage)} control coverage.
-                More information on cyanview support of the camera can be found on the [Cyanview support page for {model}]({supporturl}). The {brand} page for this camera is [{model}]({manufacturerurl}).
-
-                """ 
+                message = self.dic['camera']['performance'].format(model=model,reference=reference,control=control_message(controlcoverage),
+                                                                   supporturl=supporturl,brand=brand,manufacturerurl=manufacturerurl)
+                if (df.loc[camera,'Bidrectionnal']) == "No":
+                    message += ("\n" + self.dic['camera']['unidirectional'])
         return(message)
 if __name__ == "__main__":
     message=Messages()

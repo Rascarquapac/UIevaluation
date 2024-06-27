@@ -1,9 +1,3 @@
 ,Reference,Protocol,Brand,Type,Cable,MaxDelayToComplete,ControlCoverage,Bidrectionnal,Number,Lens,Network,Base,Camera_id,Device,Device_id,Switch_id,RCP_id,Camgroup,RCPtype
-CV225_0,MarshallCV225,Marshall Breakout,Marshall,Mini Camera,CY-CBL-6P-PFAN,500.0,1.0,No,3.0,Fixed,LAN wired,Fixed,CV225_0,CI0,CI0_0,Mini Camera Switch,CY-RCP-QUATTRO_0,Mini Camera,CY-RCP-QUATTRO
-CV225_1,MarshallCV225,Marshall Breakout,Marshall,Mini Camera,CY-CBL-6P-PFAN,500.0,1.0,No,3.0,Fixed,LAN wired,Fixed,CV225_1,CI0,CI0_0,Mini Camera Switch,CY-RCP-QUATTRO_0,Mini Camera,CY-RCP-QUATTRO
-CV225_2,MarshallCV225,Marshall Breakout,Marshall,Mini Camera,CY-CBL-6P-PFAN,500.0,1.0,No,3.0,Fixed,LAN wired,Fixed,CV225_2,CI0,CI0_1,Mini Camera Switch,CY-RCP-QUATTRO_0,Mini Camera,CY-RCP-QUATTRO
-PXW-500_0,PXW-X500,Sony 8-Pin,Sony,Shoulder Camcorder,CY-CBL-SONY-8P-03,500.0,2.0,,5.0,Fixed,LAN wired,Fixed,PXW-500_0,CI0,CI0_2,Shoulder Camcorder Switch,CY-RCP-DUO-J_0,Shoulder Camcorder,CY-RCP-DUO-J
-PXW-500_1,PXW-X500,Sony 8-Pin,Sony,Shoulder Camcorder,CY-CBL-SONY-8P-03,500.0,2.0,,5.0,Fixed,LAN wired,Fixed,PXW-500_1,CI0,CI0_2,Shoulder Camcorder Switch,CY-RCP-DUO-J_1,Shoulder Camcorder,CY-RCP-DUO-J
-PXW-500_2,PXW-X500,Sony 8-Pin,Sony,Shoulder Camcorder,CY-CBL-SONY-8P-03,500.0,2.0,,5.0,Fixed,LAN wired,Fixed,PXW-500_2,CI0,CI0_3,Shoulder Camcorder Switch,CY-RCP-DUO-J_2,Shoulder Camcorder,CY-RCP-DUO-J
-PXW-500_3,PXW-X500,Sony 8-Pin,Sony,Shoulder Camcorder,CY-CBL-SONY-8P-03,500.0,2.0,,5.0,Fixed,LAN wired,Fixed,PXW-500_3,CI0,CI0_3,Shoulder Camcorder Switch,CY-RCP-DUO-J_3,Shoulder Camcorder,CY-RCP-DUO-J
-PXW-500_4,PXW-X500,Sony 8-Pin,Sony,Shoulder Camcorder,CY-CBL-SONY-8P-03,500.0,2.0,,5.0,Fixed,LAN wired,Fixed,PXW-500_4,CI0,CI0_4,Shoulder Camcorder Switch,CY-RCP-DUO-J_4,Shoulder Camcorder,CY-RCP-DUO-J
+CV225_0,MarshallCV225,Marshall Breakout,Marshall,Mini Camera,CY-CBL-6P-PFAN,500.0,1.0,No,2.0,Fixed,LAN wired,Fixed,CV225_0,CI0,CI0_0,Mini Camera Switch,CY-RCP-DUO_0,Mini Camera,CY-RCP-DUO
+CV225_1,MarshallCV225,Marshall Breakout,Marshall,Mini Camera,CY-CBL-6P-PFAN,500.0,1.0,No,2.0,Fixed,LAN wired,Fixed,CV225_1,CI0,CI0_0,Mini Camera Switch,CY-RCP-DUO_0,Mini Camera,CY-RCP-DUO
