@@ -1,12 +1,18 @@
 import csv
 import re
+import pickle
 from pool import Pool
 from instance import Instances
 
 class Messages():
     def __init__(self) -> None:
         self.dic={}
-        self.load_messages()
+        self.pkl_messages()
+        #self.load_messages()
+        return
+    def pkl_messages(self):
+        with open('messages.pkl', 'rb') as file:
+            self.dic = pickle.load(file)        
         return
     def load_messages(self):
         def store(topic,subtopic,message):
@@ -14,7 +20,7 @@ class Messages():
             if subtopic not in self.dic[topic]: self.dic[topic][subtopic]={}
             self.dic[topic][subtopic]=message
 
-        p  = re.compile("/\[(.*)\,(.*)\]")
+        p  = re.compile(r"/\[(.*)\,(.*)\]")
         message = ""
         with open('./data/Messages.md', 'r') as reader:
             line = reader.readline()

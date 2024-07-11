@@ -16,8 +16,13 @@ class Pool:
         # the set of cameras selected splitted by blocks of cameras of the same type
         self.blocks  = {}
         self.final  = pd.DataFrame()
-        self.get_cameras()
+        self.pkl_cameras()
+        #self.get_cameras()
         self.brands = self.df["Brand"].unique()
+
+    def pkl_cameras(self):
+        self.df = pd.read_pickle("cameras.pkl")
+        return
     def get_cameras(self):
         cameras = pd.read_csv("./data/CyanviewDescriptor - Cameras.csv",usecols=['Model','Reference','Protocol','Brand','ManufacturerURL','Remark'])
         cam_df  = pd.DataFrame(cameras)
@@ -301,4 +306,4 @@ if __name__  == "__main__":
     reader.apply_pattern("CV","")
     #result = reader.pipe(get_cameras).pipe(apply_pattern,"CV","")
     print("RESULT:\n")
-    print(reader)
+    print(reader.df)
