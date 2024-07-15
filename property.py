@@ -1,10 +1,13 @@
 import pandas as pd
 import csv
+import pickle
 
 class Properties():
     def __init__(self) -> None:
-        self.get_options()
-        self.get_constraints()
+        self.pkl_properties()
+        # self.get_options()
+        # self.get_constraints()
+        #BEGIN: No more used …
         self.cameraTypes  = ['Slow Motion','Mini Camera','PTZ','Shoulder Camcorder',
                               'Handheld Camcorder','Block','DSLR','System','Large Sensor','Unknown'] 
         self.description = {
@@ -45,6 +48,14 @@ class Properties():
                 'networks': self.options["NetworkTypes"],
                 'bases'   : self.options["BaseTypes"]},
             }
+        #END: No more used ...
+
+    def pkl_properties(self):
+        with open('properties.pkl', 'rb') as file:
+            properties = pickle.load(file)        
+        self.options     = properties.options
+        self.constraints = properties.constraints   
+        return
 
     def get_options(self):
         self.options = {}

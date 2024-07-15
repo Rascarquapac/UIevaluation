@@ -2,6 +2,7 @@
 /venv/*
 /data/selected_cameras.csv.DS_Store
 /data/selected_cameras.csv
+/tmp/*
 /.ipynb_checkpoints/*
 __pycache__/*
 /.streamlit/*

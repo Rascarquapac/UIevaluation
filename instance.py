@@ -1,8 +1,8 @@
 import pandas as pd
 import graphviz as gv
-from property import Properties
 import base64
 import mermaid as md
+from property import Properties
 from mermaid.graph import Graph
 
 # Built a dataframe wiht camera instances
