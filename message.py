@@ -11,7 +11,7 @@ class Messages():
         #self.load_messages()
         return
     def pkl_messages(self):
-        with open('messages.pkl', 'rb') as file:
+        with open('./picklized/messages.pkl', 'rb') as file:
             self.dic = pickle.load(file)        
         return
     def load_messages(self):

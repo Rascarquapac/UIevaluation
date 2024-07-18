@@ -21,7 +21,7 @@ class Pool:
         self.brands = self.df["Brand"].unique()
 
     def pkl_cameras(self):
-        self.df = pd.read_pickle("cameras.pkl")
+        self.df = pd.read_pickle("./picklized/cameras.pkl")
         return
     def get_cameras(self):
         cameras = pd.read_csv("./data/CyanviewDescriptor - Cameras.csv",usecols=['Model','Reference','Protocol','Brand','ManufacturerURL','Remark'])

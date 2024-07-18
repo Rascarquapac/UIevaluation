@@ -51,10 +51,10 @@ class Properties():
         #END: No more used ...
 
     def pkl_properties(self):
-        with open('properties.pkl', 'rb') as file:
+        with open('./picklized/properties.pkl', 'rb') as file:
             properties = pickle.load(file)        
-        self.options     = properties.options
-        self.constraints = properties.constraints   
+        self.options     = properties["options"]
+        self.constraints = properties["constraints"]   
         return
 
     def get_options(self):

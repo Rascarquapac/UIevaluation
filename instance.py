@@ -284,19 +284,19 @@ class Instances:
 ################## DEBUG ############################
     def debug_camerapool_to_csv(self,camerapool):
         if not camerapool.empty:
-            camerapool.to_csv("./data/camera_pool.csv")
+            camerapool.to_csv("./debug/camera_pool.csv")
     def debug_camerapool_to_instancepool(self):
         camera_df = pd.DataFrame()
         if self.df.empty:
-            camera_df= pd.read_csv("./data/camera_pool.csv")
+            camera_df= pd.read_csv("./debug/camera_pool.csv")
             camera_df.set_index('Model', inplace=True)
             self.setup(camera_df)
     def debug_instancepool_to_csv(self):
         if not self.df.empty:
-            self.df.to_csv("./data/instance_pool.csv")
+            self.df.to_csv("./debug/instance_pool.csv")
     def debug_csv_to_instancepool(self):
         if self.df.empty:
-            self.df.read_csv("./data/instance_pool.csv")
+            self.df.read_csv("./debug/instance_pool.csv")
 ################## CANDIDATES #######################
     def lens_init(self):
         self.df = pd.DataFrame.from_dict({
@@ -495,7 +495,7 @@ if __name__ == "__main__":
     instance.debug_camerapool_to_instancepool()    
     instance.analyze()
     instance.draw_all()
-    instance.top.render(filename='top_draw_all', format='svg')
+    instance.top.render(filename='./images/top_draw_all', format='svg')
     mermaid_code = instance.get_mermaid_code()
     print(mermaid_code)
     graph = instance.graph_mermaid(mermaid_code)
