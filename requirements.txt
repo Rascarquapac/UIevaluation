@@ -3,4 +3,3 @@ pandas
 notebook
 graphviz
 mermaid-py
-st-gsheets-connection

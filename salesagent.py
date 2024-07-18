@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
-
-from pool import Pool
+from pool     import Pool
 from instance import Instances
 from property import Properties
 from message  import Messages
