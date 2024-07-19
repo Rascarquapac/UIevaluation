@@ -55,7 +55,7 @@ def ui_init():
     st.session_state.running = True
     # Import full camera data
     st.session_state.pool     = Pool()
-    st.session_state.instance = Usecase()
+    st.session_state.usecase = Usecase()
     st.session_state.property = Properties()
     st.session_state.messages = Messages()
     # Initiate drawings
@@ -92,22 +92,22 @@ with networkSelection:
         st.subheader('Select networks (optional):')
         st.session_state.pool.edit_camera_per_type('network')
         with st.expander("More Info about selection",expanded=False):
-            message = st.session_state.messages.display(object=st.session_state.instance, subtopic="")
+            message = st.session_state.messages.display(object=st.session_state.usecase, subtopic="")
             st.write(message)
 
     if st.button("Analyze",key="networkanalysis"):
-#        st.session_state.instance.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
-         st.session_state.instance.setup(st.session_state.pool.final)        
-         st.session_state.instance.analyze()
+#        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
+         st.session_state.usecase.setup(st.session_state.pool.final)        
+         st.session_state.usecase.analyze()
          st.session_state.analyze_done = True
 with lensSelection:
     if not st.session_state.pool.selected.empty :
         st.subheader('Select Lens (optional):')
         st.session_state.pool.edit_camera_per_type('lens')
     if st.button("Analyze",key="lensanalysis"):
-#        st.session_state.instance.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
-         st.session_state.instance.setup(st.session_state.pool.final)        
-         st.session_state.instance.analyze()
+#        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
+         st.session_state.usecase.setup(st.session_state.pool.final)        
+         st.session_state.usecase.analyze()
          st.session_state.analyze_done = True
 
 with motivations:
@@ -116,20 +116,20 @@ with motivations:
 with graphviz:
     if st.session_state.analyze_done:
         # GRAPHVIZ RENDERING
-        st.write(st.session_state.instance.draw_all())
+        st.write(st.session_state.usecase.draw_all())
 with mermaid:
     if st.session_state.analyze_done:
         # MERMAID RENDERING
-        svg_code = st.session_state.instance.get_mermaid_code()
-        mermaid_graph=st.session_state.instance.graph_mermaid(svg_code)
-        html = st.session_state.instance.streamlit_mermaid(mermaid_graph)
+        svg_code = st.session_state.usecase.get_mermaid_code()
+        mermaid_graph=st.session_state.usecase.graph_mermaid(svg_code)
+        html = st.session_state.usecase.streamlit_mermaid(mermaid_graph)
         st.write(html, unsafe_allow_html=True)
 
 with test:
     # if st.session_state.analyze_done:
-        # code = st.session_state.instance.get_mermaid_code()
-        # svg_code = st.session_state.instance.get_mermaid_code()
+        # code = st.session_state.usecase.get_mermaid_code()
+        # svg_code = st.session_state.usecase.get_mermaid_code()
     svg_code = None
-    mermaid_graph=st.session_state.instance.graph_mermaid(svg_code)
-    html = st.session_state.instance.streamlit_mermaid(mermaid_graph)
+    mermaid_graph=st.session_state.usecase.graph_mermaid(svg_code)
+    html = st.session_state.usecase.streamlit_mermaid(mermaid_graph)
     st.write(html, unsafe_allow_html=True)

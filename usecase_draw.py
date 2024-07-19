@@ -163,6 +163,7 @@ def streamlit_mermaid(self,mermaid_graph):
 
 Usecase.init_graph = init_graph
 Usecase.draw_all = draw_all
+Usecase.graph_mermaid = graph_mermaid
 Usecase.get_mermaid_code = get_mermaid_code
 Usecase.streamlit_mermaid = streamlit_mermaid
 

@@ -1,4 +1,11 @@
 ,Reference,Protocol,Brand,Type,Cable,MaxDelayToComplete,ControlCoverage,Bidrectionnal,Number,Lens,Network,Base,Camera_id,Device,Device_id,Switch_id,RCP_id,Camgroup,RCPtype
-Alexa 35_0,Alexa 35,Arri CAP,ARRI,Large Sensor,Ethernet-RJ45,500.0,2.0,,3,Fixed,LAN wired,Fixed,Alexa 35_0,PassThru,PassThru_0,Large Sensor Switch,CY-RCP-DUO-J_0,Large Sensor,CY-RCP-DUO-J
-Alexa 35_1,Alexa 35,Arri CAP,ARRI,Large Sensor,Ethernet-RJ45,500.0,2.0,,3,Fixed,LAN wired,Fixed,Alexa 35_1,PassThru,PassThru_0,Large Sensor Switch,CY-RCP-DUO-J_1,Large Sensor,CY-RCP-DUO-J
-Alexa 35_2,Alexa 35,Arri CAP,ARRI,Large Sensor,Ethernet-RJ45,500.0,2.0,,3,Fixed,LAN wired,Fixed,Alexa 35_2,PassThru,PassThru_0,Large Sensor Switch,CY-RCP-DUO-J_2,Large Sensor,CY-RCP-DUO-J
+Alexa mini LF_0,Alexa mini LF,Arri CAP,ARRI,Large Sensor,Ethernet-RJ45,500.0,2.0,,10,Fixed,LAN wired,Fixed,Alexa mini LF_0,PassThru,PassThru_0,Large Sensor Switch,CY-RCP-DUO-J_0,Large Sensor,CY-RCP-DUO-J
+Alexa mini LF_1,Alexa mini LF,Arri CAP,ARRI,Large Sensor,Ethernet-RJ45,500.0,2.0,,10,Fixed,LAN wired,Fixed,Alexa mini LF_1,PassThru,PassThru_0,Large Sensor Switch,CY-RCP-DUO-J_1,Large Sensor,CY-RCP-DUO-J
+Alexa mini LF_2,Alexa mini LF,Arri CAP,ARRI,Large Sensor,Ethernet-RJ45,500.0,2.0,,10,Fixed,LAN wired,Fixed,Alexa mini LF_2,PassThru,PassThru_0,Large Sensor Switch,CY-RCP-DUO-J_2,Large Sensor,CY-RCP-DUO-J
+Alexa mini LF_3,Alexa mini LF,Arri CAP,ARRI,Large Sensor,Ethernet-RJ45,500.0,2.0,,10,Fixed,LAN wired,Fixed,Alexa mini LF_3,PassThru,PassThru_0,Large Sensor Switch,CY-RCP-DUO-J_3,Large Sensor,CY-RCP-DUO-J
+Alexa mini LF_4,Alexa mini LF,Arri CAP,ARRI,Large Sensor,Ethernet-RJ45,500.0,2.0,,10,Fixed,LAN wired,Fixed,Alexa mini LF_4,PassThru,PassThru_0,Large Sensor Switch,CY-RCP-DUO-J_4,Large Sensor,CY-RCP-DUO-J
+Alexa mini LF_5,Alexa mini LF,Arri CAP,ARRI,Large Sensor,Ethernet-RJ45,500.0,2.0,,10,Fixed,LAN wired,Fixed,Alexa mini LF_5,PassThru,PassThru_0,Large Sensor Switch,CY-RCP-DUO-J_5,Large Sensor,CY-RCP-DUO-J
+Alexa mini LF_6,Alexa mini LF,Arri CAP,ARRI,Large Sensor,Ethernet-RJ45,500.0,2.0,,10,Fixed,LAN wired,Fixed,Alexa mini LF_6,PassThru,PassThru_0,Large Sensor Switch,CY-RCP-DUO-J_6,Large Sensor,CY-RCP-DUO-J
+Alexa mini LF_7,Alexa mini LF,Arri CAP,ARRI,Large Sensor,Ethernet-RJ45,500.0,2.0,,10,Fixed,LAN wired,Fixed,Alexa mini LF_7,PassThru,PassThru_0,Large Sensor Switch,CY-RCP-DUO-J_7,Large Sensor,CY-RCP-DUO-J
+Alexa mini LF_8,Alexa mini LF,Arri CAP,ARRI,Large Sensor,Ethernet-RJ45,500.0,2.0,,10,Fixed,LAN wired,Fixed,Alexa mini LF_8,PassThru,PassThru_0,Large Sensor Switch,CY-RCP-DUO-J_8,Large Sensor,CY-RCP-DUO-J
+Alexa mini LF_9,Alexa mini LF,Arri CAP,ARRI,Large Sensor,Ethernet-RJ45,500.0,2.0,,10,Fixed,LAN wired,Fixed,Alexa mini LF_9,PassThru,PassThru_0,Large Sensor Switch,CY-RCP-DUO-J_9,Large Sensor,CY-RCP-DUO-J
