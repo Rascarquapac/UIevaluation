@@ -1,7 +1,10 @@
 import streamlit as st
 import pandas as pd
 from pool     import Pool
-from instance import Instances
+from usecase import Usecase
+from usecase_analyze import *
+from usecase_streamlit import *
+from usecase_draw import *
 from property import Properties
 from message  import Messages
 
@@ -52,7 +55,7 @@ def ui_init():
     st.session_state.running = True
     # Import full camera data
     st.session_state.pool     = Pool()
-    st.session_state.instance = Instances()
+    st.session_state.instance = Usecase()
     st.session_state.property = Properties()
     st.session_state.messages = Messages()
     # Initiate drawings

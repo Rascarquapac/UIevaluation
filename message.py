@@ -2,7 +2,7 @@ import csv
 import re
 import pickle
 from pool import Pool
-from instance import Instances
+from usecase import Usecase
 
 class Messages():
     def __init__(self) -> None:
@@ -49,7 +49,7 @@ class Messages():
     def display(self,object=None, subtopic=""):
         if isinstance(object,Pool):
             return self.cameras(object.selected)
-        elif isinstance(object,Instances):
+        elif isinstance(object,Usecase):
             search_topic    = "instance"
             search_subtopic = "general" if subtopic == "" else subtopic
             message = self.dic[search_topic][search_subtopic]
