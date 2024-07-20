@@ -82,9 +82,10 @@ def get_mermaid_code(self):
     rcps = self.df['RCP_id'].unique() 
     for rcp in rcps:
         switch_df  = self.df.loc[self.df['RCP_id'] == rcp]
-        switch  = switch_df['Switch_id'].unique()[0]
-        RCPtype = switch_df['RCPtype'].unique()[0]
-        mermaid_code += clean(switch) + ' --- |Ethernet|' + clean(rcp) + '\n'
+        switches  = switch_df['Switch_id'].unique()
+        for switch in switches:
+            RCPtype = switch_df['RCPtype'].unique()[0]
+            mermaid_code += clean(switch) + ' --- |Ethernet|' + clean(rcp) + '\n'
     mermaid_code += 'end\n'
     return(mermaid_code)
 def graph_mermaid(self,code):

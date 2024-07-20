@@ -8,43 +8,10 @@ class Messages():
     def __init__(self) -> None:
         self.dic={}
         self.pkl_messages()
-        #self.load_messages()
         return
     def pkl_messages(self):
         with open('./picklized/messages.pkl', 'rb') as file:
             self.dic = pickle.load(file)        
-        return
-    def load_messages(self):
-        def store(topic,subtopic,message):
-            if topic not in self.dic : self.dic[topic]={}
-            if subtopic not in self.dic[topic]: self.dic[topic][subtopic]={}
-            self.dic[topic][subtopic]=message
-
-        p  = re.compile(r"/\[(.*)\,(.*)\]")
-        message = ""
-        with open('./data/Messages.md', 'r') as reader:
-            line = reader.readline()
-            print("Line: ",line)
-            first_line = True
-            while line != '':  # The EOF char is an empty string
-                if line[0:2]== "/[":
-                    if first_line:
-                        # No message to store
-                        first_line = False
-                    else:
-                        # Store currently collected message
-                        store(topic,subtopic,message)
-                        message = ""
-                    result   = p.search(line)
-                    topic    = result.group(1)
-                    subtopic = result.group(2)
-                else:
-                    message += line
-                    # print("Keys: ",context, state,name)
-                    # print("Message: ",message)
-                line = reader.readline()
-            # Store last message
-            store(topic,subtopic,message)           
         return
     def display(self,object=None, subtopic=""):
         if isinstance(object,Pool):
@@ -66,7 +33,7 @@ class Messages():
                 case _: return "to be defined"
         message = ""
         if df.empty:
-            message = "No camera selected"
+            message = ""
         else:
             print(df)
             print(df.columns)
@@ -77,8 +44,9 @@ class Messages():
                 supporturl = df.loc[camera,"SupportURL"]
                 brand = df.loc[camera,"Brand"]
                 manufacturerurl = df.loc[camera,"ManufacturerURL"]
-                message = self.dic['camera']['performance'].format(model=model,reference=reference,control=control_message(controlcoverage),
+                message += self.dic['camera']['performance'].format(model=model,reference=reference,control=control_message(controlcoverage),
                                                                    supporturl=supporturl,brand=brand,manufacturerurl=manufacturerurl)
+                message += "\n"
                 if (df.loc[camera,'Bidirectionnal']) == "No":
                     message += ("\n" + self.dic['camera']['unidirectional'])
         return(message)
