@@ -15,7 +15,7 @@ def analyze(self):
     # self.base()
     # self.max_latency()
     # self.max_throughput()
-    self.df.to_csv('./debug/debug_analyzed_cameras.csv')
+    # TEST DEPLYMENT BEFORE WRITIN DEBUG self.df.to_csv('./debug/debug_analyzed_cameras.csv')
 def device_from_cable(self):
     def select(cable):
         match cable:
