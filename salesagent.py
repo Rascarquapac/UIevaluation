@@ -66,7 +66,8 @@ if 'running' not in st.session_state:
     ui_init()
 # Set title
 st.header('Cyanview Gear Selector V0.0')
-# not available in streamlit 1.34 … st.logo("images/logo.png")
+# not available in streamlit 1.34 … 
+st.logo("images/logo.jpg")
 # Set sidebar
 sidebar()
 # Set tabs

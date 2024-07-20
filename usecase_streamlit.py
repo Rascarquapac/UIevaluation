@@ -8,7 +8,7 @@ def display_camera_table(self):
         st.dataframe(
             self.df,
             column_config={
-                "Model": "Model",
+                "Reference": "Model",
                 'Number':st.column_config.NumberColumn(
                     "# of Cams",
                     help="How much camera of this type in your use-case (0-15)?",
@@ -30,7 +30,7 @@ def display_camera_table(self):
                 "Message":None,
                 "Type":None
             },
-            column_order=['Model','Instance','Network','Lens','Base'],
+            column_order=['Reference','Instance','Network','Lens','Base'],
             hide_index = True)
 def edit_camera_table(self,key='1'):
     # Validate inputs
@@ -50,7 +50,7 @@ def edit_camera_table(self,key='1'):
                     default=0,
                     format="%d",
                 ),
-                "Model": "Model",
+                "Reference": "Model",
                 'Lens': st.column_config.SelectboxColumn(
                     "Lens",
                     help="Lens type",
@@ -79,8 +79,8 @@ def edit_camera_table(self,key='1'):
                 "Message":None,
                 "Type":None
             },
-            disabled=['Instance','Model','Number','Cable'],
-            column_order=['Model','Instance','Network','Lens','Base'],
+            disabled=['Instance','Reference','Number','Cable'],
+            column_order=['Reference','Instance','Network','Lens','Base'],
             hide_index = True)
         ## st.markdown(display)
         print("\nDATAFRAME AFTER EDIT")

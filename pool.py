@@ -37,7 +37,7 @@ class Pool:
                 raise Exception('Duplicated Rows in CyanviewDescriptor - Cameras.csv')
         except Exception as e:
             print(str(e))
-        protocols = pd.read_csv("./data/CyanviewDescriptor - CameraProtocols.csv",usecols=["Protocol","Brand","Type","Cable","SupportURL","Message","MaxDelayToComplete","ControlCoverage","Bidrectionnal"])
+        protocols = pd.read_csv("./data/CyanviewDescriptor - CameraProtocols.csv",usecols=["Protocol","Brand","Type","Cable","SupportURL","Message","MaxDelayToComplete","ControlCoverage","Bidirectionnal"])
         proto_df = pd.DataFrame(protocols)
         del proto_df['Brand']
         self.df = pd.merge(cam_df, proto_df, on = ['Protocol'],how = 'left').set_index('Model')
@@ -62,6 +62,10 @@ class Pool:
         else:
             match = camera_selection
         self.step_match = match
+        print('############ NEW SEARCH ###############')
+        print(self.df)
+        print(f'Search based on brand({brand}) and pattern ({camera_pattern})')
+        print(match)
         return 
     def edit_camera_number(self):
         # Validate inputs
@@ -78,7 +82,7 @@ class Pool:
                         step=1,
                         format="%d",
                     ),
-                    "Model": "Model",
+                    "Reference": "Model",
                     "Brand": "Brand",
                     "Cable": "Cable",
                     "SupportURL": st.column_config.LinkColumn(
@@ -95,14 +99,14 @@ class Pool:
     #                            display_text = "\[(.*?)\]",
                         display_text = "Brand link",
                         max_chars = 30 ),
-                    "Reference": None,
+                    # "Reference": None,
                     # "supportText": None,
                     "Protocol":None,
                     "Message":None,
                     "Type":None
                 },
-                disabled=['Selected','Model','Cable','SupportURL','ManufacturerURL'],
-                column_order=['Number','Model','Brand','Cable','SupportURL','ManufacturerURL'],
+                disabled=['Selected','Reference','Cable','SupportURL','ManufacturerURL'],
+                column_order=['Number','Reference','Brand','Cable','SupportURL','ManufacturerURL'],
                 hide_index = True,
                 use_container_width = True,
                 key = "camera_number",
@@ -121,7 +125,7 @@ class Pool:
             st.dataframe(
                 self.selected,
                 column_config={
-                    "Model": "Model",
+                    "Reference": "Model",
                     'Number':st.column_config.NumberColumn(
                         "# of Cams",
                         help="How much camera of this type in your use-case (0-15)?",
@@ -151,7 +155,7 @@ class Pool:
                     "Message":None,
                     "Type":None
                 },
-                column_order=['Model','Number','Cable','SupportURL','ManufacturerURL'],
+                column_order=['Reference','Number','Cable','SupportURL','ManufacturerURL'],
                 hide_index = True)
             return(self.selected)
     def edit_camera_per_type(self,mode='network'):
@@ -161,7 +165,7 @@ class Pool:
                     df,
                     column_config={
                             "Type": "Type",
-                            "Model": "Model",
+                            "Reference": "Model",
                             'Number':st.column_config.NumberColumn(
                                 "# Cams",
                                 help="How much camera of this type in your use-case (0-15)?",
@@ -209,8 +213,8 @@ class Pool:
                         # "supportText": None,
                         "Message":None,
                     },
-                    disabled=['Selected','Model','Cable','SupportURL','ManufacturerURL'],
-                    column_order=['Type','Number','Model','Network','Lens','Base'],
+                    disabled=['Selected','Reference','Cable','SupportURL','ManufacturerURL'],
+                    column_order=['Type','Number','Reference','Network','Lens','Base'],
                     hide_index = True,
                     use_container_width = True,
                     key = key+"_network",
@@ -226,7 +230,7 @@ class Pool:
                     df,
                     column_config={
                             "Type": "Type",
-                            "Model": "Model",
+                            "Reference": "Model",
                             'Number':st.column_config.NumberColumn(
                                 "# Cams",
                                 help="How much camera of this type in your use-case (0-15)?",
@@ -274,8 +278,8 @@ class Pool:
                         # "supportText": None,
                         "Message":None,
                     },
-                    disabled=['Selected','Model','Cable','SupportURL','ManufacturerURL'],
-                    column_order=['Type','Number','Model','Network','Lens','Base'],
+                    disabled=['Selected','Reference','Cable','SupportURL','ManufacturerURL'],
+                    column_order=['Type','Number','Reference','Network','Lens','Base'],
                     hide_index = True,
                     use_container_width = True,
                     key = key+"_lens",

@@ -79,7 +79,7 @@ class Messages():
                 manufacturerurl = df.loc[camera,"ManufacturerURL"]
                 message = self.dic['camera']['performance'].format(model=model,reference=reference,control=control_message(controlcoverage),
                                                                    supporturl=supporturl,brand=brand,manufacturerurl=manufacturerurl)
-                if (df.loc[camera,'Bidrectionnal']) == "No":
+                if (df.loc[camera,'Bidirectionnal']) == "No":
                     message += ("\n" + self.dic['camera']['unidirectional'])
         return(message)
 if __name__ == "__main__":
