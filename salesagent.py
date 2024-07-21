@@ -92,15 +92,15 @@ with networkSelection:
     if not st.session_state.pool.selected.empty :
         st.subheader('Select networks (optional):')
         st.session_state.pool.edit_camera_per_type('network')
-        with st.expander("More Info about selection",expanded=False):
-            message = st.session_state.messages.display(object=st.session_state.usecase, subtopic="")
-            st.write(message)
-
     if st.button("Analyze",key="networkanalysis"):
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
-         st.session_state.usecase.setup(st.session_state.pool.final)        
-         st.session_state.usecase.analyze()
-         st.session_state.analyze_done = True
+        st.session_state.usecase.setup(st.session_state.pool.final)        
+        st.session_state.usecase.analyze()
+        st.session_state.analyze_done = True
+        with st.expander("Required equipment for use case",expanded=False):
+            message = st.session_state.messages.display(object=st.session_state.usecase)
+            st.write(message)
+
 with lensSelection:
     if not st.session_state.pool.selected.empty :
         st.subheader('Select Lens (optional):')

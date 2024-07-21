@@ -17,12 +17,12 @@ class Messages():
         if isinstance(object,Pool):
             return self.cameras(object.selected)
         elif isinstance(object,Usecase):
+            return self.cyangear(object)
+        else:
             search_topic    = "instance"
             search_subtopic = "general" if subtopic == "" else subtopic
             message = self.dic[search_topic][search_subtopic]
             return(message)
-        else:
-            return("No Information for unknown object")
     def cameras(self,df):
         def control_message(controlLevel):
             match controlLevel:
@@ -50,6 +50,27 @@ class Messages():
                 if (df.loc[camera,'Bidirectionnal']) == "No":
                     message += ("\n" + self.dic['camera']['unidirectional'])
         return(message)
+    def cyangear(self,object):
+        message = ""
+        if object.df.empty:
+            message = ""
+        else:
+            message+=self.dic['quote']['general']
+            message += "\n"
+            message+=self.dic['quote']['rcps']
+            for rcp_type,rcp_number in object.rcps.items():
+                message += f'  - {rcp_type} x {rcp_number}'
+                message += "\n"
+            message+=self.dic['quote']['devices']
+            for device_type,device_number in object.devices.items():
+                message += f'  - {device_type} x {device_number}'
+                message += "\n"
+            message+=self.dic['quote']['cables']
+            for cable_type,cable_number in object.cables.items():
+                message += f'  - {cable_type} x {cable_number}'
+                message += "\n"
+        return(message)
+
 if __name__ == "__main__":
     message=Messages()
     print(message.dic) 
