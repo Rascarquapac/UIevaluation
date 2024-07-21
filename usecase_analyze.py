@@ -178,7 +178,7 @@ def lens_init(self):
         orient = 'index')
 
 def analyze(self,debug_mode=None):
-    self.debug_usecase("save_usecase_seed")
+    self.debug_usecase(debug_mode)
     self.device_from_cable()
     self.device_from_network()
     self.camgroup_from_cameratype()
@@ -190,7 +190,7 @@ def analyze(self,debug_mode=None):
     self.rcp_count()
     self.cable_count()
     self.device_count()
-    self.debug_usecase(None)
+    self.debug_usecase(debug_mode)
     print('########## RCPs :',self.rcps)
     print('########## DEVICES :',self.devices)
     print('########## CABLEs :',self.cables)
