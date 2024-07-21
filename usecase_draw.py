@@ -43,10 +43,11 @@ def draw_all(self):
     rcps = self.df['RCP_id'].unique() 
     for rcp in rcps:
         switch_df  = self.df.loc[self.df['RCP_id'] == rcp]
-        switch  = switch_df['Switch_id'].unique()[0]
-        RCPtype = switch_df['RCPtype'].unique()[0]
-        top.node(name=rcp,label=RCPtype)
-        top.edge(switch+":w",rcp+":e","Ethernet Link")
+        RCPtype    = switch_df['RCPtype'].unique()[0]
+        switches  = switch_df['Switch_id'].unique()
+        for switch in switches:
+            top.node(name=rcp,label=RCPtype)
+            top.edge(switch+":w",rcp+":e","Ethernet Link")
     # top.subgraph(croom)
     self.top =top
     return(top)

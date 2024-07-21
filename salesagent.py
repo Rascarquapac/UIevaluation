@@ -108,7 +108,7 @@ with lensSelection:
     if st.button("Analyze",key="lensanalysis"):
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
          st.session_state.usecase.setup(st.session_state.pool.final)        
-         st.session_state.usecase.analyze()
+         st.session_state.usecase.analyze(debug_mode=None)
          st.session_state.analyze_done = True
 
 with motivations:
