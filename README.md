@@ -3,8 +3,22 @@ A sample Streamlit application do determine Cyanview resources required by a giv
 
 # TODO
 ## CYANVIEW DATA DESCRIPTION
--  Improve camera data:
+-  Improve camera database:
   - add a field for "Control Level" (for Broadcast ? Cinematic ?, General ?)
+  - add field on maxDelaySystainable for decinding about network
+  - fill missing protocol
+- Improve generic explanation on choices and special attention
+  - create a FAQs pages on Odoo (bifirectionality, HF,)
+- Develop Network selection
+- Develop Lens selection
+- Develop Extra-Devices (Tally, GPIO, NIO,…) selection
+- Develop Non-Camera-Device-Control (switchers,…)
+- Develop storing in database and emailing for quote request
+- Manage target application (Specialty, Broadcast, Cinematic,Remote Production)
+- Details:
+  - SSM500 should require a RCP-Full ( 1 x camera ?)
+  - Downloading SVG file
+  - Analyze and display schematic on any change
 ## FAQ
 - Delay in camera process control
 - RIO vs CI0
