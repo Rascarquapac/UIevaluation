@@ -87,6 +87,7 @@ def edit_camera_table(self,key='1'):
         print(self.df)
         # self.print_selected()
         return (self.df)
+
 def merge(self,blocks):
     self.df = pd.DataFrame()
     self.df = pd.concat(list(blocks.values()))
