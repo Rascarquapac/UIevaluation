@@ -1,6 +1,5 @@
 from usecase import Usecase
 from usecase_analyze import *
-from usecase_streamlit import *
 from usecase_draw import *
 from usecase_debug import *
 

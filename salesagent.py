@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
-from pool     import Pool
 from usecase import Usecase
 from usecase_analyze import *
-from usecase_streamlit import *
 from usecase_draw import *
+from streamui import StreamUI
+from pool     import Pool
 from property import Properties
 from message  import Messages
 
@@ -55,9 +55,10 @@ def ui_init():
     st.session_state.running = True
     # Import full camera data
     st.session_state.pool     = Pool()
-    st.session_state.usecase = Usecase()
+    st.session_state.usecase  = Usecase()
     st.session_state.property = Properties()
     st.session_state.messages = Messages()
+    st.session_state.streamui = StreamUI()
     # Initiate drawings
     st.session_state.analyze_done = False
 
@@ -80,10 +81,12 @@ with cameraSelection :
     with col2:
         camera_pattern = st.text_input(label="Camera Pattern:", value="",key="camera_pattern",placeholder="Enter substring of camera name",on_change=update_selecting).upper()
     # set pool.step_select from pool.step_match 
-    st.session_state.pool.edit_camera_number()
+    ##test refacoring streamui ## st.session_state.pool.edit_camera_number()
+    st.session_state.streamui.pool_edit_camera_number(st.session_state.pool)
     st.divider()
     st.caption("Your Current Cameras Pool")
-    st.session_state.pool.display_selected()
+    ##test refacoring streamui ##  st.session_state.pool.display_selected()
+    st.session_state.streamui.pool_display_selected(st.session_state.pool)
     with st.expander("More info about selected cameras",expanded=False):
         message = st.session_state.messages.display(object=st.session_state.pool)
         st.write(message)
@@ -91,7 +94,8 @@ with cameraSelection :
 with networkSelection:
     if not st.session_state.pool.selected.empty :
         st.subheader('Select networks (optional):')
-        st.session_state.pool.edit_camera_per_type('network')
+        ##test refacoring streamui ## st.session_state.pool.edit_camera_per_type('network')
+        st.session_state.streamui.pool_edit_camera_per_type(st.session_state.pool,mode='network')
     if st.button("Analyze",key="networkanalysis"):
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
         st.session_state.usecase.setup(st.session_state.pool.final)        
@@ -104,7 +108,8 @@ with networkSelection:
 with lensSelection:
     if not st.session_state.pool.selected.empty :
         st.subheader('Select Lens (optional):')
-        st.session_state.pool.edit_camera_per_type('lens')
+        ##test refacoring streamui ##  st.session_state.pool.edit_camera_per_type('lens')
+        st.session_state.streamui.pool_edit_camera_per_type(st.session_state.pool,mode='lens')
     if st.button("Analyze",key="lensanalysis"):
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
          st.session_state.usecase.setup(st.session_state.pool.final)        

@@ -4,8 +4,10 @@ from pool     import Pool
 from usecase  import Usecase
 from property import Properties
 
-class Streamlit_ui():
-    ################## CAMERA TABLE FROM USECASE #######################       
+class StreamUI():
+    def __init__(self) -> None:
+        pass
+    ############## CAMERA TABLE FROM USECASE !! UNUSED !!!#########
     def usecase_display_camera_table(self,usecase):
         print("DEBUG:cyaneval->display_camera_table ...")
         if (len(usecase.df.index) != 0):
