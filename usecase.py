@@ -28,6 +28,9 @@ class Usecase:
             self.df['RCP_id']    = ""
             self.df['Camgroup']  = ""
             self.df['RCPtype']   = ""
+            self.df['LensTypes'] = "Unknown"
+            self.df['LensMotorization'] = "No motorization"	
+            self.df['ControlNeeds']= "No needs"
             #self.df['lens_id']=""
             return
         paths_dict = dico(cameras_df)

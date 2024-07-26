@@ -22,17 +22,36 @@ def converter_from_cable(self):
 def device_from_network(self):
     # Select the device from network associated to the camera
     def select(current_device,network,MaxDelayToComplete):
+        #TODO: add a check between case values and contraints
         match network:
-            case "LAN wired" : return current_device
-            case "LAN RF"    :
+            case "LAN Wired" : return current_device
+            case "LAN RF Halow"    :
                 if  MaxDelayToComplete < 200:
                     return "RIO-Live"
                 else: 
                     return current_device
-            case "WAN wired" : return "RIO"
-            case "WAN RF"    : return "RIO"
-            case "RF video"  : return "RIO-Live"
-            case "WAN video" : return "RIO"
+            case "LAN RF Mesh"    :
+                if  MaxDelayToComplete < 200:
+                    return "RIO-Live"
+                else: 
+                    return current_device
+            case "LAN RF WiFi"    :
+                if  MaxDelayToComplete < 200:
+                    return "RIO-Live"
+                else: 
+                    return current_device
+            case "P2P RF Pro Modem"    :
+                if  MaxDelayToComplete < 200:
+                    return "RIO-Live"
+                else: 
+                    return current_device
+            case "P2P RF Unidir"    :
+                if  MaxDelayToComplete < 200:
+                    return "RIO-Live"
+                else: 
+                    return current_device
+            case "WAN 4G 5G" : return "RIO"
+            case "P2MP UHF Video"  : return "RIO-Live"
             case _           : return "Unlisted Network"
         return
     self.df['Device'] = self.df.apply(lambda row: select(row['Device'],row['Network'],row['MaxDelayToComplete']), axis=1)
@@ -192,6 +211,7 @@ def lens_init(self):
         orient = 'index')
 # Pipeline, from camera to control, establishing Cyaview gear requirements 
 def analyze(self,debug_mode=None):
+    debug_mode = "save_usecase_seed"
     self.debug_usecase(debug_mode)
     self.converter_from_cable()
     self.device_from_network()

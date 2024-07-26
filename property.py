@@ -57,53 +57,7 @@ class Properties():
         self.constraints = properties["constraints"]   
         return
 
-    def get_options(self):
-        self.options = {}
-        with open('./data/CyanviewDescriptor - Options.csv', mode='r') as csv_file:
-            #csv_reader = csv.reader(csv_file, delimiter=',')
-            csv_reader = csv.reader(csv_file)
-            line_count = 0
-            for row in csv_reader:
-                if line_count == 0:
-                    baseKeys = row
-                elif line_count == 1:
-                    suffixKeys = row
-                    self.keyOrder = []
-                    self.columnsNumber = len(row)
-                    for i in range(self.columnsNumber):
-                        key = baseKeys[i] + suffixKeys[i]
-                        self.options[key]=[]
-                        self.keyOrder.append(key)
-                else:
-                    for i in range(len(row)):
-                        if row[i] != "":
-                            self.options[self.keyOrder[i]].append(row[i])
-                line_count += 1
-            # print(f'Processed {line_count} lines.')
-            # print(self.options)
-            # for key in self.options:
-                # print("\n\n",key," : ",self.options[key])
-
-    def get_constraints(self):
-        self.constraints = {}
-        constraints_df = pd.read_csv("./data/CyanviewDescriptor - Constraints.csv",header = [0,1])
-        self.constraints_df = pd.DataFrame(constraints_df)
-        constraints_dict = self.constraints_df.to_dict()
-        for key,dico in constraints_dict.items():
-            # print("\nRow Dict: ", dico)
-            listFromDict = []
-            for index,value in dico.items():
-                if not (value != value):
-                    listFromDict.append(value)
-            # print("Row list: ",listFromDict)
-            constraints_dict[key] = listFromDict.copy()
-        self.constraints = constraints_dict
-        # print(list(constraints_dict.keys()))
-        # print(constraints_dict[('Slow Motion', 'Network')])
-        # print(constraints_dict)
-
-
 
 if __name__  == "__main__":
     test = Properties()
-    test.get_constraints()
+    test.pkl_properties()

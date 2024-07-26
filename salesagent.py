@@ -72,7 +72,7 @@ st.logo("images/logo.jpg")
 # Set sidebar
 sidebar()
 # Set tabs
-cameraSelection, networkSelection,lensSelection, motivations, mermaid,graphviz, test = st.tabs(["Cameras","Network" ,"Lens","Motivations", "Mermaid","Graphviz","TEST"])
+cameraSelection, networkSelection,lensSelection, motivations, mermaid,graphviz, test = st.tabs(["Cameras","IP Network" ,"Lens","Motivations", "Mermaid","Graphviz","TEST"])
 with cameraSelection :
     st.subheader("Setup Camera Pool")
     col1, col2 = st.columns([0.5,0.5])

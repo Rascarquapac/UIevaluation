@@ -148,7 +148,6 @@ class StreamUI():
         pool.selected = pool.df[(pool.df['Number']>0)]
         # Trying to set properties of pool.selected for display
         pool.selected.style.set_properties(**{'background_color': 'lightgreen'})
-        print("DEBUG:cyaneval->display_camera_table ...")
         if (len(pool.selected.index) != 0):
             st.dataframe(
                 pool.selected,
@@ -178,12 +177,11 @@ class StreamUI():
     #                            display_text = "\[(.*?)\]",
                         display_text = "Brand link",
                         max_chars = 30 ),
-                    "Reference": None,
                     "Protocol":None,
                     "Message":None,
                     "Type":None
                 },
-                column_order=['Reference','Number','Cable','SupportURL','ManufacturerURL'],
+                column_order=['Number','Brand','Reference','Cable','SupportURL','ManufacturerURL'],
                 hide_index = True)
             return(pool.selected)
     def pool_edit_camera_per_type(self,pool,mode='network'):
@@ -192,35 +190,36 @@ class StreamUI():
                 df = st.data_editor(
                     df,
                     column_config={
-                            "Type": "Type",
-                            "Reference": "Model",
-                            'Number':st.column_config.NumberColumn(
-                                "# Cams",
-                                help="How much camera of this type in your use-case (0-15)?",
-                                min_value=0,
-                                max_value=15,
-                                step=1,
-                                default=0,
-                                format="%d",
-                            ),
-                            'Lens': st.column_config.SelectboxColumn(
-                                "Lens",
-                                help="Lens type",
-                                width="medium",
-                                options= st.session_state.property.constraints[(key,'Lens')],
-                                required=True),
-                            'Network':  st.column_config.SelectboxColumn(
-                                "Network",
-                                help="Select the network type",
-                                width="medium",
-                                options=st.session_state.property.constraints[(key,'Network')],
-                                required=True),
-                            'Base':  st.column_config.SelectboxColumn(
-                                "Basement",
-                                help="Base type",
-                                width="medium",
-                                options=st.session_state.property.constraints[(key,'Base')],
-                                required=True),
+                        "Type": "Type",
+                        "Reference": "Model",
+                        'Number':st.column_config.NumberColumn(
+                            "# Cams",
+                            help="How much camera of this type in your use-case (0-15)?",
+                            min_value=0,
+                            max_value=15,
+                            step=1,
+                            default=0,
+                            format="%d",
+                        ),
+                        'Lens': st.column_config.SelectboxColumn(
+                            "Lens",
+                            help="Lens type",
+                            width="medium",
+                            options= st.session_state.property.constraints[(key,'Lens')],
+                            required=True),
+                        'Network': st.column_config.SelectboxColumn(
+                            "IP Network",
+                            help="Select the IP network type",
+                            width="medium",
+                            default = st.session_state.property.constraints[(key,'Network')][0],
+                            options = st.session_state.property.constraints[(key,'Network')],
+                            required=True),
+                        'Base':  st.column_config.SelectboxColumn(
+                            "Basement",
+                            help="Base type",
+                            width="medium",
+                            options=st.session_state.property.constraints[(key,'Base')],
+                            required=True),
                         "Brand": "Brand",
                         "Cable": "Cable",
                         "SupportURL": st.column_config.LinkColumn(
@@ -237,12 +236,11 @@ class StreamUI():
         #                            display_text = "\[(.*?)\]",
                             display_text = "Brand link",
                             max_chars = 30 ),
-                        "Reference": None,
                         # "supportText": None,
                         "Message":None,
-                    },
-                    disabled=['Selected','Reference','Cable','SupportURL','ManufacturerURL'],
-                    column_order=['Type','Number','Reference','Network','Lens','Base'],
+                        },
+                    disabled=['Reference','Brand','Number','SupportURL'],
+                    column_order=['Network','Reference','Brand','Number','SupportURL'],
                     hide_index = True,
                     use_container_width = True,
                     key = key+"_network",
@@ -278,7 +276,8 @@ class StreamUI():
                                 "Network",
                                 help="Select the network type",
                                 width="medium",
-                                options=st.session_state.property.constraints[(key,'Network')],
+                                default = st.session_state.property.constraints[(key,'Network')][0],
+                                options = st.session_state.property.constraints[(key,'Network')],
                                 required=True),
                             'Base':  st.column_config.SelectboxColumn(
                                 "Basement",
