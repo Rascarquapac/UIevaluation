@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
-from usecase import Usecase
-from usecase_analyze import *
-from usecase_draw import *
+from usecase.main import Usecase
 from streamui import StreamUI
 from pool     import Pool
 from property import Properties
@@ -96,7 +94,7 @@ with networkSelection:
         st.subheader('Select networks (optional):')
         ##test refacoring streamui ## st.session_state.pool.edit_camera_per_type('network')
         st.session_state.streamui.pool_edit_camera_per_type(st.session_state.pool,mode='network')
-    if st.button("Analyze",key="networkanalysis"):
+#    if st.button("Analyze",key="networkanalysis"):
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
         st.session_state.usecase.setup(st.session_state.pool.final)        
         st.session_state.usecase.analyze()
@@ -110,11 +108,11 @@ with lensSelection:
         st.subheader('Select Lens (optional):')
         ##test refacoring streamui ##  st.session_state.pool.edit_camera_per_type('lens')
         st.session_state.streamui.pool_edit_camera_per_type(st.session_state.pool,mode='lens')
-    if st.button("Analyze",key="lensanalysis"):
+#    if st.button("Analyze",key="lensanalysis"):
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
-         st.session_state.usecase.setup(st.session_state.pool.final)        
-         st.session_state.usecase.analyze(debug_mode = None)
-         st.session_state.analyze_done = True
+        st.session_state.usecase.setup(st.session_state.pool.final)        
+        st.session_state.usecase.analyze(debug_mode = None)
+        st.session_state.analyze_done = True
 
 with motivations:
     if st.button("Motivation"):

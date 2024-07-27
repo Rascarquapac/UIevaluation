@@ -34,10 +34,10 @@ class Pool:
         else:
             match = camera_selection
         self.step_match = match
-        print('############ NEW SEARCH ###############')
-        print(self.df)
-        print(f'Search based on brand({brand}) and pattern ({camera_pattern})')
-        print(match)
+        # print('############ NEW SEARCH ###############')
+        # print(self.df)
+        # print(f'Search based on brand({brand}) and pattern ({camera_pattern})')
+        # print(match)
         return 
 
 if __name__  == "__main__":

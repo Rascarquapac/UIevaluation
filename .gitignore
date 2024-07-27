@@ -3,6 +3,7 @@
 /tmp/*
 /debug/debug*
 /purgatory/*
+/usecase/__pycache__
 /.ipynb_checkpoints/*
 __pycache__/*
 /.streamlit/*

@@ -1,6 +1,4 @@
 import pandas as pd
-from usecase import Usecase
-from usecase_debug import *
 
 ################## ANALYZE #########################
 # Select the converter for each camera and set it in "Device" index. A Specific column could be more appropriate
@@ -55,7 +53,7 @@ def device_from_network(self):
             case _           : return "Unlisted Network"
         return
     self.df['Device'] = self.df.apply(lambda row: select(row['Device'],row['Network'],row['MaxDelayToComplete']), axis=1)
-# Set the "Camgroup" column with the "Camtype" value: the camera groups are base on the camera type only
+# Set the "Camgroup" column with the "Camtype" value: the camera groups are based on camera type 
 def camgroup_from_cameratype(self):
     def select(camtype,network):
         return camtype
@@ -171,74 +169,3 @@ def rcp_optimize(self):
             (RCPtype, RCP_id)=get_rcptype_rcp_id(rcp_id,occurences)
             self.df.loc[index,'RCP_id'] = RCP_id 
             #??self.df.loc[index,'RCPtype'] = RCPtype 
-# Count RCPs of each type for quoting
-def rcp_count(self):
-    self.rcps = {}
-    rcp_ids = self.df['RCP_id'].unique()
-    for rcp_id in rcp_ids:
-        rcp_index  = self.df.loc[self.df['RCP_id'] == rcp_id].index.tolist()[0]
-        rcp_type   = self.df.loc[rcp_index,'RCPtype']
-        if rcp_type not in self.rcps: 
-            self.rcps[rcp_type] = 1
-        else:
-            self.rcps[rcp_type] += 1
-# Count Cables for quoting
-def cable_count(self):
-    self.cables = {}
-    cable_types = self.df['Cable'].unique()
-    for cable_type in cable_types:
-        self.cables[cable_type] = self.df['Cable'].tolist().count(cable_type)
-# Count devices for quoting
-def device_count(self):
-    self.devices = {}
-    device_ids = self.df['Device_id'].unique()
-    for device_id in device_ids:
-        device_index  = self.df.loc[self.df['Device_id'] == device_id].index.tolist()[0]
-        device_type   = self.df.loc[device_index,'Device']
-        if device_type not in self.devices: 
-            self.devices[device_type] = 1
-        else:
-            self.devices[device_type] += 1
-
-    
-def lens_init(self):
-    self.df = pd.DataFrame.from_dict({
-            'Camera Brand Motorized Lens':  [None, None], 
-            'ENG Canon Lens': [None, 'CY-CBL-B4-01'],
-            'ENG Fuji Lens': [None, 'CY-CBL-B4 et CY-CBL-FUJI-2'],
-            'Cine Lens': ['external', 'CY-CBL-B4 et CY-CBL-FUJI-2'], 
-            'Photo Lens': ['external', None]}, 
-        orient = 'index')
-# Pipeline, from camera to control, establishing Cyaview gear requirements 
-def analyze(self,debug_mode=None):
-    debug_mode = "save_usecase_seed"
-    self.debug_usecase(debug_mode)
-    self.converter_from_cable()
-    self.device_from_network()
-    self.camgroup_from_cameratype()
-    self.device_id_from_device()
-    self.switch_id_from_camgroup()
-    self.rcptype_from_camgroup()
-    self.rcp_id_from_camgroup()
-    self.rcp_optimize()
-    self.rcp_count()
-    self.cable_count()
-    self.device_count()
-    self.debug_usecase(debug_mode)
-    print('########## RCPs :',self.rcps)
-    print('########## DEVICES :',self.devices)
-    print('########## CABLEs :',self.cables)
-
-Usecase.converter_from_cable   = converter_from_cable
-Usecase.device_from_network = device_from_network
-Usecase.camgroup_from_cameratype=camgroup_from_cameratype
-Usecase.device_id_from_device = device_id_from_device
-Usecase.switch_id_from_camgroup = switch_id_from_camgroup
-Usecase.rcptype_from_camgroup = rcptype_from_camgroup
-Usecase.rcp_id_from_camgroup = rcp_id_from_camgroup
-Usecase.rcp_optimize = rcp_optimize
-Usecase.rcp_count = rcp_count
-Usecase.cable_count = cable_count
-Usecase.device_count = device_count
-Usecase.lens_init = lens_init
-Usecase.analyze = analyze
