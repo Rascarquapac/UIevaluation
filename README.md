@@ -3,22 +3,25 @@ A sample Streamlit application do determine Cyanview resources required by a giv
 
 # TODO
 ## CYANVIEW DATA DESCRIPTION
--  Improve camera database:
-  - add a field for "Control Level" (for Broadcast ? Cinematic ?, General ?)
-  - add field on maxDelaySystainable for decinding about network
-  - fill missing protocol
-- Improve generic explanation on choices and special attention
-  - create a FAQs pages on Odoo (bifirectionality, HF,)
-- Develop Network selection
-- Develop Lens selection
-- Develop Extra-Devices (Tally, GPIO, NIO,…) selection
-- Develop Non-Camera-Device-Control (switchers,…)
-- Develop storing in database and emailing for quote request
-- Manage target application (Specialty, Broadcast, Cinematic,Remote Production)
-- Details:
-  - SSM500 should require a RCP-Full ( 1 x camera ?)
-  - Downloading SVG file
-  - Analyze and display schematic on any change
+###  Improve camera database:
+- add a field for "Control Level" (for Broadcast ? Cinematic ?, General ?)
+- add field on maxDelaySystainable for decinding about network
+- fill missing protocol
+### Improve generic explanation on choices and special attention
+- create a FAQs pages on Odoo (bifirectionality, HF,)
+### Improve UI
+- Table of current selection: replace cable column by cameratype
+### Develop Network selection
+- add right network list
+### Develop Lens selection
+### Develop Extra-Devices (Tally, GPIO, NIO,…) selection
+### Develop Non-Camera-Device-Control (switchers,…)
+### Develop storing in database and emailing for quote request
+### Manage target application (Specialty, Broadcast, Cinematic,Remote Production)
+### Details:
+- SSM500 should require a RCP-Full ( 1 x camera ?)
+- Downloading SVG file
+- Analyze and display schematic on any change
 ## FAQ
 - Delay in camera process control
 - RIO vs CI0
@@ -36,35 +39,22 @@ A sample Streamlit application do determine Cyanview resources required by a giv
 ## FLOWCHART
 ```
 flowchart TD
-    USER --> TEXT
-    USER --> GSHEET
-    TEXT[messages.md] -->|Genpy.py| TEXDIC(picklize.text_to_dic)
-    GSHEET[Cyanview Description.gs] --> GET_GSHEET(get_gsheet)
-    subgraph pickelize
-    TEXDIC --> DIC
-    DIC --> TEXTPKL
-    GET_GSHEET[picklize.get_gsheets] -->CONSTRAINTS
-    GET_GSHEET -->OPTIONS
-    GET_GSHEET -->CAMERAS
-    GET_GSHEET -->PROTOCOLS
-    CONSTRAINTS[Constraints sheet] -->|Genpy.py| CSVPKL(picklize.csv_to_pkl)
-    OPTIONS[Options sheet] -->|Genpy.py| CSVPKL
-    CAMERAS[Cameras sheet] -->|Genpy.py| CSVPKL
-    PROTOCOLS[CameraProtocols sheet] -->|Genpy.py| CSVPKL
+    CYAN(    Cyan User  ) --> TEXT
+    CYAN --> GSHEET
+    subgraph picklize
+        TEXT[messages.md] -->|picklize.py| PKLMESS[messages.pkl]
+        GSHEET[Cyanview Description.gs] -->|picklize.py| PKLCAMS[cameras.pkl]
+        GSHEET[Cyanview Description.gs] -->|picklize.py| PKLPROP[properties.pkl]
     end
-    TEXTPKL --> PKLMESS(messages.pkl) 
-    CSVPKL  --> PKLOPTI(options.pkl)
-    CSVPKL ---> PKLCONS(constraints.pkl)
-    CSVPKL ---> PKLCAMS(cameras.pkl)
+    PKLMESS -->|usecase_analyzemessages.py| MESSDIC(messages.dic)
+    PKLCAMS --> |pool.py|POOLDF(pool.df)
+    PKLPROP --> |pool.py|POOLDF(pool.df)
     subgraph salesagent
-    PKLCAMS --> STREAMLIT1
-    PKLMESS --> STREAMLIT1
-    PKLCONS --> STREAMLIT1
-    PKLOPTI --> STREAMLIT1
-    STREAMLIT1 --> ANALYZE
-    ANALYZE --> GRAPHICS(Display graphics)
-    ANALYZE --> COMMENTANALYZE(Provide analysis feedback)
-    GRAPHICS --> MERMAID(Mermaid Graph)
-    GRAPHICS --> GRAPHVIZ[Graphviz Graph fa:fa-car Car]
+        MESSDIC --> |usecase_analyze|COMMENTANALYZE
+        POOLDF --> |streamUI.py|POOLDF
+        POOLDF-->|usecase.py|USECASEDF(usecase.df)
+        USECASEDF--> |streamUI.py|USECASEDF
+        USECASEDF -->|usecase_analyze| GRAPH(Mermaid)
+        USECASEDF -->|usecase_analyze| COMMENTANALYZE(Analysis Messages)
     end
 ```
