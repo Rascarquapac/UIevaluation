@@ -6,6 +6,9 @@ from pool     import Pool
 from property import Properties
 from message  import Messages
 
+global_depug_pool_record = False
+global_debug_pool_load   = True
+
 # Set pool.step_match from user input… should be a Pool method
 def update_selecting():
     pattern = st.session_state.camera_pattern.upper()
@@ -53,6 +56,8 @@ def ui_init():
     st.session_state.running = True
     # Import full camera data
     st.session_state.pool     = Pool()
+    if global_debug_pool_load :
+        st.session_state.pool.df = pd.read_pickle("./debug/debug_pool_df_init.pkl")
     st.session_state.usecase  = Usecase()
     st.session_state.property = Properties()
     st.session_state.messages = Messages()
@@ -96,8 +101,9 @@ with networkSelection:
         st.session_state.streamui.pool_edit_camera_per_type(st.session_state.pool,mode='network')
 #    if st.button("Analyze",key="networkanalysis"):
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
-        st.session_state.usecase.setup(st.session_state.pool.final)        
-        st.session_state.usecase.analyze()
+        if global_depug_pool_record :
+            st.session_state.pool.df.to_pickle("./debug/debug_pool_df.pkl")
+        st.session_state.usecase.analyze(st.session_state.pool.final)
         st.session_state.analyze_done = True
         with st.expander("Required equipment for use case",expanded=False):
             message = st.session_state.messages.display(object=st.session_state.usecase)
@@ -110,8 +116,9 @@ with lensSelection:
         st.session_state.streamui.pool_edit_camera_per_type(st.session_state.pool,mode='lens')
 #    if st.button("Analyze",key="lensanalysis"):
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
-        st.session_state.usecase.setup(st.session_state.pool.final)        
-        st.session_state.usecase.analyze(debug_mode = None)
+        if global_depug_pool_record :
+            st.session_state.pool.df.to_pickle("./debug/debug_pool_df.pkl")
+        st.session_state.usecase.analyze(st.session_state.pool.final)
         st.session_state.analyze_done = True
 
 with motivations:

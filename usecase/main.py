@@ -4,7 +4,12 @@ from ._draw    import init_graph,draw_all, graph_mermaid, get_mermaid_code, stre
 from ._network import converter_from_cable, device_from_network,camgroup_from_cameratype, device_id_from_device,switch_id_from_camgroup, rcptype_from_camgroup, rcp_id_from_camgroup, rcp_optimize
 from ._quote   import rcp_count, cable_count, device_count
 from ._lens    import lens_init
-from ._debug   import debug_camerapool_to_csv, debug_camerapool_to_usecase, debug_usecase
+from ._debug   import debug_pool_to_csv, debug_csv_to_pool, debug_usecase_to_csv
+
+global_debug_prefix = "base"
+global_debug_pool_record = True
+global_debug_pool_load   = False
+global_debug_usecase_record = True
 # Built a dataframe with one line per camera instance
 class Usecase:
     def __init__(self) -> None:
@@ -48,9 +53,10 @@ class Usecase:
         return 
 
     # Pipeline, from camera to control, establishing Cyaview gear requirements 
-    def analyze(self,debug_mode=None):
-        debug_mode = "save_usecase_seed"
-        self.debug_usecase(debug_mode)
+    def analyze(self,pool_df = None):
+        if global_debug_pool_record : debug_pool_to_csv(pool_df,global_debug_prefix)
+        if global_debug_pool_load   : pool_df = debug_csv_to_pool(global_debug_prefix)
+        self.setup(pool_df)
         self.converter_from_cable()
         self.device_from_network()
         self.camgroup_from_cameratype()
@@ -62,7 +68,7 @@ class Usecase:
         self.rcp_count()
         self.cable_count()
         self.device_count()
-        self.debug_usecase("save_usecase_result")
+        if global_debug_usecase_record: debug_usecase_to_csv(self.df,global_debug_prefix)
         print('########## RCPs :',self.rcps)
         print('########## DEVICES :',self.devices)
         print('########## CABLEs :',self.cables)
@@ -91,7 +97,9 @@ class Usecase:
     def get_mermaid_code(self): return get_mermaid_code(self)
     def streamlit_mermaid(self,mermaid_graph): return streamlit_mermaid(self,mermaid_graph)
 
-    # Debug
-    def debug_camerapool_to_csv(self,camera_pool) : return debug_camerapool_to_csv(self,camera_pool)
-    def debug_camerapool_to_usecase(self) :  return debug_camerapool_to_usecase(self)
-    def debug_usecase(self,debug_mode): return debug_usecase(self,debug_mode)
+if __name__ == "__main__":
+    global_debug_prefix = "base"
+    global_debug_pool_load = False
+    global_debug_usecase_record = True
+    usecase = Usecase()
+    usecase.df.analyze()

@@ -1,10 +1,8 @@
-import pandas as pd
 import graphviz as gv
 import base64
 import mermaid as md
-from mermaid.graph import Graph
+from   mermaid.graph import Graph
 
-from usecase import Usecase
 #################### DRAW WITH GRAVVIZ ###########################
 def init_graph(self,name,rank='sink'):
     graph = gv.Graph(name='cluster_' + name)

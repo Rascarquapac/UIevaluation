@@ -23,6 +23,8 @@ class Pool:
     def pkl_cameras(self):
         self.df = pd.read_pickle("./picklized/cameras.pkl")
         return
+    def pickle_save_and_load(self):
+        self.df 
     def apply_pattern(self,camera_pattern="",brand=""):
         if camera_pattern != None and camera_pattern != "":
             camera_selection = self.df.filter(like=camera_pattern,axis=0)

@@ -2,7 +2,7 @@ import csv
 import re
 import pickle
 from pool import Pool
-from usecase import Usecase
+from usecase.main import Usecase
 
 class Messages():
     def __init__(self) -> None:
