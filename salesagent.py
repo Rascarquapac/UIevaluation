@@ -7,7 +7,7 @@ from property import Properties
 from message  import Messages
 
 global_depug_pool_record = False
-global_debug_pool_load   = True
+global_debug_pool_load   = False
 
 # Set pool.step_match from user input… should be a Pool method
 def update_selecting():
@@ -69,7 +69,7 @@ def ui_init():
 if 'running' not in st.session_state:
     ui_init()
 # Set title
-st.header('Cyanview Gear Selector V0.0')
+st.header('Cyanview Gear Simulator V0.0')
 # not available in streamlit 1.34 … 
 st.logo("images/logo.jpg")
 # Set sidebar

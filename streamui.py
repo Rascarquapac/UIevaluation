@@ -263,22 +263,22 @@ class StreamUI():
                             # width="medium",
                             options=st.session_state.property.constraints[(key,'LensTypes')],
                             required=True),
-                        'LensMotorization':  st.column_config.SelectboxColumn(
+                        'LensUserMotorization':  st.column_config.SelectboxColumn(
                             "Motorization",
                             help="Type of motorization",
                             # width="small",
-                            options=st.session_state.property.options['LensMotorization'],
+                            options=st.session_state.property.options['LensUserMotorization'],
                             required=True),
-                        'LensControlNeeds':  st.column_config.SelectboxColumn(
+                        'LensUserControlNeeds':  st.column_config.SelectboxColumn(
                             "Motorization Needs",
                             help="Your needs for lens motorization",
                             # width="small",
-                            options=st.session_state.property.options['LensControlNeeds'],
+                            options=st.session_state.property.options['LensUserControlNeeds'],
                             required=True),
                         "Brand": "Brand",
                         },
                     disabled=['Reference','Brand','Number'],
-                    column_order=['LensControlNeeds','LensMotorization','LensTypes','Reference','Brand','Number'],
+                    column_order=['LensUserControlNeeds','LensUserMotorization','LensTypes','Reference','Brand','Number'],
                     hide_index = True,
                     use_container_width = True,
                     key = key+"_lens",
