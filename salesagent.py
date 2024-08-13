@@ -20,18 +20,17 @@ def update_selecting():
     return
 def sidebar(): 
      # Sidebar
-    st.sidebar.header(("Cyanview gear selection process"))
-    display = "Get Cyanview gear from a use-case:\n"
-    display += "1 Set cameras pool\n"
-    display += "\n"
-    display += "3 Get a connection scheme \n"
-    display += "4 Get motivations of sele \n"
+    st.sidebar.header(("Gear Simulator Workflow: "))
     st.sidebar.markdown((
         """
-    1. Set cameras pool
-    2. Set cameras environment
-    3. Get the connection schema
-    4. Get motivations for selection
+    1. Set cameras pool\n
+    2. Set IP network mediums\n
+    3. Set lenses  \n
+    4. Refine your use-case \n
+    The simulator provides \n 
+    1. Schema of use-case, 
+    2. List of equipment 
+    3. Tips, Pay attention points, explanation
     """
     ))
 
