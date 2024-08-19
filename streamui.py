@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas    as pd
+from lens import Lens
 
 class StreamUI():
     def __init__(self) -> None:
@@ -181,7 +182,7 @@ class StreamUI():
                 column_order=['Number','Brand','Reference','Cable','SupportURL','ManufacturerURL'],
                 hide_index = True)
             return(pool.selected)
-    def pool_edit_camera_per_type(self,pool,mode='network'):
+    def pool_edit_camera_for_network(self,pool):
         def edit_camera_network(df,key):
             if (len(df.index) != 0): 
                 df = st.data_editor(
@@ -241,7 +242,18 @@ class StreamUI():
                 #print("\nDATAFRAME AFTER EDIT")
                 #print(df)
                 return(df)
-        def edit_camera_lens(df,key):
+        blocks = {}
+        camera_types = pool.selected["Type"].unique()
+        for camera_type in camera_types:
+            #filter instance dataframe by type
+            selected_rows = pool.selected.loc[pool.selected['Type'] == camera_type]
+            if not selected_rows.empty :
+                st.markdown(camera_type)
+                blocks[camera_type] = edit_camera_network(selected_rows,key=camera_type)
+        pool.final = pd.concat(list(blocks.values()))
+
+    def pool_edit_camera_for_lens(self,pool):
+        def edit_camera_lens(df,cameraLensCategory):
             print(df)
             if (len(df.index) != 0): 
                 df = st.data_editor(
@@ -257,48 +269,51 @@ class StreamUI():
                             step=1,
                             default=0,
                             format="%d"),
-                        'LensTypes':  st.column_config.SelectboxColumn(
+                        'lensControl':  st.column_config.SelectboxColumn(
+                            "Lens Control",
+                            help="Your needs for lens motorization",
+                            # width="small",
+                            options=st.session_state.property.constraints[(cameraLensCategory,'LensControls')],
+                            #options=st.session_state.property.options['LensUserControls'],
+                            required=True),
+                        'lensType':  st.column_config.SelectboxColumn(
                             "Type of Lens",
                             help="Main characteristics of the lens",
                             # width="medium",
-                            options=st.session_state.property.constraints[(key,'LensTypes')],
+                            options=st.session_state.property.options['LensTypes'],
+                            #options=st.session_state.property.constraints[(cameraLensCategory,'LensTypes')],
                             required=True),
-                        'LensUserMotorization':  st.column_config.SelectboxColumn(
+                        'lensMotor':  st.column_config.SelectboxColumn(
                             "Motorization",
                             help="Type of motorization",
                             # width="small",
-                            options=st.session_state.property.options['LensUserMotorization'],
-                            required=True),
-                        'LensUserControlNeeds':  st.column_config.SelectboxColumn(
-                            "Motorization Needs",
-                            help="Your needs for lens motorization",
-                            # width="small",
-                            options=st.session_state.property.options['LensUserControlNeeds'],
+                            options = st.session_state.property.constraints[(cameraLensCategory,'LensMotors')],
                             required=True),
                         "Brand": "Brand",
                         },
                     disabled=['Reference','Brand','Number'],
-                    column_order=['LensUserControlNeeds','LensUserMotorization','LensTypes','Reference','Brand','Number'],
+                    column_order=['Reference','lensControl','lensType','lensMotor','Brand','Number'],
                     hide_index = True,
                     use_container_width = True,
-                    key = key+"_lens",
+                    #key = key+"_lens",
         #            on_change = st.rerun,
                     )
                 ## st.markdown(display)
                 #print("\nDATAFRAME AFTER EDIT")
                 #print(df)
                 return(df)
-
+        lens = Lens()
         blocks = {}
-        camera_types = pool.selected["Type"].unique()
-        for camera_type in camera_types:
+        #cameraLensCategory est l'élément de sélection
+        if 'LensTypes' not in pool.df.columns:
+            pool.df['LensTypes']=""
+        print("DF Columns:",pool.df.columns)
+        print("SELECTED Columns:",pool.selected.columns)
+        cameraLensCategories = pool.selected["CameraLensCategory"].unique()
+        for cameraLensCategory in cameraLensCategories:
             #filter instance dataframe by type
-            selected_rows = pool.selected.loc[pool.selected['Type'] == camera_type]
+            selected_rows = pool.selected.loc[pool.selected['CameraLensCategory'] == cameraLensCategory]
             if not selected_rows.empty :
-                if mode == 'network':
-                    blocks[camera_type] = edit_camera_network(selected_rows,key=camera_type)
-                elif mode == 'lens':
-                    blocks[camera_type] = edit_camera_lens(selected_rows,key=camera_type)
-                else:
-                    raise("Mode of input should be 'network' or 'lens' ")
+                st.markdown(cameraLensCategory)
+                blocks[cameraLensCategory] = edit_camera_lens(selected_rows,cameraLensCategory)
         pool.final = pd.concat(list(blocks.values()))

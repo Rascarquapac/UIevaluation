@@ -1,15 +1,16 @@
 import pandas as pd
+from lens import Lens
 from property import Properties
 from ._draw    import init_graph,draw_all, graph_mermaid, get_mermaid_code, streamlit_mermaid
 from ._network import converter_from_cable, device_from_network,camgroup_from_cameratype, device_id_from_device,switch_id_from_camgroup, rcptype_from_camgroup, rcp_id_from_camgroup, rcp_optimize
 from ._quote   import rcp_count, cable_count, device_count
-from ._lens    import lens_init
+#from ._lens    import lens_init
 from ._debug   import debug_pool_to_csv, debug_csv_to_pool, debug_usecase_to_csv
 
 global_debug_prefix = "base"
-global_debug_pool_record = True
-global_debug_pool_load   = False
-global_debug_usecase_record = True
+global_debug_pool_record = False
+global_debug_pool_load   = True
+global_debug_usecase_record = False
 # Built a dataframe with one line per camera instance
 class Usecase:
     def __init__(self) -> None:
@@ -36,7 +37,9 @@ class Usecase:
             return(df)
         # Suppress and add columns
         def columns():
+            # Suppressunused column
             self.df.drop(columns=['SupportURL', 'ManufacturerURL','Remark','Selected','Message'], inplace=True)
+            # Add result columns storing the results of protocol analyse
             self.df['Camera_id'] = self.df.index
             self.df['Device']    = ""
             self.df['Device_id'] = ""
@@ -44,6 +47,13 @@ class Usecase:
             self.df['RCP_id']    = ""
             self.df['Camgroup']  = ""
             self.df['RCPtype']   = ""
+            # Add result columns storing the results of lens analyse
+            self.df['Cable_A']   = ""
+            self.df['Cable_B']   = ""
+            self.df['Motorisation']  = ""
+            # Not to be done here
+            # self.df['LensTypes'] = ""
+
             #self.df['lens_id']=""
             return
         if not pool_df.empty:
@@ -74,28 +84,28 @@ class Usecase:
         print('########## CABLEs :',self.cables)
 
     # Network
-    def converter_from_cable(self) : return converter_from_cable(self)
-    def device_from_network(self) : return device_from_network(self)
+    def converter_from_cable(self)     : return converter_from_cable(self)
+    def device_from_network(self)      : return device_from_network(self)
     def camgroup_from_cameratype(self) : return camgroup_from_cameratype(self)
-    def device_id_from_device(self) : return device_id_from_device(self)
-    def switch_id_from_camgroup(self) : return switch_id_from_camgroup(self)
-    def rcptype_from_camgroup(self) : return rcptype_from_camgroup(self)
-    def rcp_id_from_camgroup(self) : return rcp_id_from_camgroup(self)
-    def rcp_optimize(self) : return rcp_optimize(self)
+    def device_id_from_device(self)    : return device_id_from_device(self)
+    def switch_id_from_camgroup(self)  : return switch_id_from_camgroup(self)
+    def rcptype_from_camgroup(self)    : return rcptype_from_camgroup(self)
+    def rcp_id_from_camgroup(self)     : return rcp_id_from_camgroup(self)
+    def rcp_optimize(self)             : return rcp_optimize(self)
 
     # Quotation
-    def rcp_count(self) : return rcp_count(self)
-    def cable_count(self) : return cable_count(self)
+    def rcp_count(self)    : return rcp_count(self)
+    def cable_count(self)  : return cable_count(self)
     def device_count(self) : return device_count(self)
     # Lens
-    def lens_init(self) : return lens_init(self)
+    #def lens_init(self)    : return lens_init(self)
 
     # Graph generation
-    def init_graph(self,name,rank='sink'):        return init_graph(self,name,rank)
-    def draw_all(self): return draw_all(self)
-    def graph_mermaid(self,code): return graph_mermaid(self,code)
-    def get_mermaid_code(self): return get_mermaid_code(self)
-    def streamlit_mermaid(self,mermaid_graph): return streamlit_mermaid(self,mermaid_graph)
+    def init_graph(self,name,rank='sink')     : return init_graph(self,name,rank)
+    def draw_all(self)                        : return draw_all(self)
+    def graph_mermaid(self,code)              : return graph_mermaid(self,code)
+    def get_mermaid_code(self)                : return get_mermaid_code(self)
+    def streamlit_mermaid(self,mermaid_graph) : return streamlit_mermaid(self,mermaid_graph)
 
 if __name__ == "__main__":
     global_debug_prefix = "base"

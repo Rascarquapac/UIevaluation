@@ -6,8 +6,8 @@ from pool     import Pool
 from property import Properties
 from message  import Messages
 
-global_depug_pool_record = False
-global_debug_pool_load   = False
+debug_pool_record = False
+debug_pool_load   = True
 
 # Set pool.step_match from user input… should be a Pool method
 def update_selecting():
@@ -20,17 +20,20 @@ def update_selecting():
     return
 def sidebar(): 
      # Sidebar
-    st.sidebar.header(("Gear Simulator Workflow: "))
+    st.sidebar.header(("Workflow"))
     st.sidebar.markdown((
         """
-    1. Set cameras pool\n
-    2. Set IP network mediums\n
-    3. Set lenses  \n
-    4. Refine your use-case \n
-    The simulator provides \n 
-    1. Schema of use-case, 
-    2. List of equipment 
-    3. Tips, Pay attention points, explanation
+    1. Set **Cameras** pool
+    2. Set **IP Network** mediums
+    3. Set **Lenses**
+    4. **Refine** your use-case
+    """))
+    st.sidebar.header(("Outputs"))
+    st.sidebar.markdown((
+        """
+    1. **Schema** of use-case, 
+    2. List of equipment for quote
+    3. Tips, attention points, explanations
     """
     ))
 
@@ -55,7 +58,7 @@ def ui_init():
     st.session_state.running = True
     # Import full camera data
     st.session_state.pool     = Pool()
-    if global_debug_pool_load :
+    if debug_pool_load :
         st.session_state.pool.df = pd.read_pickle("./debug/debug_pool_df_init.pkl")
     st.session_state.usecase  = Usecase()
     st.session_state.property = Properties()
@@ -97,10 +100,10 @@ with networkSelection:
     if not st.session_state.pool.selected.empty :
         st.subheader('Select networks (optional):')
         ##test refacoring streamui ## st.session_state.pool.edit_camera_per_type('network')
-        st.session_state.streamui.pool_edit_camera_per_type(st.session_state.pool,mode='network')
+        st.session_state.streamui.pool_edit_camera_for_network(st.session_state.pool)
 #    if st.button("Analyze",key="networkanalysis"):
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
-        if global_depug_pool_record :
+        if debug_pool_record :
             st.session_state.pool.df.to_pickle("./debug/debug_pool_df.pkl")
         st.session_state.usecase.analyze(st.session_state.pool.final)
         st.session_state.analyze_done = True
@@ -112,10 +115,10 @@ with lensSelection:
     if not st.session_state.pool.selected.empty :
         st.subheader('Select Lens (optional):')
         ##test refacoring streamui ##  st.session_state.pool.edit_camera_per_type('lens')
-        st.session_state.streamui.pool_edit_camera_per_type(st.session_state.pool,mode='lens')
+        st.session_state.streamui.pool_edit_camera_for_lens(st.session_state.pool)
 #    if st.button("Analyze",key="lensanalysis"):
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
-        if global_depug_pool_record :
+        if debug_pool_record :
             st.session_state.pool.df.to_pickle("./debug/debug_pool_df.pkl")
         st.session_state.usecase.analyze(st.session_state.pool.final)
         st.session_state.analyze_done = True
@@ -134,7 +137,6 @@ with mermaid:
         mermaid_graph=st.session_state.usecase.graph_mermaid(svg_code)
         html = st.session_state.usecase.streamlit_mermaid(mermaid_graph)
         st.write(html, unsafe_allow_html=True)
-
 with test:
     # if st.session_state.analyze_done:
         # code = st.session_state.usecase.get_mermaid_code()

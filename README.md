@@ -37,7 +37,7 @@ A sample Streamlit application do determine Cyanview resources required by a giv
 ## SSL Certificates:
 /Applications/Python\ 3.12/Install\ Certificates.command
 ## FLOWCHART
-```
+:::mermaid
 flowchart TD
     CYAN(    Cyan User  ) --> TEXT
     CYAN --> GSHEET
@@ -57,4 +57,4 @@ flowchart TD
         USECASEDF -->|usecase_analyze| GRAPH(Mermaid)
         USECASEDF -->|usecase_analyze| COMMENTANALYZE(Analysis Messages)
     end
-```
+:::
