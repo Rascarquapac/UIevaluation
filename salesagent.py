@@ -6,8 +6,8 @@ from pool     import Pool
 from property import Properties
 from message  import Messages
 
-debug_pool_record = False
-debug_pool_load   = True
+debug_pool_record = True
+debug_pool_load   = False
 
 # Set pool.step_match from user input… should be a Pool method
 def update_selecting():
@@ -105,6 +105,7 @@ with networkSelection:
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
         if debug_pool_record :
             st.session_state.pool.df.to_pickle("./debug/debug_pool_df.pkl")
+        print("salesagent->networkSelection->st.session_state.POOL.FINAL columns:\n",st.session_state.pool.final.columns)
         st.session_state.usecase.analyze(st.session_state.pool.final)
         st.session_state.analyze_done = True
         with st.expander("Required equipment for use case",expanded=False):

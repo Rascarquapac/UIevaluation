@@ -39,7 +39,6 @@ class Pool:
         self.df["lensControl"]= self.df.apply(user_lensControl,axis=1)
         self.df["lensType"]   = self.df.apply(user_lensType,axis=1)
         self.df["lensMotor"]  = self.df.apply(user_lensMotor,axis=1)
-    
     def pickle_save_and_load(self):
         self.df 
     def apply_pattern(self,camera_pattern="",brand=""):

@@ -251,9 +251,10 @@ class StreamUI():
                 st.markdown(camera_type)
                 blocks[camera_type] = edit_camera_network(selected_rows,key=camera_type)
         pool.final = pd.concat(list(blocks.values()))
+        print("StreamUI->pool_edit_camera_for_network-> POOL.FINAL columns:\n",pool.final.columns)
 
     def pool_edit_camera_for_lens(self,pool):
-        def edit_camera_lens(df,cameraLensCategory):
+        def edit_camera_lens(df,cameraLensCategory,constraints):
             print(df)
             if (len(df.index) != 0): 
                 df = st.data_editor(
@@ -269,20 +270,20 @@ class StreamUI():
                             step=1,
                             default=0,
                             format="%d"),
-                        'lensControl':  st.column_config.SelectboxColumn(
+                        'lensControl': st.column_config.SelectboxColumn(
                             "Lens Control",
-                            help="Your needs for lens motorization",
+                            help= "Your needs for lens motorization",
                             # width="small",
-                            options=st.session_state.property.constraints[(cameraLensCategory,'LensControls')],
+                            options = st.session_state.property.constraints[(cameraLensCategory,'LensControls')],
                             #options=st.session_state.property.options['LensUserControls'],
-                            required=True),
+                            required = True),
                         'lensType':  st.column_config.SelectboxColumn(
                             "Type of Lens",
                             help="Main characteristics of the lens",
                             # width="medium",
-                            options=st.session_state.property.options['LensTypes'],
-                            #options=st.session_state.property.constraints[(cameraLensCategory,'LensTypes')],
-                            required=True),
+                            #options = st.session_state.property.options['LensTypes'],
+                            options=st.session_state.property.constraints[(cameraLensCategory,'LensTypes')],
+                            required = True),
                         'lensMotor':  st.column_config.SelectboxColumn(
                             "Motorization",
                             help="Type of motorization",
@@ -315,5 +316,7 @@ class StreamUI():
             selected_rows = pool.selected.loc[pool.selected['CameraLensCategory'] == cameraLensCategory]
             if not selected_rows.empty :
                 st.markdown(cameraLensCategory)
-                blocks[cameraLensCategory] = edit_camera_lens(selected_rows,cameraLensCategory)
+                constraints = Lens.filter_constraints(cameraLensCategory)
+                blocks[cameraLensCategory] = edit_camera_lens(selected_rows,cameraLensCategory,constraints)
         pool.final = pd.concat(list(blocks.values()))
+        print("StreamUI->pool_edit_camera_for_lens-> POOL.FINAL columns:\n",pool.final.columns)

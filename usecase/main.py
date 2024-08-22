@@ -4,12 +4,12 @@ from property import Properties
 from ._draw    import init_graph,draw_all, graph_mermaid, get_mermaid_code, streamlit_mermaid
 from ._network import converter_from_cable, device_from_network,camgroup_from_cameratype, device_id_from_device,switch_id_from_camgroup, rcptype_from_camgroup, rcp_id_from_camgroup, rcp_optimize
 from ._quote   import rcp_count, cable_count, device_count
-#from ._lens    import lens_init
+from ._lens    import lens_cable
 from ._debug   import debug_pool_to_csv, debug_csv_to_pool, debug_usecase_to_csv
 
 global_debug_prefix = "base"
 global_debug_pool_record = False
-global_debug_pool_load   = True
+global_debug_pool_load   = False
 global_debug_usecase_record = False
 # Built a dataframe with one line per camera instance
 class Usecase:
@@ -48,9 +48,9 @@ class Usecase:
             self.df['Camgroup']  = ""
             self.df['RCPtype']   = ""
             # Add result columns storing the results of lens analyse
-            self.df['Cable_A']   = ""
-            self.df['Cable_B']   = ""
-            self.df['Motorisation']  = ""
+            self.df['LensCable0']   = ""
+            self.df['LensCable1']   = ""
+            self.df['LensMotor']    = ""
             # Not to be done here
             # self.df['LensTypes'] = ""
 
@@ -66,6 +66,7 @@ class Usecase:
     def analyze(self,pool_df = None):
         if global_debug_pool_record : debug_pool_to_csv(pool_df,global_debug_prefix)
         if global_debug_pool_load   : pool_df = debug_csv_to_pool(global_debug_prefix)
+        print("Usecase->main->analyze->POOL_DF columns BEFORE setup:\n",pool_df.columns)
         self.setup(pool_df)
         self.converter_from_cable()
         self.device_from_network()
@@ -74,6 +75,8 @@ class Usecase:
         self.switch_id_from_camgroup()
         self.rcptype_from_camgroup()
         self.rcp_id_from_camgroup()
+        print("Columns in Usecase dataframe (usecase.df): ",self.df.columns)
+        self.lens_cable()
         self.rcp_optimize()
         self.rcp_count()
         self.cable_count()
@@ -99,7 +102,7 @@ class Usecase:
     def device_count(self) : return device_count(self)
     # Lens
     #def lens_init(self)    : return lens_init(self)
-
+    def lens_cable(self)   : return lens_cable(self)
     # Graph generation
     def init_graph(self,name,rank='sink')     : return init_graph(self,name,rank)
     def draw_all(self)                        : return draw_all(self)
