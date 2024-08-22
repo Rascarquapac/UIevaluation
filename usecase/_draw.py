@@ -51,6 +51,28 @@ def draw_all(self):
     return(top)
 #################### DRAW WITH MERMAID ###########################
 def get_mermaid_code(self):
+    def camera_only(index):
+        camera_id = self.df.loc[index,'Camera_id'] 
+        device_id = self.df.loc[index,'Device_id'] 
+        cable     = self.df.loc[index,'Cable']
+        device    = self.df.loc[index,'Device']
+        code = clean(camera_id)+ '{{"' + clean(camera_id) + ' fa:fa-camera-retro"}}---|'+clean(cable) +'|'+clean(device_id)+'\n'
+        return code
+    def camera_lens(index):
+        camera_id = self.df.loc[index,'Camera_id'] 
+        device_id = self.df.loc[index,'Device_id'] 
+        cable     = self.df.loc[index,'Cable']
+        device    = self.df.loc[index,'Device']
+        #lensControl,lensType,lensMotor
+        lensControl = self.df.loc[index,'lensControl']
+        lensType = self.df.loc[index,'lensType']
+        lensMotor = self.df.loc[index,'lensMotor']
+        #LensCable0,LensCable1,LensMotor
+        llensCable0 = self.df.loc[index,'LensCable0']
+        llensCable1 = self.df.loc[index,'LensCable1']
+        llensMotor = self.df.loc[index,'LensMotor']
+        code = clean(camera_id)+ '{{"' + clean(camera_id) + ' fa:fa-camera-retro"}}---|'+clean(cable) +'|'+clean(device_id)+'\n'
+        return code
     def clean(code):
         return(code.replace(' ', ''))
     mermaid_code = ''
@@ -61,11 +83,7 @@ def get_mermaid_code(self):
         camgroup_indexes  = self.df.loc[self.df['Camgroup'] == camgroup].index.tolist() 
         mermaid_code+= 'subgraph ' + camgroup + "\n"
         for index in camgroup_indexes:
-            camera_id = self.df.loc[index,'Camera_id'] 
-            device_id = self.df.loc[index,'Device_id'] 
-            cable     = self.df.loc[index,'Cable']
-            device    = self.df.loc[index,'Device']
-            mermaid_code += clean(camera_id)+ '{{"' + clean(camera_id) + ' fa:fa-camera-retro"}}---|'+clean(cable) +'|'+clean(device_id)+'\n'
+            mermaid_code += camera_only(index)
         mermaid_code += 'end\n'
     ###### DRAW SWITCHES #######################
     # croom = self.init_graph("Control",'sink')

@@ -252,7 +252,6 @@ class StreamUI():
                 blocks[camera_type] = edit_camera_network(selected_rows,key=camera_type)
         pool.final = pd.concat(list(blocks.values()))
         print("StreamUI->pool_edit_camera_for_network-> POOL.FINAL columns:\n",pool.final.columns)
-
     def pool_edit_camera_for_lens(self,pool):
         def edit_camera_lens(df,cameraLensCategory,constraints):
             print(df)

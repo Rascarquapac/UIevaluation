@@ -10,7 +10,7 @@ from ._debug   import debug_pool_to_csv, debug_csv_to_pool, debug_usecase_to_csv
 global_debug_prefix = "base"
 global_debug_pool_record = False
 global_debug_pool_load   = False
-global_debug_usecase_record = False
+global_debug_usecase_record = True
 # Built a dataframe with one line per camera instance
 class Usecase:
     def __init__(self) -> None:
