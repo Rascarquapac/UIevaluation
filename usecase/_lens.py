@@ -86,8 +86,13 @@ def lens_cable(self):
         return select(parameters)[1]
     def select_motor(parameters):
         return select(parameters)[2]
+    def super_select(row):
+        parameters = (row['Type'],row['LensMount'],row['Brand'], row['Reference'],row['lensControl'],row['lensType'],row['lensMotor'])
+        result = select(parameters)
+        return (result[0],result[1],result[2])
     
     self.df['LensCable0'] = self.df.apply(lambda row: select_cable0((row['Type'],row['LensMount'],row['Brand'], row['Reference'],row['lensControl'],row['lensType'],row['lensMotor'])), axis=1)
     self.df['LensCable1'] = self.df.apply(lambda row: select_cable1((row['Type'],row['LensMount'],row['Brand'], row['Reference'],row['lensControl'],row['lensType'],row['lensMotor'])), axis=1)
     self.df['LensMotor']  = self.df.apply(lambda row: select_motor((row['Type'],row['LensMount'],row['Brand'], row['Reference'],row['lensControl'],row['lensType'],row['lensMotor'])), axis=1)
     
+    # self.df[['LensCable0', 'LensCable1','LensMotor']] = self.df.apply(super_select, axis=1)
