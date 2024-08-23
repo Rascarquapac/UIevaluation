@@ -42,20 +42,20 @@ def lens_cable(self):
             case ("Fixed Lens",b,c,d,e,f)    : 
                 result = (no_cable,no_cable,no_motor,"The lens could not be interchanged and there is probably no motor solution for this case")
             # CineStyle, Mirrorless, Mini camera with lens interchange
-            # Canon cameras and (CineServo or B4-Mount)
-            case ("Cine Interchangeable","Canon",c,d,"CineServo",f) : 
+            # Canon cameras and (Cineservo or B4-Mount)
+            case ("Cine Interchangeable","Canon",c,d,"Cineservo",f) : 
                 result =(no_cable,no_cable,no_motor,"No Cyanview cable is required, the iris is controlled through the Canon camera")     
             case ("Cine Interchangeable","Canon",c,d,"B4-Mount",f) : 
                 result =(no_cable,no_cable,no_motor,"No Cyanview cable is required, the iris is controlled through the Canon camera")     
-            # URSA cameras and (CineServo or B4-Mount)
-            case ("Cine Interchangeable",b,"URSA",d,"CineServo",f) :
+            # URSA cameras and (Cineservo or B4-Mount)
+            case ("Cine Interchangeable",b,"URSA",d,"Cineservo",f) :
                 result =(no_cable,no_cable,no_motor,"No Cyanview cable is required, the iris is controlled through the URSA camera")
             case ("Cine Interchangeable",b,"URSA",d,"B4-Mount",f) :
                 result =(no_cable,no_cable,no_motor,"No Cyanview cable is required, the iris is controlled through the URSA camera") 
-            # (Neither URSA nor Canon cameras) and (CineServo or B4-Mount)
-            case ("Cine Interchangeable",b,c,"Iris","CineServo",f) :
+            # (Neither URSA nor Canon cameras) and (Cineservo or B4-Mount)
+            case ("Cine Interchangeable",b,c,"Iris","Cineservo",f) :
                 result =(no_cable,no_cable,no_motor,"No Cyanview cable is required, the iris is controlled through the camera")
-            case ("Cine Interchangeable",b,c,"IZF","CineServo",f) :
+            case ("Cine Interchangeable",b,c,"IZF","Cineservo",f) :
                 result =(cable_B4,no_cable,no_motor,"Cyanview B4 adapter is require for Zoom/Focus control")
             case ("Cine Interchangeable",b,c,"Iris","B4-Mount",f) :
                 result =(no_cable,no_cable,no_motor,"No Cyanview cable is required, the iris is controlled through the camera")
@@ -78,7 +78,7 @@ def lens_cable(self):
                 result = (no_cable,no_cable,motor_dreamchip,"The user needs the control of Iris/Zoom and it can be done through the camera")
             case _: 
                 result =(no_cable,no_cable,no_motor,"This case is probably not supported")
-        print("_lens->lens_cable_selext->RESULT: ",result)
+        print(f"_lens->lens_cable_selext->RESULT: {result}")
         return result
     def select_cable0(parameters):
         return select(parameters)[0]

@@ -12,7 +12,7 @@ ATOMONEMINIZOOM_0{{"ATOMONEMINIZOOM_0 fa:fa-camera-retro"}}---|CY-CBL-6P-DCHIP-0
 end
 subgraph CineStyle
 EVA1_0{{"EVA1_0 fa:fa-camera-retro"}}---|Ethernet-RJ45|PassThru_1
-Cineservo_EVA1_0([Cineservo])---|Nocable|PassThru_1
+Cineservo_EVA1_0([Cineservo])---|CY-CBL-6P-B4-02|PassThru_1
   subgraph EVA1_0_cameralens [Iris/Zoom/Focus control required]
     EVA1_0
     Cineservo_EVA1_0
