@@ -39,18 +39,22 @@ class Pool:
         self.df["lensControl"]= self.df.apply(user_lensControl,axis=1)
         self.df["lensType"]   = self.df.apply(user_lensType,axis=1)
         self.df["lensMotor"]  = self.df.apply(user_lensMotor,axis=1)
-    def pickle_save_and_load(self):
-        self.df 
-    def apply_pattern(self,camera_pattern="",brand=""):
+    # Select a camera list from pattern included in camera name, or its brand or its type
+    def apply_pattern(self,camera_pattern="",brand="",camera_type=""):
         if camera_pattern != None and camera_pattern != "":
-            camera_selection = self.df.filter(like=camera_pattern,axis=0)
+            pattern_selection = self.df.filter(like=camera_pattern,axis=0)
         else:
-            camera_selection = self.df
+            pattern_selection = self.df
         if brand != None and brand != "":
             brand_query = f'Brand == "{brand}"'
-            match = camera_selection.query(brand_query)
+            brand_selection = pattern_selection.query(brand_query)
         else:
-            match = camera_selection
+            brand_selection = pattern_selection
+        if camera_type != None and camera_type != "":
+            brand_query = f'Type == "{camera_type}"'
+            match = brand_selection.query(brand_query)
+        else:
+            match = brand_selection
         self.step_match = match
         # print('############ NEW SEARCH ###############')
         # print(self.df)
@@ -60,7 +64,9 @@ class Pool:
 
 if __name__  == "__main__":
     reader = Pool()
-    reader.apply_pattern("CV","")
+    reader.apply_pattern("","Sony","PTZ")
     #result = reader.pipe(get_cameras).pipe(apply_pattern,"CV","")
-    print("RESULT:\n")
-    print(reader.df)
+    print("\nRESULT:\n")
+    print("Columns:\n",reader.df.columns)
+    print("Dataframe:\n",reader.df)
+    print("\nFiltered Dataframe:\n",reader.step_match)

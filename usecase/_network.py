@@ -1,56 +1,68 @@
 import pandas as pd
-
+from constants import CameraLensDevice
 ################## ANALYZE #########################
 # Select the converter for each camera and set it in "Device" index. A Specific column could be more appropriate
-def converter_from_cable(self):
+def device_from_camera_lens(self):
     # A cable type is already associated to the camera model
     # The function return "CI0" if a serial converter is required or "Passthru"
-    def select(cable):
-        match cable:
-            case cable if cable[0:7] == "CY-CBL-" : return "CI0"
-            case "Ethernet-RJ45"  : return "PassThru"
-            case "USB-A-to-USB-C" : return "PassThru"
-            case "IP-to-USB-C"    : return "PassThru"
-            case "BM-SDI"         : return "PassThru"
-            case "JVC USB-to-IP"  : return "PassThru" 
-            case "XDCA back"      : return "PassThru" 
-            case _                : return "PassThru" 
-    self.df['Device'] = self.df.apply(lambda row: select(row['Cable']), axis=1)
+    def select(camera_cable,lens_cable):
+        if lens_cable[0:7]     == "CY-CBL-" : return CameraLensDevice.RIO_LIVE.value
+        elif camera_cable[0:7] == "CY-CBL-" : return CameraLensDevice.CI0.value
+        else: pass
+        match camera_cable:
+            case "Ethernet-RJ45"  : return CameraLensDevice.IP.value
+            case "USB-A-to-USB-C" : return CameraLensDevice.IP.value
+            case "IP-to-USB-C"    : return CameraLensDevice.IP.value
+            case "BM-SDI"         : return CameraLensDevice.IP.value
+            case "JVC USB-to-IP"  : return CameraLensDevice.IP.value 
+            case "XDCA back"      : return CameraLensDevice.IP.value 
+            case _                : return CameraLensDevice.IP.value 
+    self.df['Device'] = self.df.apply(lambda row: select(row['Cable'],row['LensCable']), axis=1)
+# Set the fanout of converter device
+def device_fanout(self):
+    # A cable type is already associated to the camera model
+    # The function return "CI0" if a serial converter is required or "Passthru"
+    def fanout(camera_cable,lens_cable):
+        if lens_cable[0:7]   == "CY-CBL-" : return 2
+        elif camera_cable[0:7] == "CY-CBL-" : return 1
+        else: return 0
+    self.df['Fanout'] = self.df.apply(lambda row: fanout(row['Cable'],row['LensCable']), axis=1)
 # Select the device from network for each camera and set it in "Device" column.
 def device_from_network(self):
     # Select the device from network associated to the camera
     def select(current_device,network,MaxDelayToComplete):
+        assert current_device in [member.value for member in CameraLensDevice]
         #TODO: add a check between case values and contraints
         match network:
             case "LAN Wired" : return current_device
             case "LAN RF Halow"    :
                 if  MaxDelayToComplete < 200:
-                    return "RIO-Live"
+                    return CameraLensDevice.RIO_LIVE.value
                 else: 
                     return current_device
             case "LAN RF Mesh"    :
                 if  MaxDelayToComplete < 200:
-                    return "RIO-Live"
+                    return CameraLensDevice.RIO_LIVE.value
                 else: 
                     return current_device
             case "LAN RF WiFi"    :
                 if  MaxDelayToComplete < 200:
-                    return "RIO-Live"
+                    return CameraLensDevice.RIO_LIVE.value
                 else: 
                     return current_device
             case "P2P RF Pro Modem"    :
                 if  MaxDelayToComplete < 200:
-                    return "RIO-Live"
+                    return CameraLensDevice.RIO_LIVE.value
                 else: 
                     return current_device
             case "P2P RF Unidir"    :
                 if  MaxDelayToComplete < 200:
-                    return "RIO-Live"
+                    return CameraLensDevice.RIO_LIVE.value
                 else: 
                     return current_device
-            case "WAN 4G 5G" : return "RIO"
-            case "P2MP UHF Video"  : return "RIO-Live"
-            case _           : return "Unlisted Network"
+            case "WAN 4G 5G" : return CameraLensDevice.RIO.value
+            case "P2MP UHF Video"  : return CameraLensDevice.RIO_LIVE.value
+            case _           : return CameraLensDevice.UNDEFINED.value
         return
     self.df['Device'] = self.df.apply(lambda row: select(row['Device'],row['Network'],row['MaxDelayToComplete']), axis=1)
 # Set the "Camgroup" column with the "Camtype" value: the camera groups are based on camera type 
@@ -66,6 +78,7 @@ def device_id_from_device(self):
             devices_status[key]=(number+1,0,maxconnect)
         return
     def get_device_id(devices_status,device):
+        # bad check should be chacked in devices_status
         try:
             (number,port,maxconnect) = devices_status[device]
         except:
@@ -78,7 +91,8 @@ def device_id_from_device(self):
             port = 1
         devices_status[device] = (number,port,maxconnect)
         return (device + "_" + str(number))
-    devices_status = {"CI0":(-1,0,2),"RIO":(-1,0,1),"RIO-Live":(-1,0,1),"RSBM":(-1,0,1),"PassThru":(-1,0,100)}
+    # dictionnary of CameraLensDevice.names the number of the device, the consumed ports and the max number of usable connections
+    devices_status = {"ci0":(-1,0,2),"rio":(-1,0,1),"rio_live":(-1,0,1),"rsbm":(-1,0,1),"ip":(-1,0,100)}
     camgroups = self.df['Camgroup'].unique() 
     for camgroup in camgroups:
         update_status(devices_status)

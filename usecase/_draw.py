@@ -67,9 +67,9 @@ def get_mermaid_code(self):
         lensControl = self.df.loc[index,'lensControl']
         lensType    = self.df.loc[index,'lensType']
         lensMotor   = self.df.loc[index,'lensMotor']
-        #LensCable0,LensCable1,LensMotor
-        llensCable0 = self.df.loc[index,'LensCable0']
-        llensCable1 = self.df.loc[index,'LensCable1']
+        #LensCable,MotorCable,LensMotor
+        llensCable0 = self.df.loc[index,'LensCable']
+        llensCable1 = self.df.loc[index,'MotorCable']
         llensMotor  = self.df.loc[index,'LensMotor']
         code = ''
         code += clean(camera_id) + '{{"' + clean(camera_id) + ' fa:fa-camera-retro"}}---|'+clean(cable) +'|'+clean(device_id)+'\n'

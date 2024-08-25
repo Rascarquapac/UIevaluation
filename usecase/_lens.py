@@ -68,12 +68,12 @@ def lens_cable(self):
                 result =(cable_tilta,no_cable,motor_tilta,"Adding Tilta motors and Cyanview Tilta adapter is required for Zoom/Focus control")
             # Cabrio lens
             case ("Cine Interchangeable",b,c,d,"Cabrio",f) : 
-                result = (cable_B4,cable_fuji,no_motor,"The user needs the control of Iris/Zoom/Focus and it can be done through the camera")
+                result = (f'{cable_B4} +\n{cable_fuji}',no_motor,no_cable,"The user needs the control of Iris/Zoom/Focus and it can be done through the camera")
             # Primelens (or… RTI) Motors
             case ("Cine Interchangeable",b,c,d,"Primelens","Tilta") : 
-                result = (cable_tilta,no_cable,motor_tilta,"The user needs the control of Iris/Zoom/Focus, it cannot be done through the camera and the user want to use Tilta motors")
+                result = (no_cable,cable_tilta,motor_tilta,"The user needs the control of Iris/Zoom/Focus, it cannot be done through the camera and the user want to use Tilta motors")
             case ("Cine Interchangeable",b,c,d,"Primelens","Arri") : 
-                result = (cable_arri,no_cable,motor_arri,"The user needs the control of Iris/Focus, it cannot be done through the camera and the user want to use ARRI motors")
+                result = (no_cable,cable_arri,motor_arri,"The user needs the control of Iris/Focus, it cannot be done through the camera and the user want to use ARRI motors")
             case ("Cine Interchangeable","Dreamchip",c,d,e,"Dreamchip") : 
                 result = (no_cable,no_cable,motor_dreamchip,"The user needs the control of Iris/Zoom and it can be done through the camera")
             case _: 
@@ -91,8 +91,8 @@ def lens_cable(self):
         result = select(parameters)
         return (result[0],result[1],result[2])
     
-    self.df['LensCable0'] = self.df.apply(lambda row: select_cable0((row['Type'],row['LensMount'],row['Brand'], row['Reference'],row['lensControl'],row['lensType'],row['lensMotor'])), axis=1)
-    self.df['LensCable1'] = self.df.apply(lambda row: select_cable1((row['Type'],row['LensMount'],row['Brand'], row['Reference'],row['lensControl'],row['lensType'],row['lensMotor'])), axis=1)
+    self.df['LensCable'] = self.df.apply(lambda row: select_cable0((row['Type'],row['LensMount'],row['Brand'], row['Reference'],row['lensControl'],row['lensType'],row['lensMotor'])), axis=1)
+    self.df['MotorCable'] = self.df.apply(lambda row: select_cable1((row['Type'],row['LensMount'],row['Brand'], row['Reference'],row['lensControl'],row['lensType'],row['lensMotor'])), axis=1)
     self.df['LensMotor']  = self.df.apply(lambda row: select_motor((row['Type'],row['LensMount'],row['Brand'], row['Reference'],row['lensControl'],row['lensType'],row['lensMotor'])), axis=1)
     
-    # self.df[['LensCable0', 'LensCable1','LensMotor']] = self.df.apply(super_select, axis=1)
+    # self.df[['LensCable', 'MotorCable','LensMotor']] = self.df.apply(super_select, axis=1)
