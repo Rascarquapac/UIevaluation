@@ -1,5 +1,33 @@
 import pandas as pd
 from constants import CameraLensDevice
+
+class DevicesStatus():
+    def __init__(self):
+        self.ci0      = {'current_instance':0,'consumed_connections':0,'max_connections':2  ,'instanciated':False,'name':"CI0"}
+        self.rio      = {'current_instance':0,'consumed_connections':0,'max_connections':2  ,'instanciated':False,'name':"RIO"}
+        self.rio_live = {'current_instance':0,'consumed_connections':0,'max_connections':2  ,'instanciated':False,'name':"RIO-LIVE"}
+        self.rsbm     = {'current_instance':0,'consumed_connections':0,'max_connections':8  ,'instanciated':False,'name':"RSBM"}
+        self.ip       = {'current_instance':0,'consumed_connections':0,'max_connections':100,'instanciated':False,'name':"IP"}
+        # update devices status when changing camgroup
+    def camgroup_update(self):
+        for attribute, status in vars(self).items():
+            if status['instanciated']:
+                status['current_instance'] += 1
+                status['consumed_connections'] = 0
+            status['instanciated'] = False
+    # A new camera row is processed, update the devices_status
+    def get_device_id (self,device,fanout):
+        device_status = self.__dict__[device]
+        device_status['instanciated'] = True
+        if (device_status['consumed_connections'] + fanout) <= device_status['max_connections']:
+            # Change only the consumed_connections
+            device_status['consumed_connections'] += fanout
+        else:
+            # Create a new instance and set consumed connections to row fanout
+            device_status['consumed_connections'] = fanout
+            device_status['current_instance']    += 1
+        return (device_status["name"] + "_" + str(device_status['current_instance']))
+
 ################## ANALYZE #########################
 # Select the converter for each camera and set it in "Device" index. A Specific column could be more appropriate
 def device_from_camera_lens(self):
@@ -77,31 +105,7 @@ def camgroup_from_cameratype(self):
     self.df['Camgroup'] = self.df.apply(lambda row: select(row['Type'],row['Network']), axis=1)
 # According to device fanout and the camera camgroup instanciate devices and add instance number
 def device_id_from_device(self):
-    # update devices status when changing camgroup
-    def camgroup_update_status(devices_status):
-        for key in devices_status:
-            if devices_status[key]['instanciated']:
-                devices_status[key]['current_instance'] += 1
-                devices_status[key]['consumed_connections'] = 0
-            devices_status[key]['instanciated'] = False
-    # A new camera row is processed, update the devices_status
-    def get_device_id (devices_status,device,fanout):
-        device_status = devices_status[device]
-        device_status['instanciated'] = True
-        if (device_status['consumed_connections'] + fanout) <= device_status['max_connections']:
-            # Change only the consumed_connections
-            device_status['consumed_connections'] += fanout
-        else:
-            # Create a new instance and set consumed connections to row fanout
-            device_status['consumed_connections'] = fanout
-            device_status['current_instance']    += 1
-        return (device_status["name"] + "_" + str(device_status['current_instance']))
-    # dictionnary of CameraLensDevice.names the number of the device, the consumed ports and the max number of usable connections
-    devices_status = {"ci0"      : {'current_instance':0,'consumed_connections':0,'max_connections':2  ,'instanciated':False,'name':"CI0"},
-                      "rio"      : {'current_instance':0,'consumed_connections':0,'max_connections':2  ,'instanciated':False,'name':"RIO"},
-                      "rio_live" : {'current_instance':0,'consumed_connections':0,'max_connections':2  ,'instanciated':False,'name':"RIO-LIVE"},
-                      "rsbm"     : {'current_instance':0,'consumed_connections':0,'max_connections':8  ,'instanciated':False,'name':"RSBM"},
-                      "ip"       : {'current_instance':0,'consumed_connections':0,'max_connections':100,'instanciated':False,'name':"IP"}}
+    devices_status = DevicesStatus()
     camgroups = self.df['Camgroup'].unique() 
     for camgroup in camgroups:
         # update_status(devices_status)
@@ -110,11 +114,12 @@ def device_id_from_device(self):
         for index in camgroup_indexes:
             device = self.df.loc[index,'Device']
             fanout = self.df.loc[index,'Fanout']
-            self.df.loc[index,'Device_id'] = get_device_id(devices_status,device,fanout)
-            print(f'usecase-->_network-->get_device_id->device_status=\n{devices_status[device]}\n Fanout = {fanout}')
+            self.df.loc[index,'Device_id'] = devices_status.get_device_id(device,fanout)
+            print(f'usecase-->_network-->get_device_id->device_status=\n{devices_status.__dict__[device]}\n Fanout = {fanout}')
             value = (self.df.loc[index,'LensCable'],self.df.loc[index,'MotorCable'],self.df.loc[index,'LensMotor'])
             print(f'CABLES: {value}\n')
-        camgroup_update_status(devices_status)
+        # camgroup_update_status(devices_status)
+        devices_status.camgroup_update()
             # print("    Device_id    : ",self.df.loc[index,'Device_id'])
             # print("    Device Status: ",devices_status)
 # Add one switcher per camera group
