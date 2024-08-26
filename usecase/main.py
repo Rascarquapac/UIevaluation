@@ -2,7 +2,7 @@ import pandas as pd
 from lens import Lens
 from property import Properties
 from ._draw    import init_graph,draw_all, graph_mermaid, get_mermaid_code, streamlit_mermaid
-from ._network import device_from_camera_lens, device_from_network,camgroup_from_cameratype, device_id_from_device,switch_id_from_camgroup, rcptype_from_camgroup, rcp_id_from_camgroup, rcp_optimize
+from ._network import device_from_camera_lens, device_from_network,camgroup_from_cameratype, device_id_from_device,switch_id_from_camgroup, rcptype_from_camgroup, rcp_id_from_camgroup, rcp_optimize,device_fanout
 from ._quote   import rcp_count, cable_count, device_count
 from ._lens    import lens_cable
 from ._debug   import debug_pool_to_csv, debug_csv_to_pool, debug_usecase_to_csv
@@ -70,7 +70,9 @@ class Usecase:
         print("Usecase->main->analyze->POOL_DF columns BEFORE setup:\n",pool_df.columns)
         self.setup(pool_df)
         # IP or serial converter
+        self.lens_cable()
         self.device_from_camera_lens()
+        self.device_fanout()
         self.device_from_network()
         self.camgroup_from_cameratype()
         self.device_id_from_device()
@@ -78,7 +80,6 @@ class Usecase:
         self.rcptype_from_camgroup()
         self.rcp_id_from_camgroup()
         print("Columns in Usecase dataframe (usecase.df): ",self.df.columns)
-        self.lens_cable()
         self.rcp_optimize()
         self.rcp_count()
         self.cable_count()
@@ -89,7 +90,8 @@ class Usecase:
         print('########## CABLEs :',self.cables)
 
     # Network
-    def device_from_camera_lens(self)     : return device_from_camera_lens(self)
+    def device_from_camera_lens(self)  : return device_from_camera_lens(self)
+    def device_fanout(self)            : return device_fanout(self)   
     def device_from_network(self)      : return device_from_network(self)
     def camgroup_from_cameratype(self) : return camgroup_from_cameratype(self)
     def device_id_from_device(self)    : return device_id_from_device(self)

@@ -68,15 +68,15 @@ def get_mermaid_code(self):
         lensType    = self.df.loc[index,'lensType']
         lensMotor   = self.df.loc[index,'lensMotor']
         #LensCable,MotorCable,LensMotor
-        llensCable0 = self.df.loc[index,'LensCable']
-        llensCable1 = self.df.loc[index,'MotorCable']
+        llensCable = self.df.loc[index,'LensCable']
+        lmotorCable = self.df.loc[index,'MotorCable']
         llensMotor  = self.df.loc[index,'LensMotor']
         code = ''
         code += clean(camera_id) + '{{"' + clean(camera_id) + ' fa:fa-camera-retro"}}---|'+clean(cable) +'|'+clean(device_id)+'\n'
         # Add lens edge if lens required and cable needed
         lens_id = f'{clean(lensType)}_{clean(camera_id)}'
-        if lensType != 'TBD' and llensCable0 != 'No Cable' :
-            code += f'{lens_id}([{lensType}])---|{clean(llensCable0)}|{clean(device_id)}\n'
+        if lensType != 'TBD' and llensCable != 'No cable' :
+            code += f'{lens_id}([{lensType}])---|{clean(llensCable)}|{clean(device_id)}\n'
         # Add subgraph for camera + lens
         subgraph_id   = f'{clean(camera_id)}_cameralens'
         if lensControl == 'No Need':
@@ -90,7 +90,7 @@ def get_mermaid_code(self):
 
         code += f'  subgraph {subgraph_id} [{subgraph_title}]\n'
         code += f'    {clean(camera_id)}\n'
-        if lensType != 'TBD' and llensCable0 != 'No Cable' :
+        if lensType != 'TBD' and llensCable != 'No Cable' :
             code += f'    {lens_id}\n'
         code += '  end\n'
         

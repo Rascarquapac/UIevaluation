@@ -91,7 +91,7 @@ def lens_cable(self):
         result = select(parameters)
         return (result[0],result[1],result[2])
     
-    self.df['LensCable'] = self.df.apply(lambda row: select_cable0((row['Type'],row['LensMount'],row['Brand'], row['Reference'],row['lensControl'],row['lensType'],row['lensMotor'])), axis=1)
+    self.df['LensCable']  = self.df.apply(lambda row: select_cable0((row['Type'],row['LensMount'],row['Brand'], row['Reference'],row['lensControl'],row['lensType'],row['lensMotor'])), axis=1)
     self.df['MotorCable'] = self.df.apply(lambda row: select_cable1((row['Type'],row['LensMount'],row['Brand'], row['Reference'],row['lensControl'],row['lensType'],row['lensMotor'])), axis=1)
     self.df['LensMotor']  = self.df.apply(lambda row: select_motor((row['Type'],row['LensMount'],row['Brand'], row['Reference'],row['lensControl'],row['lensType'],row['lensMotor'])), axis=1)
     
