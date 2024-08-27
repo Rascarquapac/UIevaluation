@@ -69,9 +69,10 @@ class Usecase:
         if global_debug_pool_load   : pool_df = debug_csv_to_pool(global_debug_prefix)
         print("Usecase->main->analyze->POOL_DF columns BEFORE setup:\n",pool_df.columns)
         self.setup(pool_df)
-        # IP or serial converter
         self.lens_cable()
+        # IP or serial converter
         self.device_from_camera_lens()
+        #
         self.device_fanout()
         self.device_from_network()
         self.camgroup_from_cameratype()
