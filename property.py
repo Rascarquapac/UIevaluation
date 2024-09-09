@@ -1,7 +1,7 @@
 import pandas as pd
 import csv
 import pickle
-from camera_lens import Lens
+from cyancameralens import Lens
 
 class Properties():
     def __init__(self) -> None:

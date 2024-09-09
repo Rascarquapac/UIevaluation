@@ -1,9 +1,13 @@
 import pandas as pd
 
-class Lens():
-    def __init__(self) -> None:
-        self.camera_types=['Shoulder Camcorder','System','BBlock','Slow Motion','CineStyle','Mirrorless','Minicam','Minicam Motorizable','Mini IZT','Handheld Camcorder','PTZ','Undefined']
-        self.camera_categories=['Broadcast','Cine Interchangeable','IZF Integrated','Fixed Lens','Minicam Motorizable Lens','Undefined']
+class CameraLens():
+    def __init__(self,df_index,reference,protocol,cable) -> None:
+        self.df_index  = df_index
+        self.reference = reference
+        self.protocol  = protocol
+        self.camera_cable = cable
+        self.camera_types = ['Shoulder Camcorder','System','BBlock','Slow Motion','CineStyle','Mirrorless','Minicam','Minicam Motorizable','Mini IZT','Handheld Camcorder','PTZ','Undefined']
+        self.camera_categories = ['Broadcast','Cine Interchangeable','IZF Integrated','Fixed Lens','Minicam Motorizable Lens','Undefined']
         # case "Broadcast": return (['No Need','Iris','IZF'],['B4-Mount'],['No extra motors'])
         #     case "Cine Interchangeable": return (['No Need','Iris','IZF'],['B4-Mount','E-mount','Cabrio','Cineservo','Primelens','Motorized Others','TBD'],
         # ['No extra motors','Tilta','Arri','Dreamchip','TBD'])
@@ -85,7 +89,7 @@ class Lens():
         (no_cable,cable_B4,cable_tilta,cable_fuji,cable_arri) = ("No cable","CY-CBL-6P-B4-02","CY-CBL-6P-TILTA-SERIAL","CY-CBL-6P-FUJI-02","ARRI CFroce cable")
         (no_motor,motor_arri,motor_tilta,motor_dreamchip) = ("No motor","ARRI motors","TILTA motors","DREAMCHIP motors set")
         # Set cameraLensCategory
-        cameraLensCategory = Lens.get_cameraLensCategory(cameraType,cameraMount)
+        cameraLensCategory = CameraLens.get_cameraLensCategory(cameraType,cameraMount)
         # Set cables and motors
         print("\n_lens->lens_cable_selext->PARAMETERS: ",parameters)
         print("\n_lens->lens_cable_selext->MATCH INPUT: ",(cameraLensCategory,cameraBrand,cameraModel,lensControl,lensType,lensMotor) )
@@ -150,6 +154,9 @@ class Lens():
     # to be replaced by attribute
     def cameraLensCategories(self):
           return(["Broadcast","Cine Interchangeable","IZF Integrated","Fixed Lens","Unknown"])
+class Lens():
+    def __init__(self) -> None:
+        pass    
     @classmethod
     def get_cameraLensCategory(self,cameraType,cameraMount):
         # Set cameraLensCategory
@@ -176,6 +183,8 @@ class Lens():
             case "Fixed Lens": return (["No Need"],['Fixed and Manual'],['No extra motors'])
             case "Unknown": return (["No Need"],['Fixed and Manual'],['No extra motors'])
             case _: raise KeyError(f"cameraLensCategory= {cameraLensCategory} is not supported")
+    def cameraLensCategories(self):
+          return(["Broadcast","Cine Interchangeable","IZF Integrated","Fixed Lens","Unknown"])
     @classmethod
     def filter_constraints(cls,cameraLensCategory):
         pass

@@ -1,5 +1,5 @@
 import pandas as pd
-from camera_lens import Lens
+from cyancameralens import Lens
 from property import Properties
 from cyangear import Cyangear
 from ._draw    import init_graph,draw_all, graph_mermaid, get_mermaid_code, streamlit_mermaid
@@ -66,34 +66,37 @@ class Usecase:
             columns()       
         return 
     # Pipeline, from camera to control, establishing Cyaview gear requirements 
-    def analyze_flat(self,pool_df = None):
-        if global_debug_pool_record : debug_pool_to_csv(pool_df,global_debug_prefix)
-        if global_debug_pool_load   : pool_df = debug_csv_to_pool(global_debug_prefix)
-        print("Usecase->main->analyze->POOL_DF columns BEFORE setup:\n",pool_df.columns)
-        self.setup(pool_df)
-        self.lens_cable()
-        # IP or serial converter
-        self.device_from_camera_lens()
-        #
-        self.device_fanout()
-        self.device_from_network()
-        self.camgroup_from_cameratype()
-        self.device_id_from_device()
-        self.switch_id_from_camgroup()
-        self.rcptype_from_camgroup()
-        self.rcp_id_from_camgroup()
-        print("Columns in Usecase dataframe (usecase.df): ",self.df.columns)
-        self.rcp_optimize()
-        self.rcp_count()
-        self.cable_count()
-        self.device_count()
-        if global_debug_usecase_record: debug_usecase_to_csv(self.df,global_debug_prefix)
-        print('########## RCPs :',self.rcps)
-        print('########## DEVICES :',self.devices)
-        print('########## CABLEs :',self.cables)
     def analyze(self,pool_df = None):
-        self.analyze_flat(self,pool_df = None)
-        Cyangear.analyze_object(self,pool_df = None)
+        pool_df_copy = pool_df.copy(deep=True)
+
+        def analyze_flat(pool_df):
+            if global_debug_pool_record : debug_pool_to_csv(pool_df,global_debug_prefix)
+            if global_debug_pool_load   : pool_df = debug_csv_to_pool(global_debug_prefix)
+            print("Usecase->main->analyze->POOL_DF columns BEFORE setup:\n",pool_df.columns)
+            self.setup(pool_df)
+            self.lens_cable()
+            # IP or serial converter
+            self.device_from_camera_lens()
+            #
+            self.device_fanout()
+            self.device_from_network()
+            self.camgroup_from_cameratype()
+            self.device_id_from_device()
+            self.switch_id_from_camgroup()
+            self.rcptype_from_camgroup()
+            self.rcp_id_from_camgroup()
+            print("Columns in Usecase dataframe (usecase.df): ",self.df.columns)
+            self.rcp_optimize()
+            self.rcp_count()
+            self.cable_count()
+            self.device_count()
+            if global_debug_usecase_record: debug_usecase_to_csv(self.df,global_debug_prefix)
+            print('########## RCPs :',self.rcps)
+            print('########## DEVICES :',self.devices)
+            print('########## CABLEs :',self.cables)
+        analyze_flat(pool_df)
+        cyangear = Cyangear()
+        cyangear.analyze_object(pool_df_copy)
     # Network
     def device_from_camera_lens(self)  : return device_from_camera_lens(self)
     def device_fanout(self)            : return device_fanout(self)   
