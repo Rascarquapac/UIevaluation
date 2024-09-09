@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas    as pd
-from camera_lens import Lens
+from cyancameralens import Lens
 
 class StreamUI():
     def __init__(self) -> None:
