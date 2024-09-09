@@ -1,4 +1,4 @@
-from lens import Lens
+from camera_lens import Lens
 def lens_cable(self):
     def check(parameters):
         print("Lens->lens_cable->check->PARAMETERS:\n",parameters)

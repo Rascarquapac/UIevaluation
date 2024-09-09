@@ -38,6 +38,7 @@ def device_from_camera_lens(self):
         elif motor_cable[0:7]  == "CY-CBL-" : return CameraLensDevice.RIO_LIVE.value
         elif camera_cable[0:7] == "CY-CBL-" : return CameraLensDevice.CI0.value
         else: pass
+        # IP "passthrough" pseudo device
         match camera_cable:
             case "Ethernet-RJ45"  : return CameraLensDevice.IP.value
             case "USB-A-to-USB-C" : return CameraLensDevice.IP.value

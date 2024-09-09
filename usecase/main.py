@@ -1,6 +1,7 @@
 import pandas as pd
-from lens import Lens
+from camera_lens import Lens
 from property import Properties
+from cyangear import Cyangear
 from ._draw    import init_graph,draw_all, graph_mermaid, get_mermaid_code, streamlit_mermaid
 from ._network import device_from_camera_lens, device_from_network,camgroup_from_cameratype, device_id_from_device,switch_id_from_camgroup, rcptype_from_camgroup, rcp_id_from_camgroup, rcp_optimize,device_fanout
 from ._quote   import rcp_count, cable_count, device_count
@@ -19,7 +20,9 @@ class Usecase:
         return
     # Setup Usecase dataframe from Pool dataframe
     def setup(self,pool_df = None):
-        # Create a dictionnary from the Pool dataframe
+        # Create a dictionnary from the Pool dataframe with 
+        #     key = instance name based on dataframe index
+        #     data = dataframe row retlated to the index as a list
         def dataframe_to_dic(pool_df):
             paths_dict = {}
             if not pool_df.empty:
@@ -62,9 +65,8 @@ class Usecase:
             self.df = dic_to_dataframe(paths_dict,pool_df)
             columns()       
         return 
-
     # Pipeline, from camera to control, establishing Cyaview gear requirements 
-    def analyze(self,pool_df = None):
+    def analyze_flat(self,pool_df = None):
         if global_debug_pool_record : debug_pool_to_csv(pool_df,global_debug_prefix)
         if global_debug_pool_load   : pool_df = debug_csv_to_pool(global_debug_prefix)
         print("Usecase->main->analyze->POOL_DF columns BEFORE setup:\n",pool_df.columns)
@@ -89,7 +91,9 @@ class Usecase:
         print('########## RCPs :',self.rcps)
         print('########## DEVICES :',self.devices)
         print('########## CABLEs :',self.cables)
-
+    def analyze(self,pool_df = None):
+        self.analyze_flat(self,pool_df = None)
+        Cyangear.analyze_object(self,pool_df = None)
     # Network
     def device_from_camera_lens(self)  : return device_from_camera_lens(self)
     def device_fanout(self)            : return device_fanout(self)   

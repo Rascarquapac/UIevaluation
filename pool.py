@@ -2,7 +2,7 @@ import csv
 import pandas as pd
 import streamlit as st
 from property import Properties
-from lens import Lens
+from camera_lens import Lens
 class Pool:
     def __init__(self) -> None:
         # self.df contains all camera lines with the number of camera selected (0 to …) 
