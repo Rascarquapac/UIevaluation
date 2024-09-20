@@ -87,11 +87,11 @@ with cameraSelection :
         camera_pattern = st.text_input(label="Camera Pattern:", value="",key="camera_pattern",placeholder="Enter substring of camera name",on_change=update_selecting).upper()
     # set pool.step_select from pool.step_match 
     ##test refacoring streamui ## st.session_state.pool.edit_camera_number()
-    st.session_state.streamui.pool_edit_camera_number(st.session_state.pool)
+    st.session_state.pool.pool_edit_camera_number(st.session_state.pool)
     st.divider()
     st.caption("Your Current Cameras Pool")
     ##test refacoring streamui ##  st.session_state.pool.display_selected()
-    st.session_state.streamui.pool_display_selected(st.session_state.pool)
+    st.session_state.pool.pool_display_selected(st.session_state.pool)
     with st.expander("More info about selected cameras",expanded=False):
         message = st.session_state.messages.display(object=st.session_state.pool)
         st.write(message)
@@ -100,7 +100,7 @@ with networkSelection:
     if not st.session_state.pool.selected.empty :
         st.subheader('Select networks (optional):')
         ##test refacoring streamui ## st.session_state.pool.edit_camera_per_type('network')
-        st.session_state.streamui.pool_edit_camera_for_network(st.session_state.pool)
+        st.session_state.pool.pool_edit_camera_for_network(st.session_state.pool)
 #    if st.button("Analyze",key="networkanalysis"):
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
         if debug_pool_record :
