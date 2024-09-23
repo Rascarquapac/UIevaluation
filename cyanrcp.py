@@ -12,6 +12,24 @@ class RCP():
         self.poe_powered = True
         self.joystick = joystick
         self.licence  = licence
+    # Select the RCP type based on the camera group
+    @classmethod
+    def rcptype_from_camgroup(self,camgroup):
+        match camgroup:
+            case 'BBlock': return("RCP-DUO-J") 
+            case 'CineStyle': return("RCP-DUO-J") 
+            case 'Handheld Camcorder': return("RCP-DUO-J") 
+            case 'Minicam': return("RCP") 
+            case 'Minicam Motorizable': return("RCP") 
+            case 'Mirrorless': return("RCP-DUO-J") 
+            case 'PTZ': return("RCP-J") 
+            case 'Shoulder Camcorder': return("RCP-DUO-J") 
+            case 'Slow Motion': return("RCP") 
+            case 'System': return("RCP-DUO-J") 
+            case 'TBD': return("RCP")
+            case _: raise KeyError(f"camgroup= {camgroup}")
+
+
 class RCP_TBD(RCP):
     def __init__(self):
         super().__init__(0,False)

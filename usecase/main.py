@@ -96,7 +96,7 @@ class Usecase:
             print('########## CABLEs :',self.cables)
         analyze_flat(pool_df)
         cyangear = Cyangear()
-        cyangear.analyze_object(pool_df_copy)
+        cyangear.analyze(pool_df_copy)
     # Network
     def device_from_camera_lens(self)  : return device_from_camera_lens(self)
     def device_fanout(self)            : return device_fanout(self)   

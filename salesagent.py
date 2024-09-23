@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from usecase.main import Usecase
 from streamui import StreamUI
+from cyangear import Cyangear
 from pool     import Pool
 from property import Properties
 from message  import Messages
@@ -60,6 +61,7 @@ def ui_init():
     st.session_state.pool     = Pool()
     if debug_pool_load :
         st.session_state.pool.df = pd.read_pickle("./debug/debug_pool_df_init.pkl")
+    st.session_state.cyangear = Cyangear()
     st.session_state.usecase  = Usecase()
     st.session_state.property = Properties()
     st.session_state.messages = Messages()
@@ -107,6 +109,7 @@ with networkSelection:
             st.session_state.pool.df.to_pickle("./debug/debug_pool_df.pkl")
         print("salesagent->networkSelection->st.session_state.POOL.FINAL columns:\n",st.session_state.pool.final.columns)
         st.session_state.usecase.analyze(st.session_state.pool.final)
+        st.session_state.cyangear.analyze(st.session_state.pool.final)
         if debug_pool_record :
             st.session_state.pool.final.to_pickle("./debug/debug_pool_df_final.pkl")
         st.session_state.analyze_done = True
@@ -118,12 +121,13 @@ with lensSelection:
     if not st.session_state.pool.selected.empty :
         st.subheader('Select Lens (optional):')
         ##test refacoring streamui ##  st.session_state.pool.edit_camera_per_type('lens')
-        st.session_state.streamui.pool_edit_camera_for_lens(st.session_state.pool)
+        st.session_state.pool.pool_edit_camera_for_lens(st.session_state.pool)
 #    if st.button("Analyze",key="lensanalysis"):
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
         if debug_pool_record :
             st.session_state.pool.df.to_pickle("./debug/debug_pool_df.pkl")
         st.session_state.usecase.analyze(st.session_state.pool.final)
+        st.session_state.cyangear.analyze(st.session_state.pool.final)
         if debug_pool_record :
             st.session_state.pool.final.to_pickle("./debug/debug_pool_df_final.pkl")
         st.session_state.analyze_done = True
@@ -143,10 +147,7 @@ with mermaid:
         html = st.session_state.usecase.streamlit_mermaid(mermaid_graph)
         st.write(html, unsafe_allow_html=True)
 with test:
-    # if st.session_state.analyze_done:
-        # code = st.session_state.usecase.get_mermaid_code()
-        # svg_code = st.session_state.usecase.get_mermaid_code()
-    svg_code = None
-    mermaid_graph=st.session_state.usecase.graph_mermaid(svg_code)
-    html = st.session_state.usecase.streamlit_mermaid(mermaid_graph)
-    st.write(html, unsafe_allow_html=True)
+    if st.session_state.analyze_done:
+        # MERMAID RENDERING
+        html = st.session_state.cyangear.mermaidize()
+        st.write(html, unsafe_allow_html=True)

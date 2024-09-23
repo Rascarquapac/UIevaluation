@@ -1,95 +1,91 @@
 import pandas as pd
 
 class CameraLens():
-    def __init__(self,df_index,reference,protocol,cable) -> None:
-        self.df_index  = df_index
-        self.reference = reference
-        self.protocol  = protocol
-        self.camera_cable = cable
-        self.camera_types = ['Shoulder Camcorder','System','BBlock','Slow Motion','CineStyle','Mirrorless','Minicam','Minicam Motorizable','Mini IZT','Handheld Camcorder','PTZ','Undefined']
-        self.camera_categories = ['Broadcast','Cine Interchangeable','IZF Integrated','Fixed Lens','Minicam Motorizable Lens','Undefined']
-        # case "Broadcast": return (['No Need','Iris','IZF'],['B4-Mount'],['No extra motors'])
-        #     case "Cine Interchangeable": return (['No Need','Iris','IZF'],['B4-Mount','E-mount','Cabrio','Cineservo','Primelens','Motorized Others','TBD'],
-        # ['No extra motors','Tilta','Arri','Dreamchip','TBD'])
-        #     case "IZF Integrated": return (['IZF'],['Camera Integrated'],['No extra motors'])
-        #     case "Fixed Lens": return (["No Need"],['Fixed and Manual'],['No extra motors'])
-        #     case "Unknown": return (["No Need"],['Fixed and Manual'],['No extra motors'])
+    # def __init__(self,df_index,reference,protocol,cable) -> None:
+    def __init__(self) -> None:
+        # self.df_index  = df_index
+        # self.reference = reference
+        # self.protocol  = protocol
+        # self.camera_cable = cable
+        self.camera_types = ["BBlock","CineStyle","Handheld Camcorder","Minicam","Minicam Motorizable","Mirrorless","PTZ","Shoulder Camcorder","Slow Motion","System","TBD"]
+        self.camera_categories = ['Broadcast','Cine Interchangeable','IZF Integrated','Fixed Lens','Minicam Motorizable Lens','TBD' ]
         # User options of IZF control per camera type
-        self.options_needs_IZF={
+        self.options_needs_lensControl={
              'Broadcast':['No Need','Iris','IZF'],
              'Cine Interchangeable':['No Need','Iris','IZF'],
              'IZF Integrated':['IZF'],
              'Fixed Lens':['No Need'],
              'Minicam Motorizable Lens':['No Need','IZF'],
-             'Undefined':["No Need"]
+             'TBD' :["No Need"]
         }
         # User options of lens type per camera category
-        self.options_needs_lens_type={
+        self.options_needs_lensType={
              'Broadcast':['B4-Mount'],
-             'Cine Interchangeable':['B4-Mount','E-mount','Cabrio','Cineservo','Primelens','Motorized Others','TBD'],
+             'Cine Interchangeable':['B4-Mount','E-Mount','Cabrio','Cineservo','Primelens','Motorized Others','TBD'],
              'IZF Integrated':['Camera Integrated'],
              'Fixed Lens':['Manual'], # "Manual" only ?
              'Minicam Motorizable Lens':['Manual'],
-             'Undefined':["No Need"]
+             'TBD' :["No Need"]
         }
-        # User options of lens type per camera category
-        self.options_needs_motor_type={
+        # User options of motor type per camera category
+        self.options_needs_motorType={
              'Broadcast':['No extra motors'],
              'Cine Interchangeable':['No extra motors','Tilta','Arri','TBD'],
              'IZF Integrated':['Camera Integrated'],
              'Fixed Lens':['Manual'], # "Manual" only ?
              'Minicam Motorizable Lens':['No extra motors','Dreamchip'],
-             'Undefined':['No extra motors']
+             'TBD' :['No extra motors']
         }
-        # Inti values for user options per camera category
+        # Initial values for user options per camera category (lensControl,lensType,motorType)
         self.options_needs_init = {
             "Broadcast" : ('No Need','B4-Mount','No extra motors'),
             "Cine Interchangeable" : ('No Need','TBD','TBD'),
             "IZF Integrated" : ('IZF','Camera Integrated','No extra motors'),
             "Fixed Lens" : ("No Need",'Manual','No extra motors'),
             'Minicam Motorizable Lens' : ("No Need",'Manual','No extra motors'),
-            "Unknown" : ("No Need",'Manual','No extra motors')
+            "TBD" : ("No Need",'Manual','No extra motors')
         }
                 # case "Broadcast": return ('No Need','B4-Mount','No extra motors')
                 # case "Cine Interchangeable": return ('No Need','TBD','TBD')
                 # case "IZF Integrated": return ('IZF','Camera Integrated','No extra motors')
                 # case "Fixed Lens": return ("No Need",'Fixed and Manual','No extra motors')
-                # case "Unknown": return ("No Need",'Fixed and Manual','No extra motors')
-    def cameraLens_category(self,cameraType,cameraMount):
+                # case "TBD": return ("No Need",'Fixed and Manual','No extra motors')
+    @classmethod
+    def cameraLens_category(self,cameraType):
         # cameraMount can be suppressed except for exception
-        match (cameraType,cameraMount):
-            case ("Undefined",b) : cameraLensCategory = "Unknown"
-            case (a,"Undefined") : cameraLensCategory = "Unknown"
-            case ("Slow Motion",b) | ("System",b)|("BBlock",b)|("Shoulder Camcorder",b) : cameraLensCategory = "Broadcast"
-            case ("CineStyle",b)|("Mirrorless",b)       : cameraLensCategory = "Cine Interchangeable"
-            case ("PTZ",b) | ("Handheld Camcorder",b)|("Mini IZT",b)   : cameraLensCategory = "IZF Integrated"
-            case ("Minicam",b)    : cameraLensCategory = "Fixed Lens"
-            case ("Minicam Motorizable",b) : cameraLensCategory = "Minicam Motorizable Lens"
-            case _: raise KeyError(f"cameraType= {cameraType}, cameraMount= {cameraMount}")
+        match (cameraType):
+            case ("TBD") : cameraLensCategory = "TBD"
+            case ("Slow Motion") | ("System")|("BBlock")|("Shoulder Camcorder") : cameraLensCategory = "Broadcast"
+            case ("CineStyle")|("Mirrorless")       : cameraLensCategory = "Cine Interchangeable"
+            case ("PTZ") | ("Handheld Camcorder")|("Mini IZT")   : cameraLensCategory = "IZF Integrated"
+            case ("Minicam")    : cameraLensCategory = "Fixed Lens"
+            case ("Minicam Motorizable") : cameraLensCategory = "Minicam Motorizable Lens"
+            case _: raise KeyError(f"cameraType= {cameraType}")
         return cameraLensCategory
     # Select camera cable + lens cable + lens motor from user needs in Cyanview control
-    def select(parameters):
+    @classmethod
+    def adapter(self,parameters):
         def check(parameters):
             print("Lens->lens_cable->check->PARAMETERS:\n",parameters)
-            (cameraType,cameraMount,cameraBrand,cameraModel,lensControl,lensType,lensMotor) = parameters
-            if cameraType not in ["Shoulder Camcorder","System","BBlock","Slow Motion","Mirrorless","CineStyle","Mini Camera","PTZ","Handheld Camcorder","Unknown"]:
+            (cameraType,cameraBrand,cameraModel,lensControl,lensType,lensMotor) = parameters
+            if cameraType not in ["BBlock","CineStyle","Handheld Camcorder","Minicam","Minicam Motorizable","Mirrorless","PTZ","Shoulder Camcorder","Slow Motion","System","TBD"]:
                 raise KeyError(f"cameraType= {cameraType}")
-            if cameraMount not in ['B4-Mount','C-Mount','E-Mount','S-Mount','EF-Mount','MFT-Mount','RF-Mount','LPL-Mount','PL-Mount','LNE-Mount','L-Mount','No-Xchange-Manual','No-Xchange-Motorized','Unknown']:
-                raise KeyError(f"cameraMount= {cameraMount}")
+            # if cameraMount not in ['B4-Mount','C-Mount','E-Mount','S-Mount','EF-Mount','MFT-Mount','RF-Mount','LPL-Mount','PL-Mount','LNE-Mount','L-Mount','No-Xchange-Manual','No-Xchange-Motorized','TBD']:
+            #     raise KeyError(f"cameraMount= {cameraMount}")
             if lensControl not in ['No Need','Iris','IZF']:
-                raise KeyError(f"lesnControl= {lensControl}")
-            if lensType not in ['B4-Mount','E-mount','Cabrio','Cineservo','Primelens','Motorized Others','Camera Integrated','Fixed and Manual','TBD']:
+                raise KeyError(f"lensControl= {lensControl}")
+            if lensType not in ['B4-Mount','E-Mount','Cabrio','Cineservo','Primelens','Motorized Others','Camera Integrated','Manual','No Need','TBD']:
                 raise KeyError(f"lensType= {lensType}")
             if lensMotor not in ['No extra motors','Tilta','Arri','Dreamchip','TBD']:
                 raise KeyError(f"lensMotor= {lensMotor}")
             return
-        (cameraType,cameraMount,cameraBrand,cameraModel,lensControl,lensType,lensMotor) = parameters
+        (cameraType,cameraBrand,cameraModel,lensControl,lensType,lensMotor) = parameters
         check(parameters)
         # define constant values
         (no_cable,cable_B4,cable_tilta,cable_fuji,cable_arri) = ("No cable","CY-CBL-6P-B4-02","CY-CBL-6P-TILTA-SERIAL","CY-CBL-6P-FUJI-02","ARRI CFroce cable")
         (no_motor,motor_arri,motor_tilta,motor_dreamchip) = ("No motor","ARRI motors","TILTA motors","DREAMCHIP motors set")
         # Set cameraLensCategory
-        cameraLensCategory = CameraLens.get_cameraLensCategory(cameraType,cameraMount)
+        cameraLensCategory = CameraLens.cameraLens_category(cameraType)
         # Set cables and motors
         print("\n_lens->lens_cable_selext->PARAMETERS: ",parameters)
         print("\n_lens->lens_cable_selext->MATCH INPUT: ",(cameraLensCategory,cameraBrand,cameraModel,lensControl,lensType,lensMotor) )
@@ -132,7 +128,7 @@ class CameraLens():
             case ("Cine Interchangeable",b,c,"Iris","E-mount",f) :
                 result =(no_cable,no_cable,no_motor,"No Cyanview cable is required, the iris is controlled through the camera")
             case ("Cine Interchangeable",b,c,"IZF","E-mount",f) :
-                result =(cable_tilta,no_cable,motor_tilta,"Adding Tilta motors and Cyanview Tilta adapter is required for Zoom/Focus control")
+                result =(no_cable,cable_tilta,motor_tilta,"Adding Tilta motors and Cyanview Tilta adapter is required for Zoom/Focus control")
             # Cabrio lens
             case ("Cine Interchangeable",b,c,d,"Cabrio",f) : 
                 result = (f'{cable_B4} +\n{cable_fuji}',no_motor,no_cable,"The user needs the control of Iris/Zoom/Focus and it can be done through the camera")
@@ -149,11 +145,15 @@ class CameraLens():
         return result
 
     ########## FLAT ANALYZIS
-        self.camera_type='Undefined'
-        self.camera_category='Undefined'
+        self.camera_type='TBD' 
+        self.camera_category='TBD' 
     # to be replaced by attribute
     def cameraLensCategories(self):
-          return(["Broadcast","Cine Interchangeable","IZF Integrated","Fixed Lens","Unknown"])
+          return(["Broadcast","Cine Interchangeable","IZF Integrated","Fixed Lens","TBD"])
+
+
+
+# COMPATIBILITY PURPOSES
 class Lens():
     def __init__(self) -> None:
         pass    
@@ -163,14 +163,14 @@ class Lens():
         # print("###############################################")
         # print(f"cameraType= {cameraType}  cameraMount= {cameraMount}")
         match (cameraType,cameraMount):
-            case ("Unknown",b) : cameraLensCategory = "Unknown"
-            case (a,"Unknown") : cameraLensCategory = "Unknown"
+            case ("TBD",b) : cameraLensCategory = "TBD"
+            case (a,"TBD") : cameraLensCategory = "TBD"
             case ("Slow Motion",b) | ("System",b)|("BBlock",b)|("Shoulder Camcorder",b) : cameraLensCategory = "Broadcast"
             case ("CineStyle",b)|("Mirrorless",b)       : cameraLensCategory = "Cine Interchangeable"
             case ("PTZ",b) | ("Handheld Camcorder",b)   : cameraLensCategory = "IZF Integrated"
-            case ("Mini Camera","No-Xchange-Manual")    : cameraLensCategory = "Fixed Lens"
-            case ("Mini Camera","No-Xchange-Motorized") : cameraLensCategory = "IZF Integrated"
-            case ("Mini Camera",b)                      : cameraLensCategory = "Cine Interchangeable"
+            case ("Minicam",b)    : cameraLensCategory = "Fixed Lens"
+            case ("Minicam Motorizable",b) : cameraLensCategory = "IZF Integrated"
+            case ("Minicam",b)                      : cameraLensCategory = "Cine Interchangeable"
             case _: raise KeyError(f"cameraType= {cameraType}, cameraMount= {cameraMount}")
         return cameraLensCategory
 
@@ -180,11 +180,11 @@ class Lens():
             case "Broadcast": return (['No Need','Iris','IZF'],['B4-Mount'],['No extra motors'])
             case "Cine Interchangeable": return (['No Need','Iris','IZF'],['B4-Mount','E-mount','Cabrio','Cineservo','Primelens','Motorized Others','TBD'],['No extra motors','Tilta','Arri','Dreamchip','TBD'])
             case "IZF Integrated": return (['IZF'],['Camera Integrated'],['No extra motors'])
-            case "Fixed Lens": return (["No Need"],['Fixed and Manual'],['No extra motors'])
-            case "Unknown": return (["No Need"],['Fixed and Manual'],['No extra motors'])
+            case "Fixed Lens": return (["No Need"],['Manual'],['No extra motors'])
+            case "TBD": return (["No Need"],['Manual'],['No extra motors'])
             case _: raise KeyError(f"cameraLensCategory= {cameraLensCategory} is not supported")
     def cameraLensCategories(self):
-          return(["Broadcast","Cine Interchangeable","IZF Integrated","Fixed Lens","Unknown"])
+          return(["Broadcast","Cine Interchangeable","IZF Integrated","Fixed Lens","TBD"])
     @classmethod
     def filter_constraints(cls,cameraLensCategory):
         pass
@@ -194,6 +194,6 @@ class Lens():
                 case "Broadcast": return ('No Need','B4-Mount','No extra motors')
                 case "Cine Interchangeable": return ('No Need','TBD','TBD')
                 case "IZF Integrated": return ('IZF','Camera Integrated','No extra motors')
-                case "Fixed Lens": return ("No Need",'Fixed and Manual','No extra motors')
-                case "Unknown": return ("No Need",'Fixed and Manual','No extra motors')
+                case "Fixed Lens": return ("No Need",'Manual','No extra motors')
+                case "TBD": return ("No Need",'Manual','No extra motors')
                 case _: raise KeyError(f"cameraLensCategory= {cameraLensCategory} is not supported")

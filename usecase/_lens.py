@@ -3,13 +3,13 @@ def lens_cable(self):
     def check(parameters):
         print("Lens->lens_cable->check->PARAMETERS:\n",parameters)
         (cameraType,cameraMount,cameraBrand,cameraModel,lensControl,lensType,lensMotor) = parameters
-        if cameraType not in ["Shoulder Camcorder","System","BBlock","Slow Motion","Mirrorless","CineStyle","Mini Camera","PTZ","Handheld Camcorder","Unknown"]:
+        if cameraType not in ["BBlock","CineStyle","Handheld Camcorder","Minicam","Minicam Motorizable","Mirrorless","PTZ","Shoulder Camcorder","Slow Motion","System","TBD"]:
             raise KeyError(f"cameraType= {cameraType}")
-        if cameraMount not in ['B4-Mount','C-Mount','E-Mount','S-Mount','EF-Mount','MFT-Mount','RF-Mount','LPL-Mount','PL-Mount','LNE-Mount','L-Mount','No-Xchange-Manual','No-Xchange-Motorized','Unknown']:
+        if cameraMount not in ['B4-Mount','C-Mount','E-Mount','S-Mount','EF-Mount','MFT-Mount','RF-Mount','LPL-Mount','PL-Mount','LNE-Mount','L-Mount','No-Xchange-Manual','No-Xchange-Motorized','TBD']:
             raise KeyError(f"cameraMount= {cameraMount}")
         if lensControl not in ['No Need','Iris','IZF']:
-            raise KeyError(f"lesnControl= {lensControl}")
-        if lensType not in ['B4-Mount','E-mount','Cabrio','Cineservo','Primelens','Motorized Others','Camera Integrated','Fixed and Manual','TBD']:
+            raise KeyError(f"lensControl= {lensControl}")
+        if lensType not in ['B4-Mount','E-Mount','Cabrio','Cineservo','Primelens','Motorized Others','Camera Integrated','Manual','No Need','TBD']:
             raise KeyError(f"lensType= {lensType}")
         if lensMotor not in ['No extra motors','Tilta','Arri','Dreamchip','TBD']:
             raise KeyError(f"lensMotor= {lensMotor}")
