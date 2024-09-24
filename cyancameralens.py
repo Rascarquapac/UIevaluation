@@ -9,7 +9,7 @@ class CameraLens():
         # self.camera_cable = cable
         self.camera_types = ["BBlock","CineStyle","Handheld Camcorder","Minicam","Minicam Motorizable","Mirrorless","PTZ","Shoulder Camcorder","Slow Motion","System","TBD"]
         self.camera_categories = ['Broadcast','Cine Interchangeable','IZF Integrated','Fixed Lens','Minicam Motorizable Lens','TBD' ]
-        # User options of IZF control per camera type
+        # User options of IZF control per camera category
         self.options_needs_lensControl={
              'Broadcast':['No Need','Iris','IZF'],
              'Cine Interchangeable':['No Need','Iris','IZF'],
@@ -143,7 +143,7 @@ class CameraLens():
                 result =(no_cable,no_cable,no_motor,"This case is probably not supported")
         print(f"_lens->lens_cable_selext->RESULT: {result}")
         return result
-
+        
     ########## FLAT ANALYZIS
         self.camera_type='TBD' 
         self.camera_category='TBD' 

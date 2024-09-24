@@ -9,16 +9,16 @@ class Pool:
             self.df = pd.read_pickle("./picklized/cameras.pkl")
             return
         def add_lens_columns():
-            lens = CameraLens()
+            self.lens = CameraLens()
             def lensCategory(row):
-                return lens.cameraLens_category(row["Type"])
+                return self.lens.cameraLens_category(row["Type"])
             self.df["CameraLensCategory"] = self.df.apply(lensCategory,axis=1)
             def user_lensControl(row):
-                return lens.options_needs_init[row["CameraLensCategory"]][0]
+                return self.lens.options_needs_init[row["CameraLensCategory"]][0]
             def user_lensType(row):
-                return lens.options_needs_init[row["CameraLensCategory"]][1]
+                return self.lens.options_needs_init[row["CameraLensCategory"]][1]
             def user_lensMotor(row):
-                return lens.options_needs_init[row["CameraLensCategory"]][2]
+                return self.lens.options_needs_init[row["CameraLensCategory"]][2]
             self.df["lensControl"]= self.df.apply(user_lensControl,axis=1)
             self.df["lensType"]   = self.df.apply(user_lensType,axis=1)
             self.df["lensMotor"]  = self.df.apply(user_lensMotor,axis=1)
@@ -239,7 +239,8 @@ class Pool:
                             "Lens Control",
                             help= "Your needs for lens motorization",
                             # width="small",
-                            options = st.session_state.property.constraints[(cameraLensCategory,'LensControls')],
+                            options = self.lens.options_needs_lensControl[cameraLensCategory],
+                            # options = st.session_state.property.constraints[(cameraLensCategory,'LensControls')],
                             #options=st.session_state.property.options['LensUserControls'],
                             required = True),
                         'lensType':  st.column_config.SelectboxColumn(
@@ -247,13 +248,15 @@ class Pool:
                             help="Main characteristics of the lens",
                             # width="medium",
                             #options = st.session_state.property.options['LensTypes'],
-                            options=st.session_state.property.constraints[(cameraLensCategory,'LensTypes')],
+                            options = self.lens.options_needs_lensType[cameraLensCategory],
+                            # options=st.session_state.property.constraints[(cameraLensCategory,'LensTypes')],
                             required = True),
                         'lensMotor':  st.column_config.SelectboxColumn(
                             "Motorization",
                             help="Type of motorization",
                             # width="small",
-                            options = st.session_state.property.constraints[(cameraLensCategory,'LensMotors')],
+                            options = self.lens.options_needs_motorType[cameraLensCategory],
+                            # options = st.session_state.property.constraints[(cameraLensCategory,'LensMotors')],
                             required=True),
                         "Brand": "Brand",
                         },
