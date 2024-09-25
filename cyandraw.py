@@ -1,19 +1,18 @@
 import base64
 import mermaid as md
-from   mermaid.graph import Graph
+from mermaid.graph  import Graph
+from cyancameralens import CamLensBlock
 #################### DRAW WITH MERMAID ###########################
 class Draw():
     def __init__(self,df) -> None:
         self.df = df
+        self.obj = {}
         pass
+
     def get_mermaid_code(self):
-        def camera_only(index):
-            camera_id = self.df.loc[index,'Camera_id'] 
-            device_id = self.df.loc[index,'Device_id'] 
-            cable     = self.df.loc[index,'Cable']
-            device    = self.df.loc[index,'Device']
-            code = clean(camera_id)+ '{{"' + clean(camera_id) + ' fa:fa-camera-retro"}}---|'+clean(cable) +'|'+clean(device_id)+'\n'
-            return code
+        def objectize():
+            for index in self.df.index.to_list():
+                self.obj[index] = CamLensBlock(index,self.df.loc[index])
         def camera_lens(index):
             camera_id   = self.df.loc[index,'Camera_id'] 
             device_id   = self.df.loc[index,'Device_id'] 
@@ -53,6 +52,7 @@ class Draw():
             return code
         def clean(code):
             return(code.replace(' ', ''))
+        objectize()
         mermaid_code = ''
         mermaid_code = 'graph RL\n'
         ####### DRAW CAMERAS & DEVICES ##############
@@ -61,7 +61,8 @@ class Draw():
             camgroup_indexes  = self.df.loc[self.df['Camgroup'] == camgroup].index.tolist() 
             mermaid_code+= 'subgraph ' + camgroup + "\n"
             for index in camgroup_indexes:
-                mermaid_code += camera_lens(index)
+                # mermaid_code += camera_lens(index)
+                mermaid_code += self.obj[index].code
             mermaid_code += 'end\n'
         ###### DRAW SWITCHES #######################
         # croom = self.init_graph("Control",'sink')

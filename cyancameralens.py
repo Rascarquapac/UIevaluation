@@ -1,5 +1,5 @@
 import pandas as pd
-
+# Should be part of cyangear Constants object
 class CameraLens():
     # def __init__(self,df_index,reference,protocol,cable) -> None:
     def __init__(self) -> None:
@@ -151,7 +151,48 @@ class CameraLens():
     def cameraLensCategories(self):
           return(["Broadcast","Cine Interchangeable","IZF Integrated","Fixed Lens","TBD"])
 
-
+class CamLensBlock():
+    def __init__(self,index,serie) -> None:
+        self.df_index  = index
+        self.reference = serie['Reference']
+        self.protocol  = serie['Protocol']
+        self.camera_id   = serie['Camera_id'] 
+        self.device_id   = serie['Device_id'] 
+        self.cable       = serie['Cable']
+        self.device      = serie['Device']
+        #lensControl,lensType,lensMotor
+        self.lensControl = serie['lensControl']
+        self.lensType    = serie['lensType']
+        self.lensMotor   = serie['lensMotor']
+        #LensCable,MotorCable,LensMotor
+        self.llensCable = serie['LensCable']
+        self.lmotorCable = serie['MotorCable']
+        self.llensMotor  = serie['LensMotor']
+        self.code = ''
+        def clean(code):
+            return(code.replace(' ', ''))
+        # Add to mermaid code LR edge from Camera to Cyanglue
+        self.code += clean(self.camera_id) + '{{"' + clean(self.camera_id) + ' fa:fa-camera-retro"}}---|'+clean(self.cable) +'|'+clean(self.device_id)+'\n'
+        # Add to mermaid code LR edge from lens to Cyanglue
+        self.lens_id = f'{clean(self.lensType)}_{clean(self.camera_id)}'
+        if self.lensType != 'TBD' and self.llensCable != 'No cable' :
+            self.code += f'{self.lens_id}([{self.lensType}])---|{clean(self.llensCable)}|{clean(self.device_id)}\n'
+        # Create subgraph parameters for camera + lens
+        self.subgraph_id   = f'{clean(self.camera_id)}_cameralens'
+        if self.lensControl == 'No Need':
+            self.subgraph_title = 'No lens control required'
+        elif self.lensControl == 'Iris':
+            self.subgraph_title = 'Iris control required'
+        elif self.lensControl == 'IZF':
+            self.subgraph_title = 'Iris/Zoom/Focus control required'
+        else:
+            self.subgraph_title = self.lensControl
+        # Add to mermaid code the camera-lens subgraph 
+        self.code += f'  subgraph {self.subgraph_id} [self.{self.subgraph_title}]\n'
+        self.code += f'    {clean(self.camera_id)}\n'
+        if self.lensType != 'TBD' and self.llensCable != 'No Cable' :
+            self.code += f'    {self.lens_id}\n'
+        self.code += '  end\n'
 
 # COMPATIBILITY PURPOSES
 class Lens():

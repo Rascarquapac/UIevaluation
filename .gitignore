@@ -1,7 +1,6 @@
 /cyaneval.env/*
 /venv/*
 /tmp/*
-/debug/debug*
 /purgatory/*
 /usecase/__pycache__
 /.ipynb_checkpoints/*
