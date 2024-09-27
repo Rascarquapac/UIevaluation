@@ -84,7 +84,7 @@ class Draw():
                 mermaid_code += clean(switch) + ' --- |Ethernet|' + clean(rcp) + '\n'
         mermaid_code += 'end\n'
         code = ':::mermaid\n' + mermaid_code  + '\n:::\n' 
-        with open('./debug/mermaid_code.md', 'w') as f:
+        with open('./debug/mermaid_code_obj.md', 'w') as f:
             f.write(code)
 
         return(mermaid_code)
