@@ -25,8 +25,52 @@ class Camera(CameraProtocol):
         self.reference = reference
         self.mount     = mount
         self.b4_connector = b4_connector
+class LensControlNeed(StrEnum):
+    NO_NEED = 'No need' # No Need of Cyanview control for lens
+    IRIS    = 'Iris' # Need of Cynaview control for Iris only
+    IZF     = 'IZF' # Need of Cyanview control for Iris, Zoom, Focus
+class LensTypeNeed(StrEnum):
+    B4_MOUNT  = 'B4-Mount'
+    E_MOUNT   = 'E-Mount'
+    CABRIO    = 'Cabrio'
+    CINESERVO = 'Cineservo'
+    PRIMELENS = 'Primelens'
+    MOTORIZED = 'Motorized Others'
+    TBD       = 'TBD'
+    CAMERA_IN = 'Camera Integrated'
+    MANUAL    = 'Manual'
+    NONE      = 'No Need' # ! "No need" ?
+
+class MotorNeed(StrEnum):
+    NONE = 'No extra motors'
+    INTEGRATED = 'Camera Integrated'
+    TILTA = 'Tilta'
+    ARRI = 'Arri'
+    DREAMCHIP = 'Dreamchip'
+    TBD = 'TBD'
+class CameraType(StrEnum):
+    BLOCK = "BBlock"
+    CINESTYLE = "CineStyle"
+    HANDHELD = "Handheld Camcorder"
+    MINICAM = "Minicam"
+    MINIMOT = "Minicam Motorizable"
+    MIRRORLESS = "Mirrorless"
+    PTZ = "PTZ"
+    SHOULDER = "Shoulder Camcorder"
+    SLOWMO = "Slow Motion"
+    SYSTEM = "System"
+    TBD = "TBD"
+class CameraCategories(StrEnum):
+    BROADCAST = 'Broadcast'
+    CINE_XCHANGE = 'Cine Interchangeable'
+    IZF_INTEGRATED = 'IZF Integrated'
+    FIXED_LENS = 'Fixed Lens'
+    MINICAM_MOT_LENS= 'Minicam Motorizable Lens'
+    TBD = 'TBD' 
 
 # Get a list of all values
 if __name__ == "__main__":
-    all_values = [member.value for member in CameraLensDevice]
-    print(all_values)
+    print(CameraCategories.MINICAM_MOT_LENS)
+    print([member for member in CameraLensDevice])
+    print([member.value for member in CameraLensDevice])
+    print([member.name for member in CameraLensDevice])
