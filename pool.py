@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 from property import Properties
 from cyancameralens import Lens, CameraLens
+from constants import Network
 class Pool:
     def __init__(self) -> None:
         def pkl_cameras():
@@ -35,7 +36,9 @@ class Pool:
         self.blocks  = {}
         self.final  = pd.DataFrame()
         pkl_cameras()
+        self.df.to_csv('debug_unpikelized_cameras_orig.csv', index=False)
         add_lens_columns()
+        self.df.to_csv('debug_unpikelized_cameras_with_cameragroup.csv', index=False)
         print("POOL COLUMNS:",self.df.columns)
         #self.get_cameras()
         self.brands = self.df["Brand"].unique()
@@ -174,8 +177,8 @@ class Pool:
                             "IP Network",
                             help="Select the IP network type",
                             width="small",
-                            default = st.session_state.property.constraints[(key,'Network')][0],
-                            options = st.session_state.property.constraints[(key,'Network')],
+                            options = [member.value for member in Network],
+                            #options = st.session_state.property.constraints[(key,'Network')],
                             required=True),
                         "Brand": "Brand",
                         "Cable": "Cable",
@@ -219,7 +222,7 @@ class Pool:
         print("StreamUI->pool_edit_camera_for_network-> POOL.FINAL columns:\n",pool.final.columns)
     # Edit by cameraLens category the camera lens
     def pool_edit_camera_for_lens(self,pool):
-        def edit_camera_lens(df,cameraLensCategory,constraints):
+        def edit_camera_lens(df,cameraLensCategory):
             print(df)
             if (len(df.index) != 0): 
                 df = st.data_editor(
@@ -271,18 +274,23 @@ class Pool:
         #cameraLensCategory est l'élément de sélection
         if 'LensTypes' not in pool.df.columns:
             pool.df['LensTypes']=""
-        print("DF Columns:",pool.df.columns)
-        print("SELECTED Columns:",pool.selected.columns)
+        #print("DF Columns:",pool.df.columns)
+        #print("SELECTED Columns:",pool.selected.columns)
         cameraLensCategories = pool.selected["CameraLensCategory"].unique()
+        pool.selected.to_csv('debug_pool_display_lens.csv', index=False)
+        #print("################CAMERAS LENS CATEGORIES  :",cameraLensCategories)
         for cameraLensCategory in cameraLensCategories:
             #filter instance dataframe by type
             selected_rows = pool.selected.loc[pool.selected['CameraLensCategory'] == cameraLensCategory]
+            #print(cameraLensCategories)
+            #print(selected_rows)
             if not selected_rows.empty :
                 st.markdown(cameraLensCategory)
-                constraints = Lens.filter_constraints(cameraLensCategory)
-                blocks[cameraLensCategory] = edit_camera_lens(selected_rows,cameraLensCategory,constraints)
+                #??? NO USE?? constraints = Lens.filter_constraints(cameraLensCategory)
+                blocks[cameraLensCategory] = edit_camera_lens(selected_rows,cameraLensCategory)
+        #print("################CAMERAS LENS CATEGORIES END################# :",cameraLensCategories)
         pool.final = pd.concat(list(blocks.values()))
-        print("StreamUI->pool_edit_camera_for_lens-> POOL.FINAL columns:\n",pool.final.columns)
+        #print("StreamUI->pool_edit_camera_for_lens-> POOL.FINAL columns:\n",pool.final.columns)
 
 
 if __name__  == "__main__":

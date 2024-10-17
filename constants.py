@@ -68,9 +68,20 @@ class CameraCategories(StrEnum):
     MINICAM_MOT_LENS= 'Minicam Motorizable Lens'
     TBD = 'TBD' 
 
+class Network(StrEnum):
+     LAN_WIRED = "LAN Wired"  
+     LAN_RF_HALOW = "LAN RF Halow"
+     LAN_RF_MESH = "LAN RF Mesh"  
+     LAN_RF_WIFI ="LAN RF WiFi" 
+     P2P_RF_PRO_MODEM = "P2P RF Pro Modem" 
+     P2P_RF_Unidir = "P2P RF Unidir"
+     WAN_4G_5G = "WAN 4G 5G" 
+     P2MP_UHF_VIDEO = "P2MP UHF Video" 
 # Get a list of all values
 if __name__ == "__main__":
     print(CameraCategories.MINICAM_MOT_LENS)
     print([member for member in CameraLensDevice])
     print([member.value for member in CameraLensDevice])
-    print([member.name for member in CameraLensDevice])
+    print([member.name for member in CameraLensDevice])    
+    print([member.value for member in Network])
+    print([member.name for member in Network])

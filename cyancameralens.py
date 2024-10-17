@@ -6,7 +6,7 @@ class CameraLens():
     # def __init__(self,df_index,reference,protocol,cable) -> None:
     def __init__(self) -> None:
         self.camera_types = [member.value for member in cst.CameraType]
-        self.camera_types = ["BBlock","CineStyle","Handheld Camcorder","Minicam","Minicam Motorizable","Mirrorless","PTZ","Shoulder Camcorder","Slow Motion","System","TBD"]
+        self.camera_types = ["BBlock","CineStyle","Handheld Camcorder","Minicam","Minicam Motorizable","Minicam IZT","Mirrorless","PTZ","Shoulder Camcorder","Slow Motion","System","TBD"]
         self.camera_categories = ['Broadcast','Cine Interchangeable','IZF Integrated','Fixed Lens','Minicam Motorizable Lens','TBD' ]
         # User options of IZF control per camera category
         self.options_needs_lensControl={
@@ -56,7 +56,7 @@ class CameraLens():
             case ("TBD") : cameraLensCategory = "TBD"
             case ("Slow Motion") | ("System")|("BBlock")|("Shoulder Camcorder") : cameraLensCategory = "Broadcast"
             case ("CineStyle")|("Mirrorless")       : cameraLensCategory = "Cine Interchangeable"
-            case ("PTZ") | ("Handheld Camcorder")|("Mini IZT")   : cameraLensCategory = "IZF Integrated"
+            case ("PTZ") | ("Handheld Camcorder")|("Minicam IZT")   : cameraLensCategory = "IZF Integrated"
             case ("Minicam")    : cameraLensCategory = "Fixed Lens"
             case ("Minicam Motorizable") : cameraLensCategory = "Minicam Motorizable Lens"
             case _: raise KeyError(f"cameraType= {cameraType}")
@@ -86,8 +86,8 @@ class CameraLens():
         # Set cameraLensCategory
         cameraLensCategory = CameraLens.cameraLens_category(cameraType)
         # Set cables and motors
-        print("\n_lens->lens_cable_selext->PARAMETERS: ",parameters)
-        print("\n_lens->lens_cable_selext->MATCH INPUT: ",(cameraLensCategory,cameraBrand,cameraModel,lensControl,lensType,lensMotor) )
+        # print("\n_lens->lens_cable_selext->PARAMETERS: ",parameters)
+        # print("\n_lens->lens_cable_selext->MATCH INPUT: ",(cameraLensCategory,cameraBrand,cameraModel,lensControl,lensType,lensMotor) )
         match (cameraLensCategory,cameraBrand,cameraModel,lensControl,lensType,lensMotor):
             # No Cyanview lens control is needed
             case(a,b,c,"No Need",e,f) : 
@@ -140,7 +140,7 @@ class CameraLens():
                 result = (no_cable,no_cable,motor_dreamchip,"The user needs the control of Iris/Zoom and it can be done through the camera")
             case _: 
                 result =(no_cable,no_cable,no_motor,"This case is probably not supported")
-        print(f"_lens->lens_cable_selext->RESULT: {result}")
+        # print(f"_lens->lens_cable_selext->RESULT: {result}")
         return result
         
     ########## FLAT ANALYZIS

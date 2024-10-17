@@ -8,7 +8,7 @@ from property import Properties
 from message  import Messages
 
 debug_pool_record = True
-debug_pool_load   = True
+debug_pool_load   = False
 
 # Set pool.step_match from user input… should be a Pool method
 def update_selecting():
@@ -107,11 +107,13 @@ with networkSelection:
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
         if debug_pool_record :
             st.session_state.pool.df.to_pickle("./debug/debug_pool_df.pkl")
+            st.session_state.pool.df.to_csv("./debug/debug_pool_df.csv")
         print("salesagent->networkSelection->st.session_state.POOL.FINAL columns:\n",st.session_state.pool.final.columns)
         st.session_state.usecase.analyze(st.session_state.pool.final)
         st.session_state.cyangear.analyze(st.session_state.pool.final)
         if debug_pool_record :
             st.session_state.pool.final.to_pickle("./debug/debug_pool_df_final.pkl")
+            st.session_state.pool.final.to_csv("./debug/debug_pool_df_final.csv")
         st.session_state.analyze_done = True
         with st.expander("Required equipment for use case",expanded=False):
             message = st.session_state.messages.display(object=st.session_state.usecase)
@@ -126,10 +128,12 @@ with lensSelection:
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only
         if debug_pool_record :
             st.session_state.pool.df.to_pickle("./debug/debug_pool_df.pkl")
+            st.session_state.pool.df.to_csv("./debug/debug_pool_df.csv")
         st.session_state.usecase.analyze(st.session_state.pool.final)
         st.session_state.cyangear.analyze(st.session_state.pool.final)
         if debug_pool_record :
             st.session_state.pool.final.to_pickle("./debug/debug_pool_df_final.pkl")
+            st.session_state.pool.final.to_csv("./debug/debug_pool_df_final.csv")
         st.session_state.analyze_done = True
 
 with motivations:
