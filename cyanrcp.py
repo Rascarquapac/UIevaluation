@@ -21,6 +21,7 @@ class RCP():
             case 'Handheld Camcorder': return("RCP-DUO-J") 
             case 'Minicam': return("RCP") 
             case 'Minicam Motorizable': return("RCP") 
+            case 'Minicam IZT': return("RCP") 
             case 'Mirrorless': return("RCP-DUO-J") 
             case 'PTZ': return("RCP-J") 
             case 'Shoulder Camcorder': return("RCP-DUO-J") 

@@ -1,9 +1,10 @@
 from cyancameralens import Lens
 def lens_cable(self):
     def check(parameters):
+        ## ! DUPLICATED WITH method in CameraLens()
         print("Lens->lens_cable->check->PARAMETERS:\n",parameters)
         (cameraType,cameraMount,cameraBrand,cameraModel,lensControl,lensType,lensMotor) = parameters
-        if cameraType not in ["BBlock","CineStyle","Handheld Camcorder","Minicam","Minicam Motorizable","Mirrorless","PTZ","Shoulder Camcorder","Slow Motion","System","TBD"]:
+        if cameraType not in ["BBlock","CineStyle","Handheld Camcorder","Minicam","Minicam IZT","Minicam Motorizable","Mirrorless","PTZ","Shoulder Camcorder","Slow Motion","System","TBD"]:
             raise KeyError(f"cameraType= {cameraType}")
         if cameraMount not in ['B4-Mount','C-Mount','E-Mount','S-Mount','EF-Mount','MFT-Mount','RF-Mount','LPL-Mount','PL-Mount','LNE-Mount','L-Mount','No-Xchange-Manual','No-Xchange-Motorized','TBD']:
             raise KeyError(f"cameraMount= {cameraMount}")

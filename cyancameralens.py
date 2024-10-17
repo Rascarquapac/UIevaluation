@@ -67,7 +67,8 @@ class CameraLens():
         def check(parameters):
             print("Lens->lens_cable->check->PARAMETERS:\n",parameters)
             (cameraType,cameraBrand,cameraModel,lensControl,lensType,lensMotor) = parameters
-            if cameraType not in ["BBlock","CineStyle","Handheld Camcorder","Minicam","Minicam Motorizable","Mirrorless","PTZ","Shoulder Camcorder","Slow Motion","System","TBD"]:
+            ## DUPLICATE !!!!
+            if cameraType not in ["BBlock","CineStyle","Handheld Camcorder","Minicam","Minicam Motorizable","Minicam IZT","Mirrorless","PTZ","Shoulder Camcorder","Slow Motion","System","TBD"]:
                 raise KeyError(f"cameraType= {cameraType}")
             # if cameraMount not in ['B4-Mount','C-Mount','E-Mount','S-Mount','EF-Mount','MFT-Mount','RF-Mount','LPL-Mount','PL-Mount','LNE-Mount','L-Mount','No-Xchange-Manual','No-Xchange-Motorized','TBD']:
             #     raise KeyError(f"cameraMount= {cameraMount}")
@@ -240,6 +241,7 @@ class Lens():
         pass    
     @classmethod
     def get_cameraLensCategory(self,cameraType,cameraMount):
+        #!!!!!!!!!!!!!!!!! Duplicated !!!!!!!!!!
         # Set cameraLensCategory
         # print("###############################################")
         # print(f"cameraType= {cameraType}  cameraMount= {cameraMount}")
@@ -250,8 +252,8 @@ class Lens():
             case ("CineStyle",b)|("Mirrorless",b)       : cameraLensCategory = "Cine Interchangeable"
             case ("PTZ",b) | ("Handheld Camcorder",b)   : cameraLensCategory = "IZF Integrated"
             case ("Minicam",b)    : cameraLensCategory = "Fixed Lens"
-            case ("Minicam Motorizable",b) : cameraLensCategory = "IZF Integrated"
-            case ("Minicam",b)                      : cameraLensCategory = "Cine Interchangeable"
+            case ("Minicam IZT",b) : cameraLensCategory = "IZF Integrated"
+            case ("Minicam Motorizable",b)                      : cameraLensCategory = "Minicam Motorizable Lens"
             case _: raise KeyError(f"cameraType= {cameraType}, cameraMount= {cameraMount}")
         return cameraLensCategory
 
