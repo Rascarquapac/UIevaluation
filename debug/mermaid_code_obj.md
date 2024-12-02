@@ -1,21 +1,21 @@
 :::mermaid
 graph RL
-subgraph Minicam Motorizable
-ATOMONE_0{{"ATOMONE_0 fa:fa-camera-retro"}}---|CY-CBL-6P-DCHIP-02|CI0_4
-  subgraph ATOMONE_0_cameralens [No lens control required]
-    ATOMONE_0
-    Manual_ATOMONE_0
+subgraph PTZ
+CameraIntegrated_AW-UE150_0([CameraIntegrated])<-->AW-UE150_0
+AW-UE150_0[AWUE1500]<-->|Ethernet-RJ45|IP_13
+end
+subgraph Shoulder Camcorder
+PXW-350_0{{"PXW-350_0 fa:fa-camera-retro"}}---|CY-CBL-SONY-8P-03|CI0_19
+  subgraph PXW-350_0_cameralens [No lens control required]
+    PXW-350_0
+    B4-Mount_PXW-350_0
   end
 end
-subgraph Minicam IZT
-CameraIntegrated_ATOMONEMINIZOOM_0([CameraIntegrated])<-->ATOMONEMINIZOOM_0
-ATOMONEMINIZOOM_0[AtomOne mini Zoom0]<-->|CY-CBL-6P-DCHIP-02|CI0_5
-end
 subgraph "Control Room" 
-CI0_4 --- |Ethernet|MinicamMotorizableSwitch
-CI0_5 --- |Ethernet|MinicamIZTSwitch
-MinicamMotorizableSwitch --- |Ethernet|CY-RCP-DUO_0
-MinicamIZTSwitch --- |Ethernet|CY-RCP-DUO_1
+IP_13 --- |Ethernet|PTZSwitch
+CI0_19 --- |Ethernet|ShoulderCamcorderSwitch
+PTZSwitch --- |Ethernet|CY-RCP-DUO-J__0
+ShoulderCamcorderSwitch --- |Ethernet|CY-RCP-DUO-J_0
 end
 
 :::
