@@ -3,3 +3,5 @@ pandas
 notebook
 graphviz
 mermaid-py
+watchdog
+st-gsheets-connections

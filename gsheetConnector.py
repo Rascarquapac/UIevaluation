@@ -25,7 +25,7 @@ pool_df = pool_df.assign(Network='LAN Wired')
 pool_df = pool_df.assign(Base='Fixed')
 # Lens Properties
 # pool_df = pool_df.assign(CameraLensSpecificity  = "TBD")
-# pool_df = pool_df.assign(LensControlNeeds = "No needs")
+# pool_df = pool_df.assign(LensControlNeeds = "Nopip ineeds")
 # pool_df = pool_df.assign(UserLensSpecificity  = "TBD")
 # pool_df = pool_df.assign(LensMotorization = "TBD")	
 # TODO : should assign values per camera group based on properties to get adhoc default
