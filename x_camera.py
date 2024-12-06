@@ -13,7 +13,7 @@ from pprint import pprint
 class Camera():
     def __init__(self,update=True,debug=False):
         self.df       = self.camera(update)
-        self.pool_df = self.pool()
+        self.pool_df  = self.pool()
         self.brand_df = self.df["Brand"].unique()
         self.type_df  = self.df["Type"].unique()
         self.step_match  = pd.DataFrame()
@@ -22,7 +22,6 @@ class Camera():
         # self.selected contains the full set of cameras selected by the user 
         self.selected    = pd.DataFrame()
         # the set of cameras selected splitted by blocks of cameras of the same type
-
     def camera(self,update):
         def gsheet_camera():
             conn = st.connection("cameras", type=GSheetsConnection)
@@ -46,13 +45,12 @@ class Camera():
                 cameras_df = self.gsheet_camera()
                 cameras_df.to_pickle("./picklized/x_cameras.pkl")
         return(cameras_df)
-    def pool(self):
+    def pool(self): 
         pool_df = self.df.copy()
         # ADD COLUMNS 
         pool_df = pool_df.assign(Selected=False)
         pool_df = pool_df.assign(Number=0)
         return pool_df
-
     def apply_pattern(self,camera_pattern="",brand="",camera_type=""):
         if camera_pattern != None and camera_pattern != "":
             pattern_selection = self.pool_df.filter(like=camera_pattern,axis=0)

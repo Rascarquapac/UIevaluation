@@ -98,7 +98,7 @@ st.logo("images/logo.jpg")
 # Set sidebar
 sidebar()
 # Set tabs
-cameraSelection, x_cameraSelection,networkSelection,lensSelection, motivations, mermaid,graphviz, test = st.tabs(["Cameras","X_Cameras","IP Network" ,"Lens","Motivations", "Mermaid","Graphviz","TEST"])
+x_cameraSelection, cameraSelection,networkSelection,lensSelection, motivations, mermaid,graphviz, test = st.tabs(["X_Cameras","Cameras","IP Network" ,"Lens","Motivations", "Mermaid","Graphviz","TEST"])
 with cameraSelection :
     st.subheader("Setup Camera Pool")
     col1, col2 = st.columns([0.5,0.5])
@@ -139,7 +139,7 @@ with x_cameraSelection :
 with networkSelection:
     if not st.session_state.pool.selected.empty :
         st.subheader('Select networks (optional):')
-        ##test refacoring streamui ## st.session_state.pool.edit_camera_per_type('network')
+        ##test refactoring streamui ## st.session_state.pool.edit_camera_per_type('network')
         st.session_state.pool.pool_edit_camera_for_network(st.session_state.pool)
 #    if st.button("Analyze",key="networkanalysis"):
 #        st.session_state.usecase.debug_camerapool_to_csv(st.session_state.final) # DEBUG only

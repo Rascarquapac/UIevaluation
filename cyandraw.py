@@ -8,7 +8,6 @@ class Draw():
         self.df = df
         self.obj = {}
         pass
-
     def get_mermaid_code(self):
         def objectize():
             for index in self.df.index.to_list():

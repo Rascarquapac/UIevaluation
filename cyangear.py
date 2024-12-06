@@ -215,7 +215,6 @@ class Cyangear():
                 self.devices[device_type] = 1
             else:
                 self.devices[device_type] += 1
- 
     def analyze(self,pool_df = None):
         self.instances_df(pool_df)
         self.set_objects_dic()

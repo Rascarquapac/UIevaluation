@@ -27,7 +27,6 @@ class DevicesStatus():
             device_status['consumed_connections'] = fanout
             device_status['current_instance']    += 1
         return (device_status["name"] + "_" + str(device_status['current_instance']))
-
 ################## ANALYZE #########################
 # Select the converter for each camera and set it in "Device" index. A Specific column could be more appropriate
 def device_from_camera_lens(self):
@@ -178,9 +177,6 @@ def rcp_id_from_camgroup(self):
                 number += 1
             rcps_status[key] = (number,port,maxconnect,camgroup_instanciated)
         print(f"END CAMGROUPS: {camgroup}, RCPS_STATUS: {rcps_status}")
-
-
-        
 # Optimize the number of RCPs required
 def rcp_optimize(self):
     def get_rcptype_rcp_id(current_RCP,occurences):
